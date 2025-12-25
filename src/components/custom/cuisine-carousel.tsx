@@ -1,5 +1,5 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import CuisineImage from "./cuisineimage";
+import CuisineCard from "@/components/custom/cuisinecard";
 import PizzaPng from "@/assets/images/pizza.png";
 interface Artwork {
   cuisine: string;
@@ -74,7 +74,7 @@ const CuisineCarousel = () => {
     <ScrollArea className="w-full h-fit pb-4 rounded-md whitespace-nowrap">
       <div className="flex w-max space-x-4">
         {cuisines.map((cuisine) => (
-          <CuisineImage src={cuisine.url} alt={cuisine.cuisine} />
+          <CuisineCard src={cuisine.url} alt={cuisine.cuisine} />
         ))}
       </div>
       <ScrollBar orientation="horizontal" />

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const CuisineImage = ({ src, alt }: { src: string; alt: string }) => {
+const CuisineCard = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <Link
       to={`/cuisine/${alt.toLowerCase()}`}
@@ -10,7 +10,7 @@ const CuisineImage = ({ src, alt }: { src: string; alt: string }) => {
         <img
           src={src}
           alt={alt}
-          className="h-full w-full object-cover transition-transform duration-100 hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-100 hover:scale-105 bg-zinc-100"
           id={alt}
         />
       </div>
@@ -24,4 +24,4 @@ const CuisineImage = ({ src, alt }: { src: string; alt: string }) => {
   );
 };
 
-export default CuisineImage;
+export default CuisineCard;
