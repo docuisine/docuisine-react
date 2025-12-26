@@ -11,7 +11,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="w-full flex bg-amber-50">
+    <div className="w-full flex">
       {sections.map((section) => (
         <NavBarBtn key={section.title} title={section.title}>
           {section.icon}

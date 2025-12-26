@@ -11,13 +11,13 @@ const CuisineCard = ({ src, alt }: { src: string; alt: string }) => {
         <img
           src={src}
           alt={alt}
-          className="h-full w-full object-cover transition-transform duration-100 hover:scale-105 bg-zinc-100"
+          className="h-full w-full object-cover transition-transform duration-100 hover:scale-105 bg-sidebar-accent"
           id={alt}
         />
       </div>
       <label
         htmlFor={alt}
-        className="text-sm font-semibold text-amber-950 text-center"
+        className="text-sm font-semibold text-secondary-foreground text-center"
       >
         {alt}
       </label>

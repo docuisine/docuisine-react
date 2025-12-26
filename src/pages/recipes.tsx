@@ -7,7 +7,7 @@ const RecipesPage = () => {
   return (
     <div className="flex gap-8 px-[10vw] h-full background">
       <div className="flex flex-col gap-8">
-        <Button className="w-full font-semibold text-sm h-12 dark:bg-amber-950">
+        <Button className="w-full font-semibold text-sm h-12 bg-primary">
           <PlusIcon size={"1.2em"} strokeWidth={3} />
           Create Recipe
         </Button>
