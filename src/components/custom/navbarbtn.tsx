@@ -2,10 +2,11 @@ import { useLocation, Link } from "react-router-dom";
 
 interface NavBarBtnProps {
   title: string;
+  href?: string;
   children: React.ReactNode;
 }
 
-const NavBarBtn: React.FC<NavBarBtnProps> = ({ title, children }) => {
+const NavBarBtn: React.FC<NavBarBtnProps> = ({ title, href, children }) => {
   const path = useLocation().pathname;
   const normalizedTitle = title.toLowerCase().replace(/\s+/g, "-");
   const isActive = path.includes(normalizedTitle);
@@ -17,7 +18,7 @@ const NavBarBtn: React.FC<NavBarBtnProps> = ({ title, children }) => {
     "border-transparent text-muted-foreground hover:border-accent-foreground/50 hover:text-secondary-foreground/60 hover:bg-secondary/60";
 
   return (
-    <Link to={`/${normalizedTitle}`}>
+    <Link to={href ?? `/${normalizedTitle}`}>
       <button
         className={`${baseClasses} ${
           isActive ? activeClasses : inactiveClasses
