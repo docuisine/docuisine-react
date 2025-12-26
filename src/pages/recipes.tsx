@@ -1,10 +1,18 @@
 import Filters from "@/components/custom/filters";
 import RecipesExplorer from "@/components/custom/recipesxplorer";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
 
 const RecipesPage = () => {
   return (
-    <div className="flex gap-8 px-[10vw] h-full">
-      <Filters />
+    <div className="flex gap-8 px-[10vw] h-full background">
+      <div className="flex flex-col gap-8">
+        <Button className="w-full font-semibold text-sm h-12 dark:bg-amber-950">
+          <PlusIcon size={"1.2em"} strokeWidth={3} />
+          Create Recipe
+        </Button>
+        <Filters />
+      </div>
       <RecipesExplorer />
     </div>
   );
