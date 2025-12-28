@@ -6,8 +6,10 @@ import {
   SettingsIcon,
   SquareArrowOutUpRightIcon,
 } from "lucide-react";
+import { useAuth } from "@/lib/useAuth";
 
 const NavBar = () => {
+  const { isAuthenticated } = useAuth();
   const iconSize = "1.2em";
 
   const mainSections = [
@@ -15,10 +17,13 @@ const NavBar = () => {
     { title: "Cookbooks", icon: <BookTextIcon size={iconSize} /> },
     { title: "Shopping List", icon: <ListTodo size={iconSize} /> },
   ];
+  let otherSections: { title: string; icon: React.ReactNode }[] = [];
 
-  const otherSections = [
-    { title: "Administration", icon: <SettingsIcon size={iconSize} /> },
-  ];
+  if (isAuthenticated) {
+    otherSections = [
+      { title: "Administration", icon: <SettingsIcon size={iconSize} /> },
+    ];
+  }
 
   return (
     <div className="flex space-between">
@@ -38,7 +43,8 @@ const NavBar = () => {
         <NavBarBtn
           title="Documentation"
           href="https://iragca.github.io/docuisine/"
-          target="_blank" rel="noopener noreferrer"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <SquareArrowOutUpRightIcon size={iconSize} />
         </NavBarBtn>
