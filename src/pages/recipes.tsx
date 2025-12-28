@@ -6,7 +6,7 @@ import { PlusIcon } from "lucide-react";
 const RecipesPage = () => {
   return (
     <div className="flex gap-8 px-[10vw] h-full background">
-      <div className="flex flex-col gap-8 p-2">
+      <div className="flex-col gap-8 p-2 hidden md:flex">
         <Button className="w-full font-semibold text-sm h-12 bg-primary">
           <PlusIcon size={"1.2em"} strokeWidth={3} />
           Create Recipe
