@@ -13,7 +13,7 @@ const UserCard = ({
       {username}
       <Avatar>
         <AvatarImage src={avatarUrl} alt={username} />
-        <AvatarFallback>
+        <AvatarFallback className="bg-secondary">
           <CircleUser size={"1.5em"} />
         </AvatarFallback>
       </Avatar>
