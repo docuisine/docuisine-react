@@ -1,24 +1,36 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import FoodWarsJpg from "@/assets/food-wars.jpg";
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import api from "@/lib/api";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    api.login(formData);
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0 rounded-0 sm:rounded-xl shadow-md">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8 flex h-screen items-center sm:h-fit">
+          <form
+            className="p-6 md:p-8 flex h-screen items-center sm:h-fit"
+            onSubmit={handleSubmit}
+          >
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -30,6 +42,7 @@ export function LoginForm({
                 <FieldLabel htmlFor="username">Username</FieldLabel>
                 <Input
                   id="username"
+                  name="username"
                   type="text"
                   placeholder="johnFood"
                   required
@@ -45,7 +58,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
@@ -65,5 +78,5 @@ export function LoginForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
