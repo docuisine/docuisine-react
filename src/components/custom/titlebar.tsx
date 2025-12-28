@@ -15,13 +15,15 @@ const TitleBar = () => {
           username="Username"
           avatarUrl="https://github.com/shadcn.png"
         />
-        <Button
-          className="hover:bg-amber-100/60 rounded-md text-sidebar-foreground"
-          variant="secondary"
-        >
-          <LogOutIcon size={"1.2em"} />
-          Logout
-        </Button>
+        <Link to="/login">
+          <Button
+            className="hover:bg-amber-100/60 rounded-md text-sidebar-foreground"
+            variant="secondary"
+          >
+            <LogOutIcon size={"1.2em"} />
+            Logout
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import CookbooksPage from "@/pages/cookbooks";
 import ShoppingListPage from "@/pages/shopping-list";
 import AdministrationPage from "@/pages/administration";
 import SignupPage from "./pages/signup";
+import LoginPage from "@/pages/login";
 import Layout from "@/components/layout";
 
 import {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/signup", element: <SignupPage /> },
+  { path: "/login", element: <LoginPage /> },
 ]);
 
 export default function App() {
