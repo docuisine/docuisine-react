@@ -7,16 +7,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("access_token");
+    const token = localStorage.getItem("access_token");
     const user = localStorage.getItem("user");
     if (user) setUser(user);
-    if (stored) setToken(stored);
+    if (token) setToken(token);
   }, []);
 
   const login = (token: string) => {
     const jwt = jwtDecode<{ sub: string }>(token);
     localStorage.setItem("access_token", token);
-    localStorage.setItem("username", jwt.sub);
+    localStorage.setItem("user", jwt.sub);
 
     setUser(jwt.sub);
     setToken(token);
