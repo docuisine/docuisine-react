@@ -1,7 +1,7 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import CuisineCard from "@/components/custom/cuisinecard";
 import { useEffect, useState } from "react";
-import type { Category } from "@/lib/interface";
+import type { Category } from "@/lib/types";
 import api from "@/lib/api";
 
 const CuisineCarousel = () => {

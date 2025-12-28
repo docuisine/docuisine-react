@@ -5,3 +5,11 @@ export interface AuthContextType {
   login: (token: string) => void;
   logout: () => void;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  description?: string;
+  img: string;
+  preview_img: string;
+}

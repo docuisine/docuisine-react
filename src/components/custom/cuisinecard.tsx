@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Category } from "@/lib/interface";
+import type { Category } from "@/lib/types";
 
 const CuisineCard = ({ category }: { category: Category }) => {
   const normalizedPath = category.name.toLowerCase().replace(/\s+/g, "-");
