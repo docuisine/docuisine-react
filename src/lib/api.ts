@@ -1,6 +1,16 @@
 import { urlJoin } from "@/lib/utils";
 import axios from "axios";
 
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("access_token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 /**
  * Authenticate a user and retrieve an access token.
  *
@@ -53,7 +63,6 @@ export async function signup(formdata: FormData) {
   );
   return response.data;
 }
-
 
 export async function getAllCategories() {
   const response = await axios.get(

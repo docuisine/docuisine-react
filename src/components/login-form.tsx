@@ -12,17 +12,30 @@ import {
 import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
 import PasswordVisibilityToggle from "./shadcn-studio/input/input-26";
+import { useAuth } from "@/lib/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    api.login(formData);
+    const access_token = await api
+      .login(formData)
+      .then((data) => data.access_token);
+    if (!access_token) {
+      throw new Error("Login failed");
+    }
+    login(access_token);
+
+    navigate("/recipes", { replace: true });
   };
 
   return (
@@ -68,11 +81,11 @@ export function LoginForm({
               <FieldDescription className="text-center">
                 Don&apos;t have an account? <a href="/signup">Sign up</a>
               </FieldDescription>
-                <Button variant="ghost">
-                  <Link to="/recipes" className="w-full h-full">
-                    Browse as a guest
-                  </Link>
-                </Button>
+              <Button variant="ghost">
+                <Link to="/recipes" className="w-full h-full">
+                  Browse as a guest
+                </Link>
+              </Button>
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">
