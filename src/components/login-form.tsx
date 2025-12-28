@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
+import PasswordVisibilityToggle from "./shadcn-studio/input/input-26";
 
 export function LoginForm({
   className,
@@ -59,7 +60,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" name="password" type="password" required />
+                <PasswordVisibilityToggle id="password" name="password" />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>

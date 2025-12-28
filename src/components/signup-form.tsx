@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
 import { Link } from "react-router-dom";
 import InputPasswordStrength from "./shadcn-studio/input/input-46";
+import PasswordVisibilityToggle from "./shadcn-studio/input/input-26";
 
 export function SignupForm({
   className,
@@ -77,7 +78,10 @@ export function SignupForm({
                     <FieldLabel htmlFor="confirm-password">
                       Confirm Password
                     </FieldLabel>
-                    <Input id="confirm-password" type="password" required />
+                    <PasswordVisibilityToggle
+                      id="confirm-password"
+                      name="confirm-password"
+                    />
                   </Field>
                 </Field>
                 <FieldDescription className="text-start">
