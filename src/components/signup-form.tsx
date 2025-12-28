@@ -9,16 +9,27 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import api from "@/lib/api";
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    api.signup(formData);
+  };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0 rounded-0 sm:rounded-xl shadow-md">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8 flex h-screen items-center sm:h-fit">
+          <form
+            className="p-6 md:p-8 flex h-screen items-center sm:h-fit"
+            onSubmit={handleSubmit}
+          >
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Create your account</h1>
@@ -30,6 +41,7 @@ export function SignupForm({
                 <FieldLabel htmlFor="username">Username</FieldLabel>
                 <Input
                   id="username"
+                  name="username"
                   type="text"
                   placeholder="johnFood"
                   required
@@ -56,7 +68,12 @@ export function SignupForm({
                 <Field className="grid grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input id="password" type="password" required />
+                    <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                    />
                   </Field>
 
                   <Field>
