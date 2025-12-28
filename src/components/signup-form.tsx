@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
 import { Link } from "react-router-dom";
+import InputPasswordStrength from "./shadcn-studio/input/input-46";
 
 export function SignupForm({
   className,
@@ -69,12 +70,7 @@ export function SignupForm({
                 <Field className="grid grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      required
-                    />
+                    <InputPasswordStrength />
                   </Field>
 
                   <Field>
@@ -85,7 +81,7 @@ export function SignupForm({
                   </Field>
                 </Field>
                 <FieldDescription className="text-start">
-                  Must be at least 8 characters long.
+                  Must be 8-128 characters long.
                 </FieldDescription>
               </Field>
               <Field>
