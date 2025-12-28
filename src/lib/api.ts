@@ -54,9 +54,18 @@ export async function signup(formdata: FormData) {
   return response.data;
 }
 
+
+export async function getAllCategories() {
+  const response = await axios.get(
+    urlJoin(import.meta.env.VITE_BACKEND_URL, "/categories/")
+  );
+  return response.data;
+}
+
 const api = {
   login,
   signup,
+  getAllCategories,
 };
 
 export default api;

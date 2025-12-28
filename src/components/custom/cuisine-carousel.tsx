@@ -2,18 +2,14 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import CuisineCard from "@/components/custom/cuisinecard";
 import { useEffect, useState } from "react";
 import type { Category } from "@/lib/interface";
-import Axios from "axios";
-import { urlJoin } from "@/lib/utils";
-
+import api from "@/lib/api";
 
 const CuisineCarousel = () => {
   const [cuisines, setCuisines] = useState<Category[]>([]);
 
   const getCategories = async () => {
-    const response = await Axios.get(
-      urlJoin(import.meta.env.VITE_BACKEND_URL, "categories")
-    );
-    setCuisines(response.data);
+    const data = await api.getAllCategories();
+    setCuisines(data);
   };
   useEffect(() => {
     getCategories();
