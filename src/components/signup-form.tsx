@@ -36,11 +36,29 @@ export function SignupForm({
                 />
               </Field>
               <Field>
+                <FieldLabel htmlFor="email">
+                  Email
+                  <span className="text-muted-foreground text-xs">
+                    (Optional)
+                  </span>
+                </FieldLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="johnFood@docuisine.org"
+                />
+                <FieldDescription className="text-start">
+                  For password recovery purposes only.
+                </FieldDescription>
+              </Field>
+              <Field>
                 <Field className="grid grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
                     <Input id="password" type="password" required />
                   </Field>
+
                   <Field>
                     <FieldLabel htmlFor="confirm-password">
                       Confirm Password
@@ -48,7 +66,7 @@ export function SignupForm({
                     <Input id="confirm-password" type="password" required />
                   </Field>
                 </Field>
-                <FieldDescription>
+                <FieldDescription className="text-start">
                   Must be at least 8 characters long.
                 </FieldDescription>
               </Field>
