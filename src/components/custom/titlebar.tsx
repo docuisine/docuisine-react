@@ -18,7 +18,6 @@ const TitleBar = () => {
           <>
             <Usercard
               username={user || "Guest"}
-              avatarUrl="https://github.com/shadcn.png"
             />
             <Link to="/login">
               <Button

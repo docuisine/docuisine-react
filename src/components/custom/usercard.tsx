@@ -1,18 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CircleUser } from "lucide-react";
 
 const UserCard = ({
   username = "Username",
   avatarUrl,
 }: {
   username: string;
-  avatarUrl: string;
+  avatarUrl?: string;
 }) => {
   return (
     <div className="flex flex-row gap-4 align-middle justify-center items-center">
       {username}
       <Avatar>
-        <AvatarImage src={avatarUrl} />
-        <AvatarFallback>{username.slice(0, 2).toUpperCase()}</AvatarFallback>
+        <AvatarImage src={avatarUrl} alt={username} />
+        <AvatarFallback>
+          <CircleUser size={"1.5em"} />
+        </AvatarFallback>
       </Avatar>
     </div>
   );
