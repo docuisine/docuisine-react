@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import FoodWarsJpg from "@/assets/food-wars.jpg";
+import { Link } from "react-router-dom";
 import {
   Field,
   FieldDescription,
@@ -66,6 +67,11 @@ export function LoginForm({
               <FieldDescription className="text-center">
                 Don&apos;t have an account? <a href="/signup">Sign up</a>
               </FieldDescription>
+                <Button variant="ghost">
+                  <Link to="/recipes" className="w-full h-full">
+                    Browse as a guest
+                  </Link>
+                </Button>
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">

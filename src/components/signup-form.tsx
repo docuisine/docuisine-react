@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
+import { Link } from "react-router-dom";
 
 export function SignupForm({
   className,
@@ -93,6 +94,11 @@ export function SignupForm({
               <FieldDescription className="text-center">
                 Already have an account? <a href="/login">Log in</a>
               </FieldDescription>
+              <Button variant="ghost">
+                <Link to="/recipes" className="w-full h-full">
+                  Browse as a guest
+                </Link>
+              </Button>
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">

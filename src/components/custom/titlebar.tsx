@@ -17,8 +17,7 @@ const TitleBar = () => {
         />
         <Link to="/login">
           <Button
-            className="hover:bg-amber-100/60 rounded-md text-sidebar-foreground"
-            variant="secondary"
+            variant="ghost"
           >
             <LogOutIcon size={"1.2em"} />
             Logout
