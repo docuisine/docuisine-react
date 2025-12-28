@@ -7,7 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 import { Separator } from "@/components/ui/separator";
 
 const TitleBar = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   return (
     <div className="w-full flex justify-between">
       <Link to="/" className="flex items-center">
@@ -17,7 +17,7 @@ const TitleBar = () => {
         {isAuthenticated && (
           <>
             <Usercard
-              username="Username"
+              username={user || "Guest"}
               avatarUrl="https://github.com/shadcn.png"
             />
             <Link to="/login">
