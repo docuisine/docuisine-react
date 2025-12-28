@@ -38,6 +38,7 @@ const NavBar = () => {
         <NavBarBtn
           title="Documentation"
           href="https://iragca.github.io/docuisine/"
+          target="_blank" rel="noopener noreferrer"
         >
           <SquareArrowOutUpRightIcon size={iconSize} />
         </NavBarBtn>

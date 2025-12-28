@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardDescription,
   CardTitle,
-} from "@/components/ui/old/card";
+} from "@/components/ui/card";
 
 const CardBottomImageDemo = () => {
   return (

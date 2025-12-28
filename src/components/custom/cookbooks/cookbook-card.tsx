@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardFooter,
   CardTitle,
-} from "@/components/ui/old/card";
+} from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 interface Cookbook {
@@ -19,17 +19,17 @@ const CookbookCard = ({ cookbook }: { cookbook: Cookbook }) => {
   return (
     <Link
       to={`/cookbooks/${normalizedPath}`}
-      className="w-fit h-fit max-w-[min(24%,300px)]"
+      className="max-w-[min(24%,300px)]"
     >
-      <Card className="w-full h-full">
-        <CardContent className="px-0">
+      <Card className="max-h-54 p-0 overflow-hidden rounded-md gap-0 flex justify-between flex-col">
+        <CardContent className="px-0 overflow-hidden">
           <img
             src={cookbook.imageSrc}
             alt={cookbook.title}
-            className="object-cover h-full w-full"
+            className="object-cover"
           />
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-col items-start gap-4 p-4 h-fit">
           <div className="flex flex-row items-center w-full">
             <CardTitle className="mr-auto">{cookbook.title}</CardTitle>
             <div className="text-muted-foreground text-xs">

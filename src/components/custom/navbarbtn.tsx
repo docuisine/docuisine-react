@@ -4,9 +4,11 @@ interface NavBarBtnProps {
   title: string;
   href?: string;
   children: React.ReactNode;
+  target?: string;
+  rel?: string;
 }
 
-const NavBarBtn: React.FC<NavBarBtnProps> = ({ title, href, children }) => {
+const NavBarBtn: React.FC<NavBarBtnProps> = ({ title, href, children, target, rel }) => {
   const path = useLocation().pathname;
   const normalizedTitle = title.toLowerCase().replace(/\s+/g, "-");
   const isActive = path.includes(normalizedTitle);
@@ -18,7 +20,7 @@ const NavBarBtn: React.FC<NavBarBtnProps> = ({ title, href, children }) => {
     "border-transparent text-muted-foreground hover:border-accent-foreground/50 hover:text-secondary-foreground/60 hover:bg-secondary/60";
 
   return (
-    <Link to={href ?? `/${normalizedTitle}`}>
+    <Link to={href ?? `/${normalizedTitle}`} target={target} rel={rel}>
       <button
         className={`${baseClasses} ${
           isActive ? activeClasses : inactiveClasses

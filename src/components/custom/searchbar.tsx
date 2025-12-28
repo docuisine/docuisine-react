@@ -1,7 +1,7 @@
 import { useId } from "react";
 
 import { SearchIcon } from "lucide-react";
-import { Input } from "../ui/old/input";
+import { Input } from "@/components/ui/input";
 
 const Searchbar = () => {
   const id = useId();

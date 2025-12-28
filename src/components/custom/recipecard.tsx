@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/old/card";
+import { Card, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
 
 import { HourglassIcon } from "lucide-react";
 
@@ -21,15 +16,15 @@ const RecipeCard = ({ recipe }: { recipe: Recipe }) => {
   const normalizedPath = recipe.title.toLowerCase().replace(/\s+/g, "-");
   return (
     <Link to={`/recipe/${normalizedPath}`} className="w-fit">
-      <Card className="max-w-md">
-        <CardContent className="px-0">
+      <Card className="max-w-sm rounded-md p-0 overflow-hidden gap-0 w-80 max-h-54">
+        <CardContent className="px-0 overflow-hidden">
           <img
             src={recipe.imageSrc}
             alt={recipe.title}
-            className="object-cover h-full w-full"
+            className="object-cover"
           />
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-col items-start gap-4 p-4">
           <CardTitle>{recipe.title}</CardTitle>
           <Badge variant="outline">
             <HourglassIcon /> {recipe.timeTaken} mins
