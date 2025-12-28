@@ -1,5 +1,5 @@
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/old/label";
 
 export function FiltersCheckbox() {
   const cuisines = [

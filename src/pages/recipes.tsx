@@ -1,6 +1,6 @@
 import Filters from "@/components/custom/filters";
 import RecipesExplorer from "@/components/custom/recipesxplorer";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/old/button";
 import { PlusIcon } from "lucide-react";
 
 const RecipesPage = () => {

@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardFooter,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/old/card";
 import { Link } from "react-router-dom";
 
 interface Cookbook {

@@ -1,4 +1,9 @@
-import { Card, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/old/card";
 
 import { HourglassIcon } from "lucide-react";
 

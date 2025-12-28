@@ -4,6 +4,7 @@ import RecipesPage from "@/pages/recipes";
 import CookbooksPage from "@/pages/cookbooks";
 import ShoppingListPage from "@/pages/shopping-list";
 import AdministrationPage from "@/pages/administration";
+import SignupPage from "./pages/signup";
 import Layout from "@/components/layout";
 
 import {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "/signup", element: <SignupPage /> },
 ]);
 
 export default function App() {
