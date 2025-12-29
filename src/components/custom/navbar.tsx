@@ -4,7 +4,6 @@ import {
   BookTextIcon,
   ListTodo,
   SettingsIcon,
-  SquareArrowOutUpRightIcon,
 } from "lucide-react";
 import { useAuth } from "@/lib/useAuth";
 
@@ -40,14 +39,6 @@ const NavBar = () => {
             {section.icon}
           </NavBarBtn>
         ))}
-        <NavBarBtn
-          title="Documentation"
-          href="https://iragca.github.io/docuisine/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SquareArrowOutUpRightIcon size={iconSize} />
-        </NavBarBtn>
       </div>
     </div>
   );
