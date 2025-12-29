@@ -24,11 +24,9 @@ const PasswordVisibilityToggle = ({ ...props }) => {
           size="icon"
           onClick={() => setIsVisible((prevState) => !prevState)}
           className="text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent"
+          type="button"
         >
           {isVisible ? <EyeOffIcon /> : <EyeIcon />}
-          <span className="sr-only">
-            {isVisible ? "Hide password" : "Show password"}
-          </span>
         </Button>
       </div>
     </div>
