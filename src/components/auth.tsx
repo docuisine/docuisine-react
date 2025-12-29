@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { AuthContext } from "@/lib/auth-context";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
@@ -12,6 +13,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (user) setUser(user);
     if (token) setToken(token);
   }, []);
+
+  useLayoutEffect(() => {
+    const authInterceptor = axios.interceptors.request.use((config) => {
+      if (token) config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    });
+
+    return () => {
+      axios.interceptors.request.eject(authInterceptor);
+    };
+  }, [token]);
 
   const login = (token: string) => {
     const jwt = jwtDecode<{ sub: string }>(token);
