@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { useSignup } from "@/lib/signup-context";
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 export function SignupUsernameForm() {
   const { data, setData } = useSignup();
@@ -58,8 +59,12 @@ export function SignupUsernameForm() {
       </Field>
       <Field>
         <Button variant="outline" disabled={nextDisabled}>
-          <Link to="/signup/password" className="w-full h-full">
+          <Link
+            to="/signup/password"
+            className="w-full flex items-center justify-center"
+          >
             Next
+            <ArrowRight className="ml-2" />
           </Link>
         </Button>
       </Field>

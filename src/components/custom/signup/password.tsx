@@ -3,9 +3,34 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import InputPasswordStrength from "@/components/shadcn-studio/input/input-46";
 import PasswordVisibilityToggle from "@/components/shadcn-studio/input/input-26";
 import { useSignup } from "@/lib/signup-context";
+import { Link } from "react-router-dom";
+import { UndoIcon } from "lucide-react";
+import React, { useState, useEffect } from "react";
+
+const validatePassword = (password: string) => {
+  return (
+    password.length >= 8 &&
+    password.length <= 128 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /[0-9]/.test(password) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(password)
+  );
+};
 
 export function SignupPasswordForm() {
   const { data, setData } = useSignup();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+  useEffect(() => {
+
+    const isValid =
+      data.username.length >= 3 &&
+      validatePassword(data.password) &&
+      data.password === confirmPassword;
+
+    setSubmitDisabled(!isValid);
+  }, [data.username, data.password, confirmPassword]);
   return (
     <>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -19,7 +44,12 @@ export function SignupPasswordForm() {
         <Field className="grid grid-cols-2 gap-4">
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
-            <InputPasswordStrength id="password" name="password" />
+            <InputPasswordStrength
+              id="password"
+              name="password"
+              value={data.password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, password: e.target.value })}
+            />
           </Field>
 
           <Field>
@@ -27,9 +57,9 @@ export function SignupPasswordForm() {
             <PasswordVisibilityToggle
               id="confirm-password"
               name="confirm-password"
-              value={data.password}
+              value={confirmPassword}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setData({ ...data, password: e.target.value.trim() })
+                setConfirmPassword(e.target.value)
               }
             />
           </Field>
@@ -38,8 +68,19 @@ export function SignupPasswordForm() {
           Must be 8-128 characters long.
         </FieldDescription>
       </Field>
-      <Field>
-        <Button type="submit">Create Account</Button>
+      <Field orientation="horizontal" className="flex">
+        <Button variant="outline" className="basis-1/3">
+          <Link
+            to="/signup"
+            className="w-full flex items-center justify-center"
+          >
+            <UndoIcon className="mr-2" />
+            Back
+          </Link>
+        </Button>
+        <Button type="submit" className="basis-2/3" disabled={submitDisabled}>
+          Create Account
+        </Button>
       </Field>
     </>
   );

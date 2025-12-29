@@ -20,14 +20,13 @@ const requirements = [
   },
 ];
 
-const InputPasswordStrength = ({ id, name }: { id: string; name: string }) => {
-  const [password, setPassword] = useState("");
+const InputPasswordStrength = ({ ...props }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
   const strength = requirements.map((req) => ({
-    met: req.regex.test(password),
+    met: req.regex.test(props.value),
     text: req.text,
   }));
 
@@ -58,12 +57,9 @@ const InputPasswordStrength = ({ id, name }: { id: string; name: string }) => {
     <div className="w-full max-w-xs space-y-2">
       <div className="relative mb-3">
         <Input
-          id={id}
-          name={name}
+          {...props}
           type={isVisible ? "text" : "password"}
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           className="pr-9"
         />
         <Button
