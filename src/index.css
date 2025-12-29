@@ -58,7 +58,6 @@ body {
   min-height: 100vh;
 }
 
-
 button.custom {
   padding: 0.4em 0.8em;
   font-size: 1em;
@@ -67,6 +66,27 @@ button.custom {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+.btn-link {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.btn-link:hover .btn-link-label {
+  text-decoration: underline;
+}
+
+.btn-link::before {
+  content: "[";
+  font-size: 1.1rem;
+  margin-right: 0.2rem;
+}
+
+.btn-link::after {
+  content: "]";
+  font-size: 1.1rem;
+  margin-left: 0.2rem;
+}
+
 
 
 @media (prefers-color-scheme: light) {

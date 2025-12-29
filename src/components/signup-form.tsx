@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import FoodWarsJpg from "@/assets/food-wars.jpg";
 import { FieldDescription, FieldGroup } from "@/components/ui/field";
@@ -44,14 +43,14 @@ export function SignupForm({
           >
             <FieldGroup>
               {children}
-              <FieldDescription className="text-center">
-                Already have an account? <a href="/login">Log in</a>
-              </FieldDescription>
-              <Button variant="ghost" type="button">
-                <Link to="/recipes" className="w-full h-full">
-                  Browse as a guest
+              <FieldDescription className="text-center flex gap-4 justify-center">
+                <Link to="/login" className="btn-link">
+                  <span className="btn-link-label">Log in</span>
                 </Link>
-              </Button>
+                <Link to="/recipes" className="btn-link">
+                  <span className="btn-link-label">Browse as a guest</span>
+                </Link>
+              </FieldDescription>
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">

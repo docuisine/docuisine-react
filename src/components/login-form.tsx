@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import DemoInfo from "@/components/custom/login/demo-info";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
-
+import { Separator } from "@/components/ui/separator";
 export function LoginForm({
   className,
   ...props
@@ -96,14 +96,14 @@ export function LoginForm({
                   {!loading && "Login"}
                 </Button>
               </Field>
-              <FieldDescription className="text-center">
-                Don&apos;t have an account? <a href="/signup">Sign up</a>
-              </FieldDescription>
-              <Button variant="ghost">
-                <Link to="/recipes" className="w-full h-full">
-                  Browse as a guest
+              <FieldDescription className="text-center flex gap-4 justify-center">
+                <Link to="/signup" className="btn-link">
+                  <span className="btn-link-label">Sign up</span>
                 </Link>
-              </Button>
+                <Link to="/recipes" className="btn-link">
+                  <span className="btn-link-label">Browse as a guest</span>
+                </Link>
+              </FieldDescription>
             </FieldGroup>
           </form>
           <div className="bg-muted relative hidden md:block">
