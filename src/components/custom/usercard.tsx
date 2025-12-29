@@ -21,7 +21,7 @@ const UserCard = ({
             <Avatar className="rounded-md border shadow-sm">
               <AvatarImage src={avatarUrl} alt={username} />
               <AvatarFallback className="rounded-md">
-                <CircleUser size={"1.5em"} className="text-muted-foreground" />
+                <CircleUser size={"1.2em"} className="text-muted-foreground" />
               </AvatarFallback>
             </Avatar>
             {isAuthenticated && (
