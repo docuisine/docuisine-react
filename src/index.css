@@ -68,7 +68,6 @@ button.custom {
 }
 .btn-link {
   text-decoration: none;
-  color: var(--primary);
 }
 
 .btn-link:hover .btn-link-label {
