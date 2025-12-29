@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 const requirements = [
-  { regex: /.{8,}/, text: "At least 8 characters" },
+  { regex: /.{8,128}/, text: "Must be 8-128 characters long." },
   { regex: /[a-z]/, text: "At least 1 lowercase letter" },
   { regex: /[A-Z]/, text: "At least 1 uppercase letter" },
   { regex: /[0-9]/, text: "At least 1 number" },
@@ -54,7 +54,7 @@ const InputPasswordStrength = ({ ...props }) => {
   // }
 
   return (
-    <div className="w-full max-w-xs space-y-2">
+    <div className="w-full space-y-2">
       <div className="relative mb-3">
         <Input
           {...props}

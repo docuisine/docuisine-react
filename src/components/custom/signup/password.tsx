@@ -43,8 +43,8 @@ export function SignupPasswordForm() {
       </div>
 
       <Field>
-        <Field className="grid grid-cols-2 gap-4">
-          <Field>
+        <Field className="flex flex-col gap-4">
+          <Field className="basis-2/3">
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <InputPasswordStrength
               id="password"
@@ -56,7 +56,7 @@ export function SignupPasswordForm() {
             />
           </Field>
 
-          <Field>
+          <Field className="basis-1/3">
             <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
             <PasswordVisibilityToggle
               id="confirm-password"
@@ -68,9 +68,6 @@ export function SignupPasswordForm() {
             />
           </Field>
         </Field>
-        <FieldDescription className="text-start">
-          Must be 8-128 characters long.
-        </FieldDescription>
       </Field>
       <Field orientation="horizontal" className="flex">
         <Button
