@@ -48,13 +48,9 @@ export function SignupPasswordForm() {
               id="password"
               name="password"
               value={data.password}
-<<<<<<< HEAD
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, password: e.target.value })}
-=======
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setData({ ...data, password: e.target.value })
               }
->>>>>>> 18c2b00 (feat: enhance signup password validation and UI components)
             />
           </Field>
 
