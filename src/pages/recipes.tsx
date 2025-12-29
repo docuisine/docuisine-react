@@ -1,4 +1,4 @@
-import Filters from "@/components/custom/filters";
+import Filters from "@/components/custom/filters/filters";
 import RecipesExplorer from "@/components/custom/recipesxplorer";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
