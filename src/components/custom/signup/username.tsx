@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
 import { useSignup } from "@/lib/signup-context";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function SignupUsernameForm() {
   const { data, setData } = useSignup();
   const [nextDisabled, setNextDisabled] = useState(true);
-
+  const navigate = useNavigate();
   if (data.username && data.username.length >= 3 && nextDisabled) {
     setNextDisabled(false);
   }
@@ -58,14 +58,14 @@ export function SignupUsernameForm() {
         </FieldDescription>
       </Field>
       <Field>
-        <Button variant="outline" disabled={nextDisabled}>
-          <Link
-            to="/signup/password"
-            className="w-full flex items-center justify-center"
-          >
-            Next
-            <ArrowRight className="ml-2" />
-          </Link>
+        <Button
+          variant="outline"
+          className="w-full"
+          disabled={nextDisabled}
+          onClick={() => navigate("/signup/password")}
+        >
+          Next
+          <ArrowRight className="ml-2" />
         </Button>
       </Field>
     </>

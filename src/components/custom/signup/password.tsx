@@ -3,7 +3,7 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import InputPasswordStrength from "@/components/shadcn-studio/input/input-46";
 import PasswordVisibilityToggle from "@/components/shadcn-studio/input/input-26";
 import { useSignup } from "@/lib/signup-context";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UndoIcon } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
@@ -22,8 +22,8 @@ export function SignupPasswordForm() {
   const { data, setData } = useSignup();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
-
     const isValid =
       data.username.length >= 3 &&
       validatePassword(data.password) &&
@@ -48,7 +48,13 @@ export function SignupPasswordForm() {
               id="password"
               name="password"
               value={data.password}
+<<<<<<< HEAD
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, password: e.target.value })}
+=======
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, password: e.target.value })
+              }
+>>>>>>> 18c2b00 (feat: enhance signup password validation and UI components)
             />
           </Field>
 
@@ -69,14 +75,13 @@ export function SignupPasswordForm() {
         </FieldDescription>
       </Field>
       <Field orientation="horizontal" className="flex">
-        <Button variant="outline" className="basis-1/3">
-          <Link
-            to="/signup"
-            className="w-full flex items-center justify-center"
-          >
-            <UndoIcon className="mr-2" />
-            Back
-          </Link>
+        <Button
+          variant="outline"
+          className="w-full basis-1/3"
+          onClick={() => navigate("/signup")}
+        >
+          <UndoIcon className="mr-2" />
+          Back
         </Button>
         <Button type="submit" className="basis-2/3" disabled={submitDisabled}>
           Create Account
