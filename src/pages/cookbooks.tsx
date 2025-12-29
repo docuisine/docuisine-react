@@ -28,7 +28,7 @@ const multiple_cookbooks = example_cookbooks.concat([
 
 const CookbooksPage = () => {
   return (
-    <div className="flex flex-wrap px-[10vw] h-full gap-x-2 gap-y-2">
+    <div className="flex flex-wrap px-[10vw] h-full gap-x-2 gap-y-2 justify-center">
       {multiple_cookbooks.map((cookbook) => (
         <CookbookCard key={cookbook.title} cookbook={cookbook} />
       ))}

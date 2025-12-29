@@ -14,6 +14,7 @@ import api from "@/lib/api";
 import PasswordVisibilityToggle from "./shadcn-studio/input/input-26";
 import { useAuth } from "@/lib/useAuth";
 import { useNavigate } from "react-router-dom";
+import DemoInfo from "@/components/custom/login/demo-info";
 
 export function LoginForm({
   className,
@@ -53,6 +54,7 @@ export function LoginForm({
                   Login to your account
                 </p>
               </div>
+              <DemoInfo />
               <Field>
                 <FieldLabel htmlFor="username">Username</FieldLabel>
                 <Input
