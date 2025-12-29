@@ -7,18 +7,17 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-const PasswordVisibilityToggle = ({ id, name }: { id: string; name: string }) => {
+const PasswordVisibilityToggle = ({ ...props }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="w-full space-y-2">
       <div className="relative">
         <Input
-          id={id}
-          name={name}
           type={isVisible ? "text" : "password"}
           className="pr-9"
           required
+          {...props}
         />
         <Button
           variant="ghost"

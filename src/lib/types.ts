@@ -6,6 +6,12 @@ export interface AuthContextType {
   logout: () => void;
 }
 
+export interface SignupFormData {
+  username: string;
+  email?: string;
+  password: string;
+}
+
 export interface Category {
   id: number;
   name: string;

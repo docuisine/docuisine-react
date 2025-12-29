@@ -8,7 +8,8 @@ import SignupPage from "./pages/signup";
 import LoginPage from "@/pages/login";
 import Layout from "@/components/layout";
 import ProtectedRoute from "@/components/protected-route";
-
+import { SignupUsernameForm } from "@/components/custom/signup/username";
+import { SignupPasswordForm } from "@/components/custom/signup/password";
 import {
   createBrowserRouter,
   Navigate,
@@ -43,7 +44,14 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "/signup", element: <SignupPage /> },
+  {
+    path: "/signup",
+    element: <SignupPage />,
+    children: [
+      { index: true, element: <SignupUsernameForm /> },
+      { path: "password", element: <SignupPasswordForm /> },
+    ],
+  },
   { path: "/login", element: <LoginPage /> },
 ]);
 
