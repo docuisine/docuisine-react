@@ -12,6 +12,10 @@ export interface SignupFormData {
   password: string;
 }
 
+export interface SignupState {
+  isLoading: boolean;
+}
+
 export interface Category {
   id: number;
   name: string;

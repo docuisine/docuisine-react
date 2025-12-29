@@ -15,6 +15,8 @@ import PasswordVisibilityToggle from "./shadcn-studio/input/input-26";
 import { useAuth } from "@/lib/useAuth";
 import { useNavigate } from "react-router-dom";
 import DemoInfo from "@/components/custom/login/demo-info";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 export function LoginForm({
   className,
@@ -22,9 +24,11 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -34,8 +38,11 @@ export function LoginForm({
     if (!access_token) {
       throw new Error("Login failed");
     }
-    login(access_token);
-
+    try {
+      await login(access_token);
+    } finally {
+      setLoading(false);
+    }
     navigate("/recipes", { replace: true });
   };
 
@@ -78,7 +85,16 @@ export function LoginForm({
                 <PasswordVisibilityToggle id="password" name="password" />
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button type="submit">
+                  {loading && (
+                    <Spinner
+                      className="mr-2"
+                      role="status"
+                      aria-label="Loading"
+                    />
+                  )}
+                  {!loading && "Login"}
+                </Button>
               </Field>
               <FieldDescription className="text-center">
                 Don&apos;t have an account? <a href="/signup">Sign up</a>

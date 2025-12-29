@@ -63,6 +63,7 @@ export function SignupUsernameForm() {
           className="w-full"
           disabled={nextDisabled}
           onClick={() => navigate("/signup/password")}
+          type="button"
         >
           Next
           <ArrowRight className="ml-2" />

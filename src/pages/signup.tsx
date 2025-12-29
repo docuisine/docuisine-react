@@ -2,7 +2,7 @@ import { SignupForm } from "@/components/signup-form";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import type { SignupFormData } from "@/lib/types";
-import { SignupContext } from "@/lib/signup-context";
+import { SignupContext, SignupStateContext } from "@/lib/signup-context";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState<SignupFormData>({
@@ -10,15 +10,23 @@ export default function SignupPage() {
     email: "",
     password: "",
   });
+
+  const [signupState, setSignupState] = useState({
+    isLoading: false,
+  });
   return (
     <div className="h-screen w-screen bg-secondary flex items-center justify-center p-4">
       <div className="w-full max-w-sm md:max-w-4xl">
         <SignupContext.Provider
           value={{ data: formData, setData: setFormData }}
         >
-          <SignupForm>
-            <Outlet />
-          </SignupForm>
+          <SignupStateContext.Provider
+            value={{ state: signupState, setState: setSignupState }}
+          >
+            <SignupForm>
+              <Outlet />
+            </SignupForm>
+          </SignupStateContext.Provider>
         </SignupContext.Provider>
       </div>
     </div>

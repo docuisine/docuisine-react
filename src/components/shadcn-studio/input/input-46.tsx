@@ -67,6 +67,7 @@ const InputPasswordStrength = ({ ...props }) => {
           size="icon"
           onClick={toggleVisibility}
           className="text-muted-foreground focus-visible:ring-ring/50 absolute inset-y-0 right-0 rounded-l-none hover:bg-transparent"
+          type="button"
         >
           {isVisible ? <EyeOffIcon /> : <EyeIcon />}
           <span className="sr-only">

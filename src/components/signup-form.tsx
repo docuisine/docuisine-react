@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import FoodWarsJpg from "@/assets/food-wars.jpg";
 import { FieldDescription, FieldGroup } from "@/components/ui/field";
-import { useSignup } from "@/lib/signup-context";
+import { useSignup, useSignupState } from "@/lib/signup-context";
 import api from "@/lib/api";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,11 @@ export function SignupForm({
   ...props
 }: React.ComponentProps<"div">) {
   const { data } = useSignup();
+  const { setState } = useSignupState();
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setState({ isLoading: true });
     const formData = new FormData();
     formData.append("username", data.username);
     formData.append("password", data.password);
@@ -25,8 +27,11 @@ export function SignupForm({
     if (email) {
       formData.append("email", email);
     }
-
-    await api.signup(formData);
+    try {
+      await api.signup(formData);
+    } finally {
+      setState({ isLoading: false });
+    }
     navigate("/login");
   };
   return (
@@ -42,7 +47,7 @@ export function SignupForm({
               <FieldDescription className="text-center">
                 Already have an account? <a href="/login">Log in</a>
               </FieldDescription>
-              <Button variant="ghost">
+              <Button variant="ghost" type="button">
                 <Link to="/recipes" className="w-full h-full">
                   Browse as a guest
                 </Link>

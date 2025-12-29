@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import InputPasswordStrength from "@/components/shadcn-studio/input/input-46";
 import PasswordVisibilityToggle from "@/components/shadcn-studio/input/input-26";
-import { useSignup } from "@/lib/signup-context";
+import { useSignup, useSignupState } from "@/lib/signup-context";
 import { useNavigate } from "react-router-dom";
 import { UndoIcon } from "lucide-react";
 import React, { useState, useEffect } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 const validatePassword = (password: string) => {
   return (
@@ -20,6 +21,7 @@ const validatePassword = (password: string) => {
 
 export function SignupPasswordForm() {
   const { data, setData } = useSignup();
+  const { state } = useSignupState();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const navigate = useNavigate();
@@ -29,8 +31,8 @@ export function SignupPasswordForm() {
       validatePassword(data.password) &&
       data.password === confirmPassword;
 
-    setSubmitDisabled(!isValid);
-  }, [data.username, data.password, confirmPassword]);
+    setSubmitDisabled(!isValid || state.isLoading);
+  }, [data.username, data.password, confirmPassword, state.isLoading]);
   return (
     <>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -75,12 +77,17 @@ export function SignupPasswordForm() {
           variant="outline"
           className="w-full basis-1/3"
           onClick={() => navigate("/signup")}
+          type="button"
         >
           <UndoIcon className="mr-2" />
           Back
         </Button>
         <Button type="submit" className="basis-2/3" disabled={submitDisabled}>
-          Create Account
+          {state.isLoading ? (
+            <Spinner className="mr-2" role="status" aria-label="Loading" />
+          ) : (
+            "Create Account"
+          )}
         </Button>
       </Field>
     </>
