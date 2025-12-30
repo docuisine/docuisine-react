@@ -24,7 +24,7 @@ const HorizontalLogo = () => {
   const isLightMode = usePrefersColorScheme();
 
   return (
-    <div className="flex flex-row gap-4 align-middle justify-center items-center">
+    <div className="flex flex-row gap-4 justify-center items-center px-[min(4vw,10px)] sm:p-0 py-2">
       <img
         src={isLightMode ? LogoPng : LogoPngFlatDarkPng}
         alt="Docuisine Logo"
