@@ -3,6 +3,7 @@ import { CircleUser } from "lucide-react";
 import EditProfilePic from "@/components/custom/profile/profile-pic-edit";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useEffect } from "react";
 
 const UserField = ({
   label,
@@ -33,6 +34,9 @@ const UserField = ({
 };
 
 export default function ProfilePage() {
+  useEffect(() => {
+    document.title = "Profile - Docuisine";
+  }, []);
   return (
     <div className="w-full">
       <h1 className="font-semibold text-2xl mb-6 text-start border-b">
@@ -49,7 +53,10 @@ export default function ProfilePage() {
           />
         </div>
         <div className="flex flex-col justify-start gap-4">
-          <Label htmlFor="profile-picture" className="mb-2 font-semibold text-start">
+          <Label
+            htmlFor="profile-picture"
+            className="mb-2 font-semibold text-start"
+          >
             Profile Picture
           </Label>
           <Avatar className="w-60 h-60 rounded-full border shadow-sm">

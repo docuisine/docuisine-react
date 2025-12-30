@@ -3,9 +3,13 @@ import RecipesExplorer from "@/components/custom/recipes/recipesxplorer";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { useAuth } from "@/lib/useAuth";
+import { useEffect } from "react";
 
 const RecipesPage = () => {
   const { isAuthenticated } = useAuth();
+  useEffect(() => {
+    document.title = "Recipes - Docuisine";
+  }, []);
   return (
     <div className="flex gap-8 h-full">
       <div className="flex-col gap-8 p-2 hidden md:flex">

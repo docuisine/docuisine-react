@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 interface Item {
   id: string;
@@ -41,7 +42,8 @@ export function DragDropWithQuantity() {
     setDragItem(null);
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault();
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) =>
+    e.preventDefault();
 
   // Remove item
   const removeItem = (label: string) => {
@@ -137,10 +139,15 @@ export function DragDropWithQuantity() {
   );
 }
 
-
-
 const ShoppingListPage = () => {
-  return <div><DragDropWithQuantity /></div>;
+  useEffect(() => {
+    document.title = "Shopping List - Docuisine";
+  }, []);
+  return (
+    <div>
+      <DragDropWithQuantity />
+    </div>
+  );
 };
 
 export default ShoppingListPage;
