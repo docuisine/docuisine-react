@@ -1,4 +1,4 @@
-import CuisineCarousel from "./cuisine-carousel";
+import CuisineCarousel from "@/components/custom/cuisines/cuisine-carousel";
 import Searchbar from "@/components/custom/searchbar";
 import RecipeCarousel from "./recipe-carousel";
 import exampleRecipeJpg from "@/assets/example-recipe.jpg";

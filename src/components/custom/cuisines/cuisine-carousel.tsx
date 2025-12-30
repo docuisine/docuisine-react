@@ -1,5 +1,5 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import CuisineCard from "@/components/custom/cuisinecard";
+import CuisineCard from "@/components/custom/cuisines/cuisinecard";
 import { useEffect, useState } from "react";
 import type { Category } from "@/lib/types";
 import api from "@/lib/api";

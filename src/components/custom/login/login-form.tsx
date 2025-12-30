@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import api from "@/lib/api";
-import PasswordVisibilityToggle from "./shadcn-studio/input/input-26";
+import PasswordVisibilityToggle from "@/components/shadcn-studio/input/input-26";
 import { useAuth } from "@/lib/useAuth";
 import { useNavigate } from "react-router-dom";
 import DemoInfo from "@/components/custom/login/demo-info";

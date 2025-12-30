@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 const requirements = [
-  { regex: /.{8,128}/, text: "Must be 8-128 characters long." },
+  { regex: /.{8,128}/, text: "Must be 8-128 characters long" },
   { regex: /[a-z]/, text: "At least 1 lowercase letter" },
   { regex: /[A-Z]/, text: "At least 1 uppercase letter" },
   { regex: /[0-9]/, text: "At least 1 number" },

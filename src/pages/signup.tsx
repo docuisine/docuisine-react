@@ -1,4 +1,4 @@
-import { SignupForm } from "@/components/signup-form";
+import { SignupForm } from "@/components/custom/signup/signup-form";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import type { SignupFormData } from "@/lib/types";
