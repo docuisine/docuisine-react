@@ -28,3 +28,14 @@ export const validatePassword = (password: string) => {
     /[!@#$%^&*(),.?":{}|<>]/.test(password)
   );
 };
+
+
+export const normalizeTitle = (title: string) =>
+  title.toLowerCase().replace(/\s+/g, "-");
+
+export const unNormalizeTitle = (path: string) =>
+  path
+    .replace("/", "")
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");

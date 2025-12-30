@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
@@ -22,4 +24,13 @@ export interface Category {
   description?: string;
   img: string;
   preview_img: string;
+}
+
+export interface IconMap {
+  [key: string]: React.ReactNode;
+}
+
+export interface Bar {
+  title: string;
+  icon: React.ReactNode;
 }

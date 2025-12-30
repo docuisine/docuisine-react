@@ -70,7 +70,7 @@ const ProfileDropdown = ({
 
         <DropdownMenuGroup>
           {isAuthenticated && (
-            <DropdownMenuItem className="px-4 py-2.5 text-base">
+            <DropdownMenuItem className="px-4 py-2.5 text-base" onClick={() => navigate("/account")}>
               <UserIcon className="text-foreground size-5" />
               <span>My account</span>
             </DropdownMenuItem>

@@ -1,5 +1,5 @@
 import TitleBar from "@/components/custom/titlebar";
-import NavBar from "@/components/custom/navbar";
+import NavBar from "@/components/custom/navbar/navbar";
 
 function Header() {
   return (
