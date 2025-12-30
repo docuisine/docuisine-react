@@ -65,7 +65,7 @@ const NavBar = () => {
       ? [
           {
             title: unNormalizeTitle(recentPath),
-            icon: iconmap[recentPath.replace("/", "")] || (
+            icon: iconmap[recentPath] || (
               <AppWindowIcon size={iconSize} />
             ),
           },

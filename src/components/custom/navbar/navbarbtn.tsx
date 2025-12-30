@@ -1,4 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
+import { titleCase } from "@/lib/utils";
+import { normalizeTitle } from "@/lib/utils";
 
 interface NavBarBtnProps {
   title: string;
@@ -16,8 +18,8 @@ const NavBarBtn: React.FC<NavBarBtnProps> = ({
   rel,
 }) => {
   const path = useLocation().pathname;
-  const normalizedTitle = title.toLowerCase().replace(/\s+/g, "-");
-  const isActive = path.includes(normalizedTitle);
+  const normalizedPath = normalizeTitle(title);
+  const isActive = path.includes(normalizedPath);
 
   const baseClasses =
     "custom flex items-center justify-center gap-2 border-b-4 transition-colors rounded-t-md text-nowrap h-full";
@@ -29,7 +31,7 @@ const NavBarBtn: React.FC<NavBarBtnProps> = ({
   const textInactiveClasses = "hidden lg:inline-block";
 
   return (
-    <Link to={href ?? `/${normalizedTitle}`} target={target} rel={rel}>
+    <Link to={href ?? `/${normalizedPath}`} target={target} rel={rel}>
       <button
         className={`${baseClasses} ${
           isActive ? activeClasses : inactiveClasses
@@ -37,7 +39,7 @@ const NavBarBtn: React.FC<NavBarBtnProps> = ({
       >
         {children}
         <span className={isActive ? textActiveClasses : textInactiveClasses}>
-          {title}
+          {titleCase(title.split("/").slice(-1)[0])}
         </span>
       </button>
     </Link>
