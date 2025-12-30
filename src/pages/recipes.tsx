@@ -7,7 +7,7 @@ import { useAuth } from "@/lib/useAuth";
 const RecipesPage = () => {
   const { isAuthenticated } = useAuth();
   return (
-    <div className="flex gap-8 px-[10vw] h-full background">
+    <div className="flex gap-8 px-[10vw] h-full">
       <div className="flex-col gap-8 p-2 hidden md:flex">
         {isAuthenticated && (
           <Button className="w-full font-semibold text-sm h-12 bg-primary">
