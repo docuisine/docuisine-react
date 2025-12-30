@@ -1,18 +1,16 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { AuthContext } from "@/lib/auth-context";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [token, setToken] = useState<string | null>(null);
-  const [user, setUser] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(() =>
+    localStorage.getItem("access_token")
+  );
 
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    const user = localStorage.getItem("user");
-    if (user) setUser(user);
-    if (token) setToken(token);
-  }, []);
+  const [user, setUser] = useState<string | null>(() =>
+    localStorage.getItem("user")
+  );
 
   useLayoutEffect(() => {
     const authInterceptor = axios.interceptors.request.use((config) => {
