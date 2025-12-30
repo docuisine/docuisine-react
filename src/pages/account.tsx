@@ -46,7 +46,7 @@ function MenuItem({
 
 export default function AccountPage() {
   return (
-    <div className="flex gap-8 px-[10vw] h-full">
+    <div className="flex gap-8 h-full">
       <Menu>
         <MenuGroup title="Account">
           <MenuItem page="profile">
