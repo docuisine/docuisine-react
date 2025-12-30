@@ -48,6 +48,31 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* INFO */
+  --admonition-info-border: 68 138 255;
+  --admonition-info-bg: 68 138 255 / 0.1;
+  --admonition-info-fg: 68 138 255;
+
+  /* SUCCESS */
+  --admonition-success-border: 34 197 94;
+  --admonition-success-bg: 34 197 94 / 0.1;
+  --admonition-success-fg: 34 197 94;
+
+  /* TIP */
+  --admonition-tip-border: 0 191 165;
+  --admonition-tip-bg: 0 191 165 / 0.1;
+  --admonition-tip-fg: 0 191 165;
+
+  /* WARNING */
+  --admonition-warning-border: 255 145 0;
+  --admonition-warning-bg: 255 145 0 / 0.1;
+  --admonition-warning-fg: 255 145 0;
+
+  /* DESTRUCTIVE */
+  --admonition-destructive-border: 239 68 68;
+  --admonition-destructive-bg: 239 68 68 / 0.1;
+  --admonition-destructive-fg: 239 68 68;
 }
 
 body {
@@ -85,8 +110,6 @@ button.custom {
   font-size: 1.1rem;
   margin-left: 0.2rem;
 }
-
-
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -169,6 +192,31 @@ button.custom {
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+
+    /* INFO */
+    --admonition-info-border: 96 165 250;
+    --admonition-info-bg: 96 165 250 / 0.15;
+    --admonition-info-fg: 147 197 253;
+
+    /* SUCCESS */
+    --admonition-success-border: 34 197 94;
+    --admonition-success-bg: 34 197 94 / 0.15;
+    --admonition-success-fg: 110 231 183;
+
+    /* TIP */
+    --admonition-tip-border: 0 191 165;
+    --admonition-tip-bg: 0 191 165 / 0.1;
+    --admonition-tip-fg: 0 191 165;
+
+    /* WARNING */
+    --admonition-warning-border: 255 145 0;
+    --admonition-warning-bg: 255 145 0 / 0.1;
+    --admonition-warning-fg: 255 145 0;
+
+    /* DESTRUCTIVE */
+    --admonition-destructive-border: 248 113 113;
+    --admonition-destructive-bg: 248 113 113 / 0.15;
+    --admonition-destructive-fg: 252 165 165;
   }
 }
 
