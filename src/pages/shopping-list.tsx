@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 
 interface Item {
   id: string;
@@ -140,9 +139,6 @@ export function DragDropWithQuantity() {
 }
 
 const ShoppingListPage = () => {
-  useEffect(() => {
-    document.title = "Shopping List - Docuisine";
-  }, []);
   return (
     <div>
       <DragDropWithQuantity />

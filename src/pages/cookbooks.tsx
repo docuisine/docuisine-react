@@ -1,6 +1,5 @@
 import CookbookCard from "@/components/custom/cookbooks/cookbook-card";
 import exampleRecipeJpg from "@/assets/example-recipe.jpg";
-import { useEffect } from "react";
 
 const example_cookbooks = [
   {
@@ -19,6 +18,7 @@ const example_cookbooks = [
     imageSrc: exampleRecipeJpg,
   },
 ];
+
 const multiple_cookbooks = example_cookbooks.concat([
   ...example_cookbooks,
   ...example_cookbooks,
@@ -29,9 +29,6 @@ const multiple_cookbooks = example_cookbooks.concat([
 ]);
 
 const CookbooksPage = () => {
-  useEffect(() => {
-    document.title = "Cookbooks - Docuisine";
-  }, []);
   return (
     <div className="flex flex-wrap h-full gap-x-2 gap-y-2 justify-center">
       {multiple_cookbooks.map((cookbook) => (
