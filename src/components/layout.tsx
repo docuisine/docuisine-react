@@ -4,8 +4,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const titles: Record<string, string> = {
-  "/login": "Login - Docuisine",
-  "/signup": "Sign Up - Docuisine",
   "/recipes": "Recipes - Docuisine",
   "/cookbooks": "Cookbooks - Docuisine",
   "/shopping-list": "Shopping List - Docuisine",

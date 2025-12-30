@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import type { SignupFormData } from "@/lib/types";
 import { SignupContext, SignupStateContext } from "@/lib/signup-context";
+import { useEffect } from "react";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState<SignupFormData>({
@@ -15,6 +16,9 @@ export default function SignupPage() {
     isLoading: false,
   });
 
+  useEffect(() => {
+    document.title = "Signup - Docuisine";
+  }, []);
   return (
     <div className="h-screen w-screen bg-secondary flex items-center justify-center p-4">
       <div className="w-full max-w-sm md:max-w-4xl">
