@@ -17,7 +17,10 @@ import { useNavigate } from "react-router-dom";
 import DemoInfo from "@/components/custom/login/demo-info";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
-import { Separator } from "@/components/ui/separator";
+import { APIError } from "@/lib/errors";
+import Admonition from "@/components/custom/admonition";
+import { validatePassword } from "@/lib/utils";
+
 export function LoginForm({
   className,
   ...props
@@ -25,25 +28,34 @@ export function LoginForm({
   const { login } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<APIError | null>(null);
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const access_token = await api
-      .login(formData)
-      .then((data) => data.access_token);
-    if (!access_token) {
-      throw new Error("Login failed");
-    }
     try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+
+      const data = await api.login(formData);
+      const access_token = data.access_token;
+
       await login(access_token);
+      navigate("/recipes", { replace: true });
+    } catch (error) {
+      if (error instanceof APIError) {
+        setError(error);
+      } else {
+        throw error;
+      }
     } finally {
       setLoading(false);
     }
-    navigate("/recipes", { replace: true });
   };
 
   return (
@@ -62,15 +74,33 @@ export function LoginForm({
                 </p>
               </div>
               <DemoInfo />
+              {error && !(error instanceof APIError) && (
+                <Admonition type="destructive" title="Something went wrong">
+                  {error}
+                </Admonition>
+              )}
               <Field>
                 <FieldLabel htmlFor="username">Username</FieldLabel>
                 <Input
                   id="username"
                   name="username"
                   type="text"
+                  value={form.username}
+                  onChange={(e) =>
+                    setForm({ ...form, username: e.target.value })
+                  }
                   placeholder="johnFood"
                   required
+                  {...(error?.statusCode === 404 && {
+                    "aria-invalid": "true",
+                    className: "peer",
+                  })}
                 />
+                {error?.statusCode === 404 && (
+                  <p className="text-muted-foreground text-start peer-aria-invalid:text-destructive text-xs">
+                    {error.message}
+                  </p>
+                )}
               </Field>
               <Field>
                 <div className="flex items-center">
@@ -82,10 +112,33 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <PasswordVisibilityToggle id="password" name="password" />
+                <PasswordVisibilityToggle
+                  id="password"
+                  name="password"
+                  value={form.password}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                  required
+                  {...(error?.statusCode === 401 && {
+                    "aria-invalid": "true",
+                  })}
+                />
+                {error?.statusCode === 401 && (
+                  <p className="text-start text-destructive text-xs">
+                    {error.message}
+                  </p>
+                )}
               </Field>
               <Field>
-                <Button type="submit">
+                <Button
+                  type="submit"
+                  disabled={
+                    form.username.length < 3 ||
+                    !validatePassword(form.password) ||
+                    loading
+                  }
+                >
                   {loading && (
                     <Spinner
                       className="mr-2"

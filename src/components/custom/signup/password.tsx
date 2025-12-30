@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
+import { Field, FieldLabel } from "@/components/ui/field";
 import InputPasswordStrength from "@/components/shadcn-studio/input/input-46";
 import PasswordVisibilityToggle from "@/components/shadcn-studio/input/input-26";
 import { useSignup, useSignupState } from "@/lib/signup-context";
@@ -7,17 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { UndoIcon } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Spinner } from "@/components/ui/spinner";
-
-const validatePassword = (password: string) => {
-  return (
-    password.length >= 8 &&
-    password.length <= 128 &&
-    /[A-Z]/.test(password) &&
-    /[a-z]/.test(password) &&
-    /[0-9]/.test(password) &&
-    /[!@#$%^&*(),.?":{}|<>]/.test(password)
-  );
-};
+import { validatePassword } from "@/lib/utils";
 
 export function SignupPasswordForm() {
   const { data, setData } = useSignup();

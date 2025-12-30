@@ -1,5 +1,6 @@
 import { urlJoin } from "@/lib/utils";
 import axios from "axios";
+import errors from "@/lib/errors";
 
 /**
  * Authenticate a user and retrieve an access token.
@@ -18,11 +19,42 @@ import axios from "axios";
  * @throws AxiosError if the request fails or credentials are invalid.
  */
 export async function login(formdata: FormData) {
-  const response = await axios.post(
-    urlJoin(import.meta.env.VITE_BACKEND_URL, "/auth/token/"),
-    formdata
-  );
-  return response.data;
+  try {
+    const response = await axios.post(
+      urlJoin(import.meta.env.VITE_BACKEND_URL, "/auth/token/"),
+      formdata
+    );
+
+    return response.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      const status = err.response?.status;
+
+      if (status && status >= 500) {
+        throw new errors.ServerError(
+          "Something went wrong on the server.",
+          status
+        );
+      }
+
+      switch (status) {
+        case 401:
+          throw new errors.InvalidCredentialsError(
+            "The password provided is incorrect.",
+            401
+          );
+        case 404:
+          throw new errors.UserNotFoundError(
+            "A user with this username does not exist.",
+            404
+          );
+        default:
+          throw new Error("Login failed");
+      }
+    }
+
+    throw err;
+  }
 }
 
 /**
