@@ -10,6 +10,8 @@ import Layout from "@/components/layout";
 import ProtectedRoute from "@/components/protected-route";
 import PageNotFound404 from "@/pages/404";
 import AccountPage from "@/pages/account";
+import ProfilePage from "@/pages/account/profile";
+
 import { SignupUsernameForm } from "@/components/custom/signup/username";
 import { SignupPasswordForm } from "@/components/custom/signup/password";
 import {
@@ -44,11 +46,24 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "/account", element:
+      {
+        path: "/account",
+        element: (
           <ProtectedRoute>
             <AccountPage />
           </ProtectedRoute>
-        },
+        ),
+        children: [
+          {
+            index: true,
+            element: <Navigate to="profile" replace />,
+          },
+          {
+            path: "profile",
+            element: <ProfilePage />,
+          },
+        ],
+      },
     ],
   },
   {
