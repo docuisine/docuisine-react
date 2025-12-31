@@ -56,6 +56,68 @@ const defaultTitles = {
   success: "Success",
 };
 
+export function AdmonitionBorder({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn("border rounded-md overflow-hidden shadow-sm", className)}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function AdmonitionHeader({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex items-center px-4 py-2 gap-2 font-semibold text-md",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+export function AdmonitionTitle({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <span className={cn("flex items-center justify-center text-sm", className)}>
+      {children}
+    </span>
+  );
+}
+
+export function AdmonitionContent({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("px-4 py-2 text-start flex text-sm", className)}>
+      {children}
+    </div>
+  );
+}
+
 export default function Admonition({
   type,
   title,
@@ -64,28 +126,14 @@ export default function Admonition({
 }: AdmonitionProps) {
   const hasChildren = Boolean(children && String(children).trim().length > 0);
   return (
-    <div
-      className={cn(
-        "border rounded-md overflow-hidden shadow-sm",
-        borderStyles[type]
-      )}
-    >
-      <div
-        className={cn(
-          "flex items-center px-4 py-2 gap-2 font-semibold text-md",
-          backgroundStyles[type]
-        )}
-      >
+    <AdmonitionBorder className={borderStyles[type]}>
+      <AdmonitionHeader className={backgroundStyles[type]}>
         {typeIcons[type]}
-        <span className="flex items-center justify-center text-sm">
-          {title ?? defaultTitles[type]}
-        </span>
-      </div>
+        <AdmonitionTitle>{title ?? defaultTitles[type]}</AdmonitionTitle>
+      </AdmonitionHeader>
       {hasChildren && (
-        <span className={cn("px-4 py-2 text-start flex text-sm", className)}>
-          {children}
-        </span>
+        <AdmonitionContent className={className}>{children}</AdmonitionContent>
       )}
-    </div>
+    </AdmonitionBorder>
   );
 }
