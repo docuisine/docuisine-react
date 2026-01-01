@@ -5,7 +5,7 @@ import PasswordVisibilityToggle from "@/components/shadcn-studio/input/input-26"
 import { useSignup, useSignupState } from "@/lib/signup-context";
 import { useNavigate } from "react-router-dom";
 import { UndoIcon } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { validatePassword } from "@/lib/utils";
 
@@ -15,14 +15,14 @@ export function SignupPasswordForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const navigate = useNavigate();
-  useEffect(() => {
-    const isValid =
-      data.username.length >= 3 &&
-      validatePassword(data.password) &&
-      data.password === confirmPassword;
+  const isValid =
+    data.username.length >= 3 &&
+    validatePassword(data.password) &&
+    data.password === confirmPassword;
 
+  if (submitDisabled != (!isValid || state.isLoading)) {
     setSubmitDisabled(!isValid || state.isLoading);
-  }, [data.username, data.password, confirmPassword, state.isLoading]);
+  }
   return (
     <>
       <div className="flex flex-col items-center gap-2 text-center">
