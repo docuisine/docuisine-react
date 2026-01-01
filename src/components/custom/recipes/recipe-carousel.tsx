@@ -7,12 +7,7 @@ const RecipeCarousel = ({ recipes }: { recipes: Recipe[] }) => {
       <div className="flex w-full space-x-4">
         {recipes.map((recipe) => (
           <RecipeCard
-            recipe={{
-              title: recipe.title,
-              imageSrc: recipe.imageSrc,
-              timeTaken: recipe.timeTaken,
-              servings: recipe.servings,
-            }}
+            recipe={{...recipe}}
           />
         ))}
       </div>
