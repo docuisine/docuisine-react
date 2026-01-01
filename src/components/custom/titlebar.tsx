@@ -13,7 +13,7 @@ const TitleBar = () => {
       </Link>
       <div className="flex flex-row gap-4 align-middle justify-center items-center">
         {version && (
-          <span className="text-xs text-muted-foreground">v{version}</span>
+          <span className="text-xs text-muted-foreground">v{version.slice(0, 7)}</span>
         )}
         <Usercard username={user || "Guest"} />
       </div>
