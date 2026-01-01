@@ -50,7 +50,7 @@ export const titleCase = (str: string) => {
 export const appVersion = () => {
   let version = import.meta.env.VITE_APP_VERSION;
 
-  if (!version) {
+  if (!version || version.length === 0) {
     version = import.meta.env.VERCEL_GIT_COMMIT_SHA;
   }
 
