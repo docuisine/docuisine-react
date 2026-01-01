@@ -1,6 +1,7 @@
 import "./App.css";
 
 import RecipesPage from "@/pages/recipes";
+import RecipeCreatePage from "@/pages/recipe/create";
 import CookbooksPage from "@/pages/cookbooks";
 import ShoppingListPage from "@/pages/shopping-list";
 import AdministrationPage from "@/pages/administration";
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "/recipes",
         element: <RecipesPage />,
+      },
+      {
+        path: "/recipes/create",
+        element: (
+          <ProtectedRoute>
+            <RecipeCreatePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/cookbooks",
