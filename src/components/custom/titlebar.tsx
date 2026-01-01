@@ -2,18 +2,19 @@ import Usercard from "@/components/custom/usercard";
 import HorizontalLogo from "@/components/custom/horizontallogo";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/lib/useAuth";
+import { appVersion } from "@/lib/utils";
 
 const TitleBar = () => {
   const { user } = useAuth();
-  const appVersion = import.meta.env.VITE_APP_VERSION;
+  const version = appVersion();
   return (
     <div className="w-full flex justify-between">
       <Link to="/" className="flex items-center">
         <HorizontalLogo />
       </Link>
       <div className="flex flex-row gap-4 align-middle justify-center items-center">
-        {appVersion && (
-          <span className="text-xs text-muted-foreground">v{appVersion.slice(0, 7)}</span>
+        {version && (
+          <span className="text-xs text-muted-foreground">v{version}</span>
         )}
         <Usercard username={user || "Guest"} />
       </div>

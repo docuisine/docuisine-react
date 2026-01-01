@@ -29,7 +29,6 @@ export const validatePassword = (password: string) => {
   );
 };
 
-
 export const normalizeTitle = (title: string) =>
   title.toLowerCase().replace(/\s+/g, "-");
 
@@ -46,4 +45,14 @@ export const titleCase = (str: string) => {
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
-}
+};
+
+export const appVersion = () => {
+  let version = import.meta.env.VITE_APP_VERSION;
+
+  if (!version) {
+    version = import.meta.env.RCEL_GIT_COMMIT_SHA;
+  }
+
+  return version ? version.slice(0, 7) : null;
+};
