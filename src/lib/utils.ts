@@ -46,13 +46,3 @@ export const titleCase = (str: string) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
-
-export const appVersion = () => {
-  let version = import.meta.env.VITE_APP_VERSION;
-
-  if (!version || version.length === 0) {
-    version = import.meta.env.VERCEL_GIT_COMMIT_SHA;
-  }
-
-  return version ? version.slice(0, 7) : null;
-};

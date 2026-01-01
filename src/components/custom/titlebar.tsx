@@ -2,11 +2,10 @@ import Usercard from "@/components/custom/usercard";
 import HorizontalLogo from "@/components/custom/horizontallogo";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/lib/useAuth";
-import { appVersion } from "@/lib/utils";
 
 const TitleBar = () => {
   const { user } = useAuth();
-  const version = appVersion();
+  const version = import.meta.env.VITE_APP_VERSION;
   return (
     <div className="w-full flex justify-between">
       <Link to="/" className="flex items-center">
