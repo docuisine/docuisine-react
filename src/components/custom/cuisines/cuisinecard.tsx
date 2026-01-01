@@ -13,7 +13,7 @@ const CuisineCard = ({ category }: { category: Category }) => {
         <img
           src={urlJoin(import.meta.env.VITE_IMAGE_HOST, category.preview_img)}
           alt={category.name}
-          className="h-full w-full object-cover transition-transform duration-100 hover:scale-105 bg-sidebar-accent text-secondary-foreground"
+          className="h-full w-full object-cover transition-transform duration-400 hover:scale-104 bg-sidebar-accent text-secondary-foreground"
           id={category.name}
         />
       </div>
