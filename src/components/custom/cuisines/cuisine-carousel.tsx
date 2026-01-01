@@ -1,6 +1,6 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import CuisineCard from "@/components/custom/cuisines/cuisinecard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Category } from "@/lib/types";
 import api from "@/lib/api";
 
@@ -11,10 +11,10 @@ const CuisineCarousel = () => {
     const data = await api.getAllCategories();
     setCuisines(data);
   };
-  useEffect(() => {
-    getCategories();
-  }, []);
 
+  if (cuisines.length === 0) {
+    getCategories();
+  }
   if (cuisines) {
     return (
       <ScrollArea className="w-full h-fit pb-4 rounded-md whitespace-nowrap">
