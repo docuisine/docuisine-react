@@ -23,6 +23,7 @@ const UserCard = () => {
       <ProfileDropdown
         align="end"
         username={username}
+        email={user?.email || ""}
         avatarUrl={avatarUrl}
         trigger={
           <div className="relative">
