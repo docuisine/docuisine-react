@@ -10,7 +10,7 @@ import {
 import { useAuth } from "@/lib/useAuth";
 import { useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { normalizeTitle, unNormalizeTitle } from "@/lib/utils";
+import { normalizeTitle } from "@/lib/utils";
 import type { Bar } from "@/lib/types";
 
 const NavBar = () => {
@@ -22,9 +22,21 @@ const NavBar = () => {
 
   const mainSections: Bar[] = useMemo(
     () => [
-      { title: "Recipes", icon: <UtensilsCrossedIcon size={iconSize} /> },
-      { title: "Cookbooks", icon: <BookTextIcon size={iconSize} /> },
-      { title: "Shopping List", icon: <ListTodo size={iconSize} /> },
+      {
+        title: "Recipes",
+        slug: "/recipes",
+        icon: <UtensilsCrossedIcon size={iconSize} />,
+      },
+      {
+        title: "Cookbooks",
+        slug: "/cookbooks",
+        icon: <BookTextIcon size={iconSize} />,
+      },
+      {
+        title: "Shopping List",
+        slug: "/shopping-list",
+        icon: <ListTodo size={iconSize} />,
+      },
     ],
     []
   );
@@ -32,7 +44,13 @@ const NavBar = () => {
   const adminSection: Bar[] = useMemo(
     () =>
       isAuthenticated
-        ? [{ title: "Administration", icon: <SettingsIcon size={iconSize} /> }]
+        ? [
+            {
+              title: "Administration",
+              slug: "/administration",
+              icon: <SettingsIcon size={iconSize} />,
+            },
+          ]
         : [],
     [isAuthenticated]
   );
@@ -41,9 +59,7 @@ const NavBar = () => {
    * All default tabs (used to check if current route is already known)
    */
   const defaultTabs = useMemo(() => {
-    return [...mainSections, ...adminSection].map((s) =>
-      normalizeTitle(s.title)
-    );
+    return [...mainSections, ...adminSection].map((s) => s.slug);
   }, [mainSections, adminSection]);
 
   /**
@@ -54,7 +70,7 @@ const NavBar = () => {
 
     if (path === "/") return;
 
-    const isDefault = defaultTabs.some((tab) => path.includes(tab));
+    const isDefault = defaultTabs.includes(path);
 
     if (!isDefault) {
       setRecentPath(path);
@@ -64,10 +80,9 @@ const NavBar = () => {
     recentPath && recentPath !== "/"
       ? [
           {
-            title: unNormalizeTitle(recentPath),
-            icon: iconmap[recentPath] || (
-              <AppWindowIcon size={iconSize} />
-            ),
+            title: normalizeTitle(recentPath),
+            slug: recentPath,
+            icon: iconmap[recentPath] || <AppWindowIcon size={iconSize} />,
           },
         ]
       : [];
@@ -77,7 +92,10 @@ const NavBar = () => {
       {/* Main sections */}
       <div className="flex">
         {mainSections.map((section) => (
-          <NavBarBtn key={section.title} title={section.title}>
+          <NavBarBtn
+            key={section.slug}
+            slug={section.slug}
+          >
             {section.icon}
           </NavBarBtn>
         ))}
@@ -86,13 +104,19 @@ const NavBar = () => {
       {/* Auth + recent sections */}
       <div className="flex">
         {adminSection.map((section) => (
-          <NavBarBtn key={section.title} title={section.title}>
+          <NavBarBtn
+            key={section.slug}
+            slug={section.slug}
+          >
             {section.icon}
           </NavBarBtn>
         ))}
 
         {recentSection.map((section) => (
-          <NavBarBtn key={section.title} title={section.title}>
+          <NavBarBtn
+            key={section.slug}
+            slug={section.slug}
+          >
             {section.icon}
           </NavBarBtn>
         ))}

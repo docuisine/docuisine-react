@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { FileBraces } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export default function RecipeFileUpload() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -18,6 +19,16 @@ export default function RecipeFileUpload() {
     const file = e.dataTransfer.files?.[0];
     if (file) handleFile(file);
   };
+
+  const classname = cn(
+    "relative flex flex-col items-center justify-center",
+    "border-2 border-dashed rounded-md",
+    "h-48 cursor-pointer transition text-center",
+    "hover:bg-primary/8 hover:border-primary/20",
+    isDragging
+      ? "bg-primary/8 border-primary/20"
+      : "bg-muted/40 border-muted-foreground/40"
+  );
   return (
     <>
       <div
@@ -28,12 +39,7 @@ export default function RecipeFileUpload() {
         }}
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
-        className={`
-          relative flex flex-col items-center justify-center
-          border-2 border-dashed rounded-md
-          h-48 cursor-pointer transition text-center
-          ${isDragging ? "border-primary bg-primary/10" : "border-muted"}
-        `}
+        className={classname}
       >
         <FileBraces className="w-10 h-10 mb-2 text-muted-foreground" />
         <p className="text-sm text-muted-foreground">

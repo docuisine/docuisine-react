@@ -1,3 +1,9 @@
+import RecipeCreateForm from "@/components/custom/recipes/recipe-create-form";
+
 export default function RecipeCreatePage() {
-  return <div>Recipe Create Page</div>;
+  return (
+    <div className="w-full">
+      <RecipeCreateForm />
+    </div>
+  );
 }

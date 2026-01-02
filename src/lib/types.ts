@@ -32,5 +32,14 @@ export interface IconMap {
 
 export interface Bar {
   title: string;
+  slug: string;
   icon: React.ReactNode;
+}
+
+export interface Ingredient {
+  id: number;
+  name: string;
+  description?: string;
+  img?: string;
+  preview_img?: string;
 }

@@ -9,6 +9,7 @@ const titles: Record<string, string> = {
   "/shopping-list": "Shopping List - Docuisine",
   "/account/profile": "Profile - Docuisine",
   "/administration": "Administration - Docuisine",
+  "/recipes/create": "Create Recipe - Docuisine",
 };
 
 const Layout = () => {
