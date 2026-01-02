@@ -4,6 +4,7 @@ import EditProfilePic from "@/components/custom/profile/profile-pic-edit";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/useAuth";
+import { urlJoin } from "@/lib/utils";
 
 const UserField = ({
   label,
@@ -35,6 +36,7 @@ const UserField = ({
 
 export default function ProfilePage() {
   const { user } = useAuth();
+  const avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user?.img || "");
   return (
     <div className="w-full">
       <h1 className="font-semibold text-2xl mb-6 text-start border-b">
@@ -58,7 +60,7 @@ export default function ProfilePage() {
             Profile Picture
           </Label>
           <Avatar className="w-60 h-60 rounded-full border shadow-sm">
-            <AvatarImage src={user?.preview_img} alt="User Avatar" />
+            <AvatarImage src={avatarUrl} alt="User Avatar" />
             <AvatarFallback className="rounded-full">
               <CircleUser size={"4em"} className="text-muted-foreground" />
             </AvatarFallback>

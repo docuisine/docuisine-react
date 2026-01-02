@@ -13,6 +13,7 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
   user: User | null;
+  setUserSync: (user: User | null) => void;
   login: (token: string) => void;
   logout: () => void;
 }

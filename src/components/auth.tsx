@@ -31,6 +31,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [token]);
 
+  const setUserSync = (user: User | null) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  };
+
   const login = async (token: string) => {
     try {
       localStorage.setItem("access_token", token);
@@ -39,8 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const jwt = jwtDecode<{ sub: string }>(token);
       const user = await api.getUserbyUsername(jwt.sub);
 
-      localStorage.setItem("user", JSON.stringify(user));
-      setUser(user);
+      setUserSync(user);
     } catch (err) {
       console.error("Login failed", err);
       logout();
@@ -60,6 +64,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         token,
         isAuthenticated: !!token,
         user,
+        setUserSync: setUserSync,
         login,
         logout,
       }}

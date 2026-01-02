@@ -100,11 +100,22 @@ export async function getUserbyUsername(username: string) {
   return response.data;
 }
 
+export async function updateUserProfilePicture(
+  formdata: FormData
+) {
+  const response = await axios.put(
+    urlJoin(import.meta.env.VITE_BACKEND_URL, `/users/img`),
+    formdata
+  );
+  return response.data;
+}
+
 const api = {
   login,
   signup,
   getUserbyUsername,
   getAllCategories,
+  updateUserProfilePicture,
 };
 
 export default api;
