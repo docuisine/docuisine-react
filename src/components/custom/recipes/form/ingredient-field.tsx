@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Ingredient } from "@/lib/types";
 import { IngredientUnitCombobox } from "./ingredient-unit-combobox";
+import { TrashIcon } from "lucide-react";
 
 type InputFloatingLabelProps = React.ComponentProps<typeof Input> & {
   className?: string;
@@ -70,10 +71,10 @@ export default function IngredientField({
       <Button
         variant="ghost"
         aria-roledescription="Delete entry"
-        className="text-destructive hover:bg-[rgb(var(--admonition-destructive-bg))] hover:text-none"
+        className="text-muted-foreground hover:bg-[rgb(var(--admonition-destructive-bg))] hover:text-[rgb(var(--admonition-destructive-fg))]"
         onClick={() => deleteHandler(ingredient.id)}
       >
-        &times;
+        <TrashIcon />
       </Button>
     </div>
   );
