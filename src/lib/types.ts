@@ -4,6 +4,7 @@ export interface User {
   username: string;
   email?: string;
   img?: string;
+  role: "user" | "admin";
   preview_img?: string;
   created_at: string;
   updated_at: string;

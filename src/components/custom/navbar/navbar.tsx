@@ -14,7 +14,7 @@ import { normalizeTitle } from "@/lib/utils";
 import type { Bar } from "@/lib/types";
 
 const NavBar = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const location = useLocation();
   const [recentPath, setRecentPath] = useState<string | null>(null);
 
@@ -43,7 +43,7 @@ const NavBar = () => {
 
   const adminSection: Bar[] = useMemo(
     () =>
-      isAuthenticated
+      (isAuthenticated && user && user.role === "admin")
         ? [
             {
               title: "Administration",
@@ -52,7 +52,7 @@ const NavBar = () => {
             },
           ]
         : [],
-    [isAuthenticated]
+    [isAuthenticated, user]
   );
 
   /**
