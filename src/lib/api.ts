@@ -93,9 +93,17 @@ export async function getAllCategories() {
   return response.data;
 }
 
+export async function getUserbyUsername(username: string) {
+  const response = await axios.get(
+    urlJoin(import.meta.env.VITE_BACKEND_URL, `/users/${username}`)
+  );
+  return response.data;
+}
+
 const api = {
   login,
   signup,
+  getUserbyUsername,
   getAllCategories,
 };
 

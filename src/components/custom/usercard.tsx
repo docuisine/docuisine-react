@@ -2,14 +2,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleUser } from "lucide-react";
 import ProfileDropdown from "../shadcn-studio/blocks/dropdown-profile";
 import { useAuth } from "@/lib/useAuth";
-const UserCard = ({
-  username = "Username",
-  avatarUrl,
-}: {
-  username: string;
-  avatarUrl?: string;
-}) => {
-  const { isAuthenticated } = useAuth();
+import { urlJoin } from "@/lib/utils";
+
+const UserCard = () => {
+  const { isAuthenticated, user } = useAuth();
+
+  let avatarUrl;
+  if (user) {
+    if (user.preview_img != null) {
+      avatarUrl = urlJoin(import.meta.env.IMAGE_HOST, user.preview_img);
+    } else {
+      if (user.img != null) {
+        avatarUrl = urlJoin(import.meta.env.IMAGE_HOST, user.img);
+      }
+    }
+  }
+  const username = user?.username || "Guest";
   return (
     <div className="flex flex-row gap-4 align-middle justify-center items-center">
       <ProfileDropdown

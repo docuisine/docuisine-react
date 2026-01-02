@@ -1,9 +1,18 @@
 import React from "react";
+export interface User {
+  id: number;
+  username: string;
+  email?: string;
+  img?: string;
+  preview_img?: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
-  user: string | null;
+  user: User | null;
   login: (token: string) => void;
   logout: () => void;
 }
