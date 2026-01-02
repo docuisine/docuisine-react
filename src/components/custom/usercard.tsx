@@ -10,10 +10,10 @@ const UserCard = () => {
   let avatarUrl;
   if (user) {
     if (user.preview_img != null) {
-      avatarUrl = urlJoin(import.meta.env.IMAGE_HOST, user.preview_img);
+      avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.preview_img);
     } else {
       if (user.img != null) {
-        avatarUrl = urlJoin(import.meta.env.IMAGE_HOST, user.img);
+        avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.img);
       }
     }
   }
