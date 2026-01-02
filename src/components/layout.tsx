@@ -22,7 +22,7 @@ const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col w-screen overflow-x-hidden">
       <Header />
-      <main className="flex-1 px-[10vw]">
+      <main className="flex-1 px-[10vw] my-8">
         <Outlet /> {/* renders the nested route content */}
       </main>
     </div>
