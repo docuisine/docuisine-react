@@ -18,11 +18,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { PlusIcon, FileUpIcon, SquarePenIcon } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/lib/useAuth";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function DropdownMenuDialog({
   children,
@@ -83,10 +84,18 @@ export function DropdownMenuDialog({
 
 const CreateRecipeButton = () => {
   return (
-    <Button className="w-full font-semibold text-sm h-12 bg-primary">
+    <div
+      className={cn(
+        buttonVariants({
+          size: "default",
+          variant: "default",
+          className: "w-full font-semibold text-sm h-12 bg-primary",
+        })
+      )}
+    >
       <PlusIcon size={"1.2em"} strokeWidth={3} />
       Add recipe
-    </Button>
+    </div>
   );
 };
 
