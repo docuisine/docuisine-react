@@ -13,14 +13,20 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function IngredientCombobox({ children }: { children: React.ReactNode }) {
+export function SelectComboBox({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex items-center space-x-4">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-full">
-            + Add ingredient
+            {label}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0" side="top" align="center">
@@ -28,9 +34,7 @@ export function IngredientCombobox({ children }: { children: React.ReactNode }) 
             <CommandInput placeholder="Change ingredient..." />
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup>
-                {children}
-              </CommandGroup>
+              <CommandGroup>{children}</CommandGroup>
             </CommandList>
           </Command>
         </PopoverContent>

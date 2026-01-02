@@ -19,7 +19,7 @@ import { InputTime } from "@/components/custom/recipes/form/time-taken";
 import { useState } from "react";
 import type { Ingredient } from "@/lib/types";
 import { ingredients as DBingredients } from "./form/ingredient-placeholder-data";
-import { IngredientCombobox } from "./form/ingredient-combobox";
+import { SelectComboBox } from "./form/select-combobox";
 import { CommandItem } from "@/components/ui/command";
 
 const headerIconProps = {
@@ -94,7 +94,7 @@ export default function RecipeCreateForm() {
             deleteHandler={deleteIngredient}
           />
         ))}
-        <IngredientCombobox>
+        <SelectComboBox label="+ Add Ingredient">
           {DBingredients.map((ingredient) => (
             <CommandItem
               key={ingredient.id}
@@ -106,7 +106,7 @@ export default function RecipeCreateForm() {
               {ingredient.name}
             </CommandItem>
           ))}
-        </IngredientCombobox>
+        </SelectComboBox>
       </InputGroup>
       <InputGroup>
         <InputGroupHeader>
