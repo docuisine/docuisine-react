@@ -6,7 +6,8 @@ import {
   CarrotIcon,
   ImageIcon,
   WrenchIcon,
-  ShapesIcon
+  ShapesIcon,
+  FormIcon,
 } from "lucide-react";
 import IngredientField from "./form/ingredient-field";
 import {
@@ -19,10 +20,12 @@ import {
 } from "@/components/custom/recipes/form/basic-information";
 import { InputTime } from "@/components/custom/recipes/form/time-taken";
 import { useState } from "react";
-import type { Ingredient } from "@/lib/types";
+import type { Ingredient, CreateRecipeStep } from "@/lib/types";
 import { ingredients as DBingredients } from "./form/ingredient-placeholder-data";
 import { SelectComboBox } from "./form/select-combobox";
 import { CommandItem } from "@/components/ui/command";
+import StepField from "./form/step-field";
+import { Button } from "@/components/ui/button";
 
 const headerIconProps = {
   className: "inline-block mr-2",
@@ -35,6 +38,7 @@ const inputIconProps = {
 
 export default function RecipeCreateForm() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [steps, setSteps] = useState<CreateRecipeStep[]>([]);
 
   const deleteIngredient = (id: number) => {
     setIngredients((prevIngredients) =>
@@ -47,6 +51,17 @@ export default function RecipeCreateForm() {
       return;
     }
     setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
+  };
+
+  const handleDeleteStep = (html_id: string) => {
+    setSteps((prevSteps) => {
+      const filtered = prevSteps.filter((step) => step.html_id !== html_id);
+
+      return filtered.map((step, index) => ({
+        ...step,
+        step_num: index + 1,
+      }));
+    });
   };
 
   return (
@@ -74,6 +89,7 @@ export default function RecipeCreateForm() {
           <TextareaWithHintText
             label="Description"
             placeholder="Enter a brief description of the recipe"
+            optional
           />
         </InputGroup>
         <InputGroup className="basis-1/3">
@@ -112,6 +128,33 @@ export default function RecipeCreateForm() {
       </InputGroup>
       <InputGroup>
         <InputGroupHeader>
+          <FormIcon {...headerIconProps} />
+          Instructions
+        </InputGroupHeader>
+        {steps.map((step) => (
+          <StepField
+            key={step.html_id}
+            recipeStep={step}
+            deleteHandler={handleDeleteStep}
+          />
+        ))}
+        <Button
+          variant="outline"
+          onClick={() => {
+            setSteps((prevSteps) => [
+              ...prevSteps,
+              {
+                html_id: crypto.randomUUID(),
+                step_num: prevSteps.length + 1,
+              },
+            ]);
+          }}
+        >
+          + Add Step
+        </Button>
+      </InputGroup>
+      <InputGroup>
+        <InputGroupHeader>
           <ClockIcon {...headerIconProps} />
           Time taken
         </InputGroupHeader>
@@ -122,8 +165,9 @@ export default function RecipeCreateForm() {
       <div className="flex gap-4">
         <InputGroup>
           <InputGroupHeader>
-          <ShapesIcon {...headerIconProps} />
-          Categories</InputGroupHeader>
+            <ShapesIcon {...headerIconProps} />
+            Categories
+          </InputGroupHeader>
           <SelectComboBox label="+ Add Category">
             <CommandItem value="Category 1">Category 1</CommandItem>
             <CommandItem value="Category 2">Category 2</CommandItem>
@@ -132,8 +176,9 @@ export default function RecipeCreateForm() {
         </InputGroup>
         <InputGroup>
           <InputGroupHeader>
-          <WrenchIcon {...headerIconProps} />
-          Tools</InputGroupHeader>
+            <WrenchIcon {...headerIconProps} />
+            Tools
+          </InputGroupHeader>
           <SelectComboBox label="+ Add Tool">
             <CommandItem value="Tool 1">Tool 1</CommandItem>
             <CommandItem value="Tool 2">Tool 2</CommandItem>

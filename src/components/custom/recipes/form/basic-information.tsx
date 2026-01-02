@@ -38,15 +38,17 @@ export const InputStartIcon = ({
 export const TextareaWithHintText = ({
   label,
   placeholder,
+  optional,
 }: {
   label: string;
   placeholder: string;
+  optional?: boolean;
 }) => {
   const id = useId();
 
   return (
     <div className="w-full space-y-2">
-      <RecipeFieldLabel htmlFor={id} label={label} optional />
+      <RecipeFieldLabel htmlFor={id} label={label} optional={optional} />
       <Textarea placeholder={placeholder} id={id} />
     </div>
   );

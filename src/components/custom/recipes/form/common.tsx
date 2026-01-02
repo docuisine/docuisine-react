@@ -30,7 +30,7 @@ export const InputGroupHeader = ({
   return (
     <h3
       className={cn(
-        "text-lg font-medium text-start border-b mt-2 flex items-center pb-1",
+        "text-lg font-semibold text-start border-b mt-2 flex items-center pb-1 ",
         className
       )}
     >

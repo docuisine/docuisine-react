@@ -43,3 +43,8 @@ export interface Ingredient {
   img?: string;
   preview_img?: string;
 }
+
+export interface CreateRecipeStep {
+  html_id: string;
+  step_num: number;
+}
