@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CircleUser } from "lucide-react";
 import EditProfilePic from "@/components/custom/profile/profile-pic-edit";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/useAuth";
 import { urlJoin } from "@/lib/utils";
@@ -11,33 +10,12 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import api from "@/lib/api";
 import { Spinner } from "@/components/ui/spinner";
-
-const UserField = ({
-  label,
-  defaultValue,
-  id,
-  type = "text",
-}: {
-  label: string;
-  defaultValue?: string;
-  id: string;
-  type?: string;
-}) => {
-  return (
-    <div className="flex flex-col w-xs">
-      <Label htmlFor={id} className="mb-2 text-start font-semibold">
-        {label}
-      </Label>
-      <Input id={id} type={type} placeholder={defaultValue} className="w-xs" />
-    </div>
-  );
-};
-
+import { UserField } from "@/components/custom/profile/common";
 
 const noEmailAdmonition = (
   <Admonition type="warning" title="No recovery email found">
-    Make sure to add a recovery email as a backup solution when you forget
-    your password.
+    Make sure to add a recovery email as a backup solution when you forget your
+    password.
   </Admonition>
 );
 
@@ -50,7 +28,7 @@ export default function ProfilePage() {
     return null;
   }
   const avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.img || "");
-  
+
   const handleUpdateEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -77,11 +55,11 @@ export default function ProfilePage() {
           {!user.email && noEmailAdmonition}
           <UserField
             label="Email Address"
-            id="email"
+            name="email"
             type="email"
             defaultValue={user.email || ""}
           />
-          <UserField label="Password" id="password" type="password" />
+          <UserField label="Password" name="password" type="password" />
           <Button className="w-xs" disabled={updating} type="submit">
             {updating ? <Spinner /> : "Update Email"}
           </Button>
