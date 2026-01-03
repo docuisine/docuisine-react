@@ -13,7 +13,7 @@ export interface User {
 export interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;
-  user: User | null;
+  user: User | null | Partial<User>;
   setUserSync: (user: User | null) => void;
   login: (token: string) => void;
   logout: () => void;

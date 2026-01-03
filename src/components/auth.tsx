@@ -10,7 +10,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.getItem("access_token")
   );
 
-  const [user, setUser] = useState<User | null>(() => {
+  const [user, setUser] = useState<User | null | Partial<User>>(() => {
     try {
       const userData = localStorage.getItem("user");
       return userData ? JSON.parse(userData) : null;
@@ -31,9 +31,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [token]);
 
-  const setUserSync = (user: User | null) => {
-    localStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
+  const setUserSync = (updates: Partial<User> | null) => {
+    setUser((prev) => {
+      if (!updates || !prev) return updates;
+
+      const merged = { ...prev, ...updates };
+      localStorage.setItem("user", JSON.stringify(merged));
+      return merged;
+    });
   };
 
   const login = async (token: string) => {
