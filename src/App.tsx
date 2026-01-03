@@ -12,6 +12,7 @@ import ProtectedRoute from "@/components/protected-route";
 import PageNotFound404 from "@/pages/404";
 import AccountPage from "@/pages/account";
 import ProfilePage from "@/pages/account/profile";
+import AuthenticationPage from "@/pages/account/authentication";
 
 import { SignupUsernameForm } from "@/components/custom/signup/username";
 import { SignupPasswordForm } from "@/components/custom/signup/password";
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <ProfilePage />,
+          },
+          {
+            path: "authentication",
+            element: <AuthenticationPage />,
           },
         ],
       },

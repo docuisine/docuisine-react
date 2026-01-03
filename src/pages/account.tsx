@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { UserIcon } from "lucide-react";
+import { UserIcon, KeyRoundIcon } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
 function Menu({ children }: { children: React.ReactNode }) {
@@ -52,6 +52,10 @@ export default function AccountPage() {
           <MenuItem page="profile">
             <UserIcon />
             Profile
+          </MenuItem>
+          <MenuItem page="authentication">
+            <KeyRoundIcon />
+            Authentication
           </MenuItem>
         </MenuGroup>
       </Menu>
