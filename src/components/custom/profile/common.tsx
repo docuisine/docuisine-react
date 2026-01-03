@@ -18,3 +18,32 @@ export const UserField = ({ label, ...props }: UserField) => {
     </div>
   );
 };
+
+export function MiniPage({ children }: { children: React.ReactNode }) {
+  return <div className="w-full">{children}</div>;
+}
+
+export function MiniPageSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <h1 className="font-semibold text-2xl mb-6 text-start border-b">
+        {title}
+      </h1>
+      {children}
+    </div>
+  );
+}
+
+export function MiniPageSectionContent({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <div className="flex justify-between w-full gap-4">{children}</div>;
+}
