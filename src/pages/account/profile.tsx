@@ -5,6 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/useAuth";
 import { urlJoin } from "@/lib/utils";
+import Admonition from "@/components/custom/admonition";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import api from "@/lib/api";
+import { Spinner } from "@/components/ui/spinner";
 
 const UserField = ({
   label,
@@ -13,45 +19,73 @@ const UserField = ({
   type = "text",
 }: {
   label: string;
-  defaultValue: string;
+  defaultValue?: string;
   id: string;
   type?: string;
 }) => {
   return (
-    <>
-      <div className="mb-4 flex flex-col">
-        <Label htmlFor={id} className="mb-2 text-start font-semibold">
-          {label}
-        </Label>
-        <Input
-          id={id}
-          type={type}
-          placeholder={defaultValue}
-          className="w-80"
-        />
-      </div>
-    </>
+    <div className="flex flex-col w-xs">
+      <Label htmlFor={id} className="mb-2 text-start font-semibold">
+        {label}
+      </Label>
+      <Input id={id} type={type} placeholder={defaultValue} className="w-xs" />
+    </div>
   );
 };
 
+
+const noEmailAdmonition = (
+  <Admonition type="warning" title="No recovery email found">
+    Make sure to add a recovery email as a backup solution when you forget
+    your password.
+  </Admonition>
+);
+
 export default function ProfilePage() {
-  const { user } = useAuth();
-  const avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user?.img || "");
+  const navigate = useNavigate();
+  const { user, setUserSync } = useAuth();
+  const [updating, setUpdating] = useState(false);
+  if (!user) {
+    navigate("/");
+    return null;
+  }
+  const avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.img || "");
+  
+  const handleUpdateEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      setUpdating(true);
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const data = await api.updateUserEmail(formData);
+      setUserSync(data);
+    } finally {
+      setUpdating(false);
+    }
+  };
   return (
     <div className="w-full">
       <h1 className="font-semibold text-2xl mb-6 text-start border-b">
         Profile Information
       </h1>
       <div className="flex justify-between w-full gap-4">
-        <div className="w-full flex flex-col">
-          <UserField label="Full Name" id="full-name" defaultValue="John Doe" />
+        <form
+          className="max-w-xs gap-4 flex flex-col"
+          id="email-form"
+          onSubmit={handleUpdateEmail}
+        >
+          {!user.email && noEmailAdmonition}
           <UserField
             label="Email Address"
             id="email"
             type="email"
-            defaultValue="john.doe@example.com"
+            defaultValue={user.email || ""}
           />
-        </div>
+          <UserField label="Password" id="password" type="password" />
+          <Button className="w-xs" disabled={updating} type="submit">
+            {updating ? <Spinner /> : "Update Email"}
+          </Button>
+        </form>
         <div className="flex flex-col justify-start gap-4">
           <Label
             htmlFor="profile-picture"

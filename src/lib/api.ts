@@ -110,12 +110,23 @@ export async function updateUserProfilePicture(
   return response.data;
 }
 
+export async function updateUserEmail(
+  formdata: FormData
+) {
+  const response = await axios.put(
+    urlJoin(import.meta.env.VITE_BACKEND_URL, `/users/email`),
+    formdata
+  );
+  return response.data;
+}
+
 const api = {
   login,
   signup,
   getUserbyUsername,
   getAllCategories,
   updateUserProfilePicture,
+  updateUserEmail,
 };
 
 export default api;
