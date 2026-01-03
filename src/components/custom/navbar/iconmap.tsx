@@ -1,9 +1,12 @@
-import { CircleUser, SquarePenIcon } from "lucide-react";
+import { CircleUser, SquarePenIcon, KeyRoundIcon } from "lucide-react";
 import type { IconMap } from "@/lib/types";
 
+const iconSize = "1.2em";
+
 const iconmap: IconMap = {
-  "/account/profile": <CircleUser size="1.2em" />,
-  "/recipes/create": <SquarePenIcon size="1.2em" />,
+  "/recipes/create": <SquarePenIcon size={iconSize} />,
+  "/account/profile": <CircleUser size={iconSize} />,
+  "/account/authentication": <KeyRoundIcon size={iconSize} />,
 };
 
 export default iconmap;
