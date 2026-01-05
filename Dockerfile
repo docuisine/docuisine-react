@@ -25,18 +25,18 @@ RUN apk add --no-cache gettext && \
 # Copy built artifacts from build stage
 COPY --from=builder /app/dist ./dist
 
-# Copy runtime configuration files
+# Make environment variables be defined at runtime (dependency injection)
+# Passing in these variables are required to run it, 
+# otherwise build process will be a success but the app will crash on startup.
+# Example:
+#   -e APP_VERSION=dev \
+#   -e BACKEND_URL=https://docuisine.vercel.app \
+#   -e IMAGE_HOST=https://pub-d3ef28b83a854575bfa54225e768a452.r2.dev \
+# Copy runtime environment files
 COPY env.js .
 COPY entrypoint.sh .
 
 RUN chmod +x /app/entrypoint.sh
-
-# Make environment variables be defined at runtime (dependency injection)
-# Passing in these variables are required to run it, otherwise build process will be a success
-# but the app will crash on startup.
-#   -e APP_VERSION=dev \
-#   -e BACKEND_URL=https://docuisine.vercel.app \
-#   -e IMAGE_HOST=https://pub-d3ef28b83a854575bfa54225e768a452.r2.dev \
 
 EXPOSE 3000
 
