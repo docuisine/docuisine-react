@@ -15,7 +15,7 @@ COPY README.md .
 
 # Make environment variables be defined at runtime (dependency injection)
 # Passing in these variables are required to run it, otherwise build process will be a success
-# the app will crash
+# but the app will crash on startup.
 #   -e APP_VERSION=dev \
 #   -e BACKEND_URL=https://docuisine.vercel.app \
 #   -e IMAGE_HOST=https://pub-d3ef28b83a854575bfa54225e768a452.r2.dev \
