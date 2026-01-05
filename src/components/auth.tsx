@@ -41,7 +41,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (token: string) => {
     try {
-      console.log("Logging in with token", token);
       localStorage.setItem("access_token", token);
       setToken(token);
 
