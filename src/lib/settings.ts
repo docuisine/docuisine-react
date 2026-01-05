@@ -12,10 +12,10 @@ function getRuntimeEnv(): RuntimeEnv {
   if (typeof window !== "undefined" && (window as AppWindow).__ENV__) {
     const env = (window as AppWindow).__ENV__ as RuntimeEnv;
 
-    if (env.BACKEND_URL === "") {
+    if (!env.BACKEND_URL) {
       throw new Error("BACKEND_URL is missing");
     }
-    if (env.IMAGE_HOST === "") {
+    if (!env.IMAGE_HOST) {
       throw new Error("IMAGE_HOST is missing");
     }
 
