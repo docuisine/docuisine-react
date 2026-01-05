@@ -33,8 +33,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const setUserSync = (updates: Partial<User> | null) => {
     setUser((prev) => {
-      if (!updates || !prev) return updates;
-
       const merged = { ...prev, ...updates };
       localStorage.setItem("user", JSON.stringify(merged));
       return merged;
