@@ -11,7 +11,7 @@
     <script
       src="/env.runtime.js"
       onload="window.__envLoaded = true;"
-      onerror="console.error('Failed to load runtime environment script: /env.runtime.js'); var root=document.getElementById('root'); if(root){ root.innerHTML='<p>Failed to load application configuration. Please try again later.</p>'; }"
+      onerror="console.error('Failed to load runtime environment script: /env.runtime.js'); var root=document.getElementById('root'); if(root){ var p=document.createElement('p'); p.textContent='Failed to load application configuration. Please try again later.'; root.appendChild(p); }"
     ></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
