@@ -1,7 +1,7 @@
 import Usercard from "@/components/custom/usercard";
 import HorizontalLogo from "@/components/custom/horizontallogo";
 import { Link } from "react-router-dom";
-import { APP_VERSION} from "@/lib/settings";
+import { APP_VERSION } from "@/lib/settings";
 
 const TitleBar = () => {
   return (
