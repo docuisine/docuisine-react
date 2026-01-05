@@ -24,7 +24,7 @@ COPY env.js .
 COPY entrypoint.sh .
 
 RUN npm install
-RUN npm i -g serve
+RUN npm i -g serve@14.2.5
 
 RUN npm run build
 
