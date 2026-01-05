@@ -39,6 +39,7 @@ COPY entrypoint.sh .
 RUN chmod +x /app/entrypoint.sh
 
 # Create a non-privileged user and set ownership
+# The chown ensures the appuser can write to /app/dist/env.runtime.js at runtime
 RUN addgroup -g 1001 -S appuser && \
     adduser -u 1001 -S appuser -G appuser && \
     chown -R appuser:appuser /app
