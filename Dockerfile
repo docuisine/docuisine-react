@@ -1,6 +1,10 @@
-FROM node:18-alpine
+# Build stage
+FROM node:18-alpine AS builder
 
 WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY index.html .
 COPY src ./src
@@ -9,9 +13,27 @@ COPY vite.config.ts .
 COPY tsconfig.app.json .
 COPY tsconfig.json .
 COPY tsconfig.node.json .
-COPY package.json .
-COPY package-lock.json .
 COPY README.md .
+
+RUN npm run build
+
+# Runtime stage
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install runtime dependencies only
+RUN apk add --no-cache gettext && \
+    npm i -g serve
+
+# Copy built artifacts from build stage
+COPY --from=builder /app/dist ./dist
+
+# Copy runtime configuration files
+COPY env.js .
+COPY entrypoint.sh .
+
+RUN chmod +x /app/entrypoint.sh
 
 # Make environment variables be defined at runtime (dependency injection)
 # Passing in these variables are required to run it, otherwise build process will be a success
@@ -19,16 +41,6 @@ COPY README.md .
 #   -e APP_VERSION=dev \
 #   -e BACKEND_URL=https://docuisine.vercel.app \
 #   -e IMAGE_HOST=https://pub-d3ef28b83a854575bfa54225e768a452.r2.dev \
-RUN apk add --no-cache gettext
-COPY env.js .
-COPY entrypoint.sh .
-
-RUN npm install
-RUN npm i -g serve
-
-RUN npm run build
-
-RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 3000
 
