@@ -1,19 +1,18 @@
 import Usercard from "@/components/custom/usercard";
 import HorizontalLogo from "@/components/custom/horizontallogo";
 import { Link } from "react-router-dom";
+import { APP_VERSION} from "@/lib/settings";
 
 const TitleBar = () => {
-  const version = import.meta.env.VITE_APP_VERSION;
-
   return (
     <div className="w-full flex justify-between">
       <Link to="/" className="flex items-center">
         <HorizontalLogo />
       </Link>
       <div className="flex flex-row gap-4 align-middle justify-center items-center">
-        {version && (
+        {APP_VERSION && (
           <span className="text-xs text-muted-foreground">
-            v{version.slice(0, 7)}
+            v{APP_VERSION.slice(0, 7)}
           </span>
         )}
         <Usercard />
