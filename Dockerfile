@@ -6,14 +6,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY index.html .
+COPY index.html vite.config.ts ./
+COPY tsconfig*.json ./
 COPY src ./src
 COPY public ./public
-COPY vite.config.ts .
-COPY tsconfig.app.json .
-COPY tsconfig.json .
-COPY tsconfig.node.json .
-COPY README.md .
 
 RUN npm run build
 
