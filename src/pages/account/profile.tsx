@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import api from "@/lib/api";
 import { Spinner } from "@/components/ui/spinner";
 import * as PC from "@/components/custom/profile/common";
+import { IMAGE_HOST } from "@/lib/settings";
 
 const noEmailAdmonition = (
   <Admonition type="warning" title="No recovery email found">
@@ -27,7 +28,7 @@ export default function ProfilePage() {
     navigate("/");
     return null;
   }
-  const avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.img || "");
+  const avatarUrl = urlJoin(IMAGE_HOST, user.img || "");
 
   const handleUpdateEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

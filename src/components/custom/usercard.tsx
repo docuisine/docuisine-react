@@ -3,6 +3,7 @@ import { CircleUser } from "lucide-react";
 import ProfileDropdown from "../shadcn-studio/blocks/dropdown-profile";
 import { useAuth } from "@/lib/useAuth";
 import { urlJoin } from "@/lib/utils";
+import { IMAGE_HOST } from "@/lib/settings";
 
 const UserCard = () => {
   const { isAuthenticated, user } = useAuth();
@@ -10,10 +11,10 @@ const UserCard = () => {
   let avatarUrl;
   if (user) {
     if (user.preview_img != null) {
-      avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.preview_img);
+      avatarUrl = urlJoin(IMAGE_HOST, user.preview_img);
     } else {
       if (user.img != null) {
-        avatarUrl = urlJoin(import.meta.env.VITE_IMAGE_HOST, user.img);
+        avatarUrl = urlJoin(IMAGE_HOST, user.img);
       }
     }
   }

@@ -1,6 +1,7 @@
 import { urlJoin } from "@/lib/utils";
 import axios from "axios";
 import errors from "@/lib/errors";
+import { BACKEND_URL } from "./settings";
 
 /**
  * Authenticate a user and retrieve an access token.
@@ -21,7 +22,7 @@ import errors from "@/lib/errors";
 export async function login(formdata: FormData) {
   try {
     const response = await axios.post(
-      urlJoin(import.meta.env.VITE_BACKEND_URL, "/auth/token/"),
+      urlJoin(BACKEND_URL, "/auth/token/"),
       formdata
     );
 
@@ -76,7 +77,7 @@ export async function login(formdata: FormData) {
 
 export async function signup(formdata: FormData) {
   const response = await axios.post(
-    urlJoin(import.meta.env.VITE_BACKEND_URL, "/users/"),
+    urlJoin(BACKEND_URL, "/users/"),
     {
       username: formdata.get("username"),
       email: formdata.get("email"),
@@ -88,14 +89,14 @@ export async function signup(formdata: FormData) {
 
 export async function getAllCategories() {
   const response = await axios.get(
-    urlJoin(import.meta.env.VITE_BACKEND_URL, "/categories/")
+    urlJoin(BACKEND_URL, "/categories/")
   );
   return response.data;
 }
 
 export async function getUserbyUsername(username: string) {
   const response = await axios.get(
-    urlJoin(import.meta.env.VITE_BACKEND_URL, `/users/${username}`)
+    urlJoin(BACKEND_URL, `/users/${username}`)
   );
   return response.data;
 }
@@ -104,7 +105,7 @@ export async function updateUserProfilePicture(
   formdata: FormData
 ) {
   const response = await axios.put(
-    urlJoin(import.meta.env.VITE_BACKEND_URL, `/users/img`),
+    urlJoin(BACKEND_URL, `/users/img`),
     formdata
   );
   return response.data;
@@ -114,7 +115,7 @@ export async function updateUserEmail(
   formdata: FormData
 ) {
   const response = await axios.put(
-    urlJoin(import.meta.env.VITE_BACKEND_URL, `/users/email`),
+    urlJoin(BACKEND_URL, `/users/email`),
     formdata
   );
   return response.data;
