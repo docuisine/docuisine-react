@@ -1,0 +1,5 @@
+window.__ENV__ = {
+  BACKEND_URL: "${BACKEND_URL}",
+  IMAGE_HOST: "${IMAGE_HOST}",
+  APP_VERSION: "${APP_VERSION}"
+};
