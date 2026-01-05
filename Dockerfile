@@ -20,7 +20,7 @@ WORKDIR /app
 
 # Install runtime dependencies only
 RUN apk add --no-cache gettext && \
-    npm i -g serve
+    npm i -g serve@14.2.5
 
 # Copy built artifacts from build stage
 COPY --from=builder /app/dist ./dist
