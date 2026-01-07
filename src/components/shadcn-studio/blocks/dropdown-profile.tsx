@@ -88,7 +88,7 @@ const ProfileDropdown = ({
             className="px-4 py-2.5 text-base"
             onClick={() =>
               window.open(
-                "https://iragca.github.io/docuisine/",
+                "https://docuisine.github.io/documentation/",
                 "_blank",
                 "noopener,noreferrer"
               )
