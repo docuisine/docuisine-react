@@ -1,5 +1,5 @@
-# This docker-compose file is a production-ready setup for the Docuisine backend service stack, suitable for testing and deployment.
-# It defines services for the backend application, a PostgreSQL database, and a MinIO S3-compatible storage service.
+# This docker-compose file defines a local development setup for the Docuisine backend service stack, suitable for testing and iterative development.
+# It defines services for the backend application, a PostgreSQL database, and a MinIO S3-compatible storage service used for local development and testing.
 services:
   backend:
     image: iragca/docuisine:backend
