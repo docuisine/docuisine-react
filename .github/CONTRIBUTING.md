@@ -31,7 +31,7 @@ npm i
 ```bash
 cp .env.example .env
 ```
-Make sure edit the variables to your liking, and they must match together. For example, `S3_ENDPOINT_URL=http://s3:9000` must match `S3_PORT=9000`.
+Make sure to edit the variables to your liking, and they must match together. For example, `S3_ENDPOINT_URL=http://s3:9000` must match `S3_PORT=9000`.
 
 `VITE_BACKEND_URL` - This is where we access the backend. `VITE_IMAGE_HOST` - This the S3 bucket and images are stored. `VITE_APP_VERSION` - Optional, but is used to display the version hash on production, we do not set this manually on production.
 
