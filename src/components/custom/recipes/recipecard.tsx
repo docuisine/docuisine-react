@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 export interface Recipe {
   title: string;
   imageSrc: string;
-  timeTaken: number;
+  timeTaken: number; // in minutes
   servings: number;
   description?: string;
   rating?: number;
