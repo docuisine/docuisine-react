@@ -1,0 +1,80 @@
+# This docker-compose file defines a local development setup for the Docuisine backend service stack, suitable for testing and iterative development.
+# It defines services for the backend application, a PostgreSQL database, and a MinIO S3-compatible storage service used for local development and testing.
+services:
+  backend:
+    image: iragca/docuisine:backend
+    container_name: docuisine-react-backend-dev
+    restart: always
+    ports:
+      - "${DOCUISINE_BACKEND_PORT:-7000}:7000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-docuisine}
+    depends_on:
+      db:
+        condition: service_healthy
+      s3:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:7000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+  db:
+    hostname: ${POSTGRES_HOST:-localhost}
+    image: postgres:18.1
+    container_name: docuisine-react-postgres-dev
+    restart: always
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-docuisine}
+    volumes:
+      - docuisine_db_data:/var/lib/postgresql/
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready",
+          "-U",
+          "${POSTGRES_USER:-user}",
+          "-d",
+          "${POSTGRES_DB:-docuisine}",
+          "-h",
+          "${POSTGRES_HOST:-localhost}",
+          "-p",
+          "5432",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+  s3:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z-cpuv1
+    container_name: docuisine-react-s3-dev
+    ports:
+      - "${S3_PORT:-9000}:9000" # S3 API
+      - "${S3_CONSOLE_PORT:-9001}:9001" # Web Console
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-s3user}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-s3password}
+    volumes:
+      - docuisine_minio_data:/data
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  docuisine_db_data:
+  docuisine_minio_data:

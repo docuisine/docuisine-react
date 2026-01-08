@@ -12,13 +12,11 @@ The frontend is written in JavaScript (TypeScript) using ReactJS. We use [shadcn
 The project is in this [repository](https://github.com/docuisine/docuisine-react).
 
 1. Clone that repo using your favorite terminal
-
 ```bash
 git clone https://github.com/docuisine/docuisine-react
 ```
 
 2. Enter the project directory and open it using your IDE or simply use a text editor.
-
 ```bash
 cd docuisine-react
 code .                  # Example: Using Visual Studio Code
@@ -29,13 +27,11 @@ code .                  # Example: Using Visual Studio Code
 npm i
 ```
 
-4. Setup environment variables
-
+4. Setup environment variables by duplicating `.env.example` and rename it to `.env`.
 ```bash
-VITE_BACKEND_URL=http://localhost:7000
-VITE_IMAGE_HOST=http://localhost:9000
-VITE_APP_VERSION=dev
+cp .env.example .env
 ```
+Make sure to edit the variables to your liking, and they must match together. For example, `S3_ENDPOINT_URL=http://s3:9000` must match `S3_PORT=9000`.
 
 `VITE_BACKEND_URL` - This is where we access the backend. `VITE_IMAGE_HOST` - This the S3 bucket and images are stored. `VITE_APP_VERSION` - Optional, but is used to display the version hash on production, we do not set this manually on production.
 
