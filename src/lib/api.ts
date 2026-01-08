@@ -31,13 +31,6 @@ export async function login(formdata: FormData) {
     if (axios.isAxiosError(err)) {
       const status = err.response?.status;
 
-      if (status && status >= 500) {
-        throw new errors.ServerError(
-          "Something went wrong on the server.",
-          status
-        );
-      }
-
       switch (status) {
         case 401:
           throw new errors.InvalidCredentialsError(
@@ -48,6 +41,11 @@ export async function login(formdata: FormData) {
           throw new errors.UserNotFoundError(
             "A user with this username does not exist.",
             404
+          );
+        case 500:
+          throw new errors.ServerError(
+            "Something went wrong on the server.",
+            500
           );
         default:
           throw new Error("Login failed");
