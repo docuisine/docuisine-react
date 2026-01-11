@@ -20,6 +20,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { APIError } from "@/lib/errors";
 import Admonition from "@/components/custom/admonition";
 import { validatePassword } from "@/lib/utils";
+import STATUS from "@/lib/status";
 
 export function LoginForm({
   className,
@@ -91,12 +92,12 @@ export function LoginForm({
                   }
                   placeholder="johnFood"
                   required
-                  {...(error?.statusCode === 404 && {
+                  {...(error?.statusCode === STATUS.HTTP_404_NOT_FOUND && {
                     "aria-invalid": "true",
                     className: "peer",
                   })}
                 />
-                {error?.statusCode === 404 && (
+                {error?.statusCode === STATUS.HTTP_404_NOT_FOUND && (
                   <p className="text-muted-foreground text-start peer-aria-invalid:text-destructive text-xs">
                     {error.message}
                   </p>
@@ -120,11 +121,11 @@ export function LoginForm({
                     setForm({ ...form, password: e.target.value })
                   }
                   required
-                  {...(error?.statusCode === 401 && {
+                  {...(error?.statusCode === STATUS.HTTP_401_UNAUTHORIZED && {
                     "aria-invalid": "true",
                   })}
                 />
-                {error?.statusCode === 401 && (
+                {error?.statusCode === STATUS.HTTP_401_UNAUTHORIZED && (
                   <p className="text-start text-destructive text-xs">
                     {error.message}
                   </p>

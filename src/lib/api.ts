@@ -2,6 +2,7 @@ import { urlJoin } from "@/lib/utils";
 import axios from "axios";
 import errors from "@/lib/errors";
 import { BACKEND_URL } from "./settings";
+import STATUS from "@/lib/status";
 
 /**
  * Authenticate a user and retrieve an access token.
@@ -32,20 +33,20 @@ export async function login(formdata: FormData) {
       const status = err.response?.status;
 
       switch (status) {
-        case 401:
+        case STATUS.HTTP_401_UNAUTHORIZED:
           throw new errors.InvalidCredentialsError(
             "The password provided is incorrect.",
-            401
+            STATUS.HTTP_401_UNAUTHORIZED
           );
-        case 404:
+        case STATUS.HTTP_404_NOT_FOUND:
           throw new errors.UserNotFoundError(
             "A user with this username does not exist.",
-            404
+            STATUS.HTTP_404_NOT_FOUND
           );
-        case 500:
+        case STATUS.HTTP_500_INTERNAL_SERVER_ERROR:
           throw new errors.ServerError(
             "Something went wrong on the server.",
-            500
+            STATUS.HTTP_500_INTERNAL_SERVER_ERROR
           );
         default:
           throw new Error("Login failed");
@@ -74,34 +75,25 @@ export async function login(formdata: FormData) {
  */
 
 export async function signup(formdata: FormData) {
-  const response = await axios.post(
-    urlJoin(BACKEND_URL, "/users/"),
-    {
-      username: formdata.get("username"),
-      email: formdata.get("email"),
-      password: formdata.get("password"),
-    }
-  );
+  const response = await axios.post(urlJoin(BACKEND_URL, "/users/"), {
+    username: formdata.get("username"),
+    email: formdata.get("email"),
+    password: formdata.get("password"),
+  });
   return response.data;
 }
 
 export async function getAllCategories() {
-  const response = await axios.get(
-    urlJoin(BACKEND_URL, "/categories/")
-  );
+  const response = await axios.get(urlJoin(BACKEND_URL, "/categories/"));
   return response.data;
 }
 
 export async function getUserbyUsername(username: string) {
-  const response = await axios.get(
-    urlJoin(BACKEND_URL, `/users/${username}`)
-  );
+  const response = await axios.get(urlJoin(BACKEND_URL, `/users/${username}`));
   return response.data;
 }
 
-export async function updateUserProfilePicture(
-  formdata: FormData
-) {
+export async function updateUserProfilePicture(formdata: FormData) {
   const response = await axios.put(
     urlJoin(BACKEND_URL, `/users/img`),
     formdata
@@ -109,9 +101,7 @@ export async function updateUserProfilePicture(
   return response.data;
 }
 
-export async function updateUserEmail(
-  formdata: FormData
-) {
+export async function updateUserEmail(formdata: FormData) {
   const response = await axios.put(
     urlJoin(BACKEND_URL, `/users/email`),
     formdata
