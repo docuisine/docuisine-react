@@ -102,10 +102,11 @@ export async function updateUserProfilePicture(formdata: FormData) {
 }
 
 export async function updateUserEmail(formdata: FormData) {
-  const response = await axios.put(
-    urlJoin(BACKEND_URL, `/users/email`),
-    formdata
-  );
+  const response = await axios.put(urlJoin(BACKEND_URL, `/users/email`), {
+    email: formdata.get("email"),
+    password: formdata.get("password"),
+    id: formdata.get("id"),
+  });
   return response.data;
 }
 
