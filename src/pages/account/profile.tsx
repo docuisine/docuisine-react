@@ -36,10 +36,7 @@ export default function ProfilePage() {
       setUpdating(true);
       const form = e.currentTarget;
       const formData = new FormData(form);
-      
-      if (user.id) {
-        formData.append("id", user.id.toString());
-      }
+      formData.append("id", user.id!.toString());
       const data = await api.updateUserEmail(formData);
       setUserSync(data);
     } finally {
