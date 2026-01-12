@@ -1,3 +1,5 @@
+import STATUS from "@/lib/status";
+
 export abstract class APIError extends Error {
   statusCode: number;
 
@@ -11,14 +13,17 @@ export abstract class APIError extends Error {
 export class ServerError extends APIError {
   constructor(
     message: string = "Internal Server Error",
-    statusCode: number = 500
+    statusCode: number = STATUS.HTTP_500_INTERNAL_SERVER_ERROR
   ) {
     super(message, statusCode);
   }
 }
 
 export class UserNotFoundError extends APIError {
-  constructor(message: string = "User not found", statusCode: number = 404) {
+  constructor(
+    message: string = "User not found",
+    statusCode: number = STATUS.HTTP_404_NOT_FOUND
+  ) {
     super(message, statusCode);
   }
 }
@@ -26,7 +31,7 @@ export class UserNotFoundError extends APIError {
 export class InvalidCredentialsError extends APIError {
   constructor(
     message: string = "Invalid username or password",
-    statusCode: number = 401
+    statusCode: number = STATUS.HTTP_401_UNAUTHORIZED
   ) {
     super(message, statusCode);
   }
