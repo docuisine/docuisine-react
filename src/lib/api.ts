@@ -83,7 +83,7 @@ export async function signup(formdata: FormData) {
   return response.data;
 }
 
-export async function getAllCategories() {
+export async function getAllCuisines() {
   const response = await axios.get(urlJoin(BACKEND_URL, "/categories/"));
   return response.data;
 }
@@ -123,7 +123,7 @@ const api = {
   signup,
   getUserbyUsername,
   getCuisineByName,
-  getAllCategories,
+  getAllCategories: getAllCuisines,
   updateUserProfilePicture,
   updateUserEmail,
 };

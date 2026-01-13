@@ -38,7 +38,7 @@ export interface SignupState {
   isLoading: boolean;
 }
 
-export interface Category {
+export interface Cuisine {
   id: number;
   name: string;
   description?: string;

@@ -1,28 +1,28 @@
 import { Link } from "react-router-dom";
-import type { Category } from "@/lib/types";
+import type { Cuisine } from "@/lib/types";
 import { urlJoin } from "@/lib/utils";
 import { IMAGE_HOST } from "@/lib/settings";
+import { normalizeTitle } from "@/lib/utils";
 
-const CuisineCard = ({ category }: { category: Category }) => {
-  const normalizedPath = category.name.toLowerCase().replace(/\s+/g, "-");
+const CuisineCard = ({ cuisine }: { cuisine: Cuisine }) => {
   return (
     <Link
-      to={`/cuisine/${normalizedPath}`}
+      to={`/cuisine/${normalizeTitle(cuisine.name)}`}
       className="flex flex-col items-center gap-2"
     >
       <div className="h-24 w-24 overflow-hidden rounded-md border shadow-sm">
         <img
-          src={urlJoin(IMAGE_HOST, category.preview_img)}
-          alt={category.name}
+          src={urlJoin(IMAGE_HOST, cuisine.preview_img)}
+          alt={cuisine.name}
           className="h-full w-full object-cover transition-transform duration-400 hover:scale-104 bg-sidebar-accent text-secondary-foreground"
-          id={category.name}
+          id={cuisine.name}
         />
       </div>
       <label
-        htmlFor={category.name}
+        htmlFor={cuisine.name}
         className="text-sm font-semibold text-secondary-foreground text-center"
       >
-        {category.name}
+        {cuisine.name}
       </label>
     </Link>
   );
