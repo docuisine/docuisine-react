@@ -10,6 +10,15 @@ export interface User {
   updated_at: string;
 }
 
+export interface Recipe {
+  title: string;
+  imageSrc: string;
+  timeTaken: number; // in minutes
+  servings: number;
+  description?: string;
+  rating?: number;
+}
+
 export interface AuthContextType {
   isAuthenticated: boolean;
   token: string | null;

@@ -1,5 +1,6 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import RecipeCard, { type Recipe } from "./recipecard";
+import RecipeCard from "./recipecard";
+import type { Recipe } from "@/lib/types";
 
 const RecipeCarousel = ({ recipes }: { recipes: Recipe[] }) => {
   return (
