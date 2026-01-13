@@ -82,7 +82,7 @@ export function DropdownMenuDialog({
   );
 }
 
-const CreateRecipeButton = () => {
+export const CreateRecipeButton = () => {
   return (
     <div
       className={cn(
@@ -103,8 +103,7 @@ const RecipesPage = () => {
   const { isAuthenticated } = useAuth();
   return (
     <div className="flex gap-8 h-full">
-      <div className="flex-col gap-8 p-2 hidden md:flex">
-        {/* {isAuthenticated && <CreateRecipeDropdownMenu />} */}
+      <div className="flex-col gap-8 p-2 hidden md:flex w-44">
         {isAuthenticated && (
           <DropdownMenuDialog>
             <CreateRecipeButton />

@@ -13,6 +13,7 @@ import PageNotFound404 from "@/pages/404";
 import AccountPage from "@/pages/account";
 import ProfilePage from "@/pages/account/profile";
 import AuthenticationPage from "@/pages/account/authentication";
+import CuisinePage from "@/pages/cuisine";
 
 import { SignupUsernameForm } from "@/components/custom/signup/username";
 import { SignupPasswordForm } from "@/components/custom/signup/password";
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/cuisine/:cuisineName",
+        element: <CuisinePage />,
+      }
     ],
   },
   {

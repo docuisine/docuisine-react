@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import { titleCase } from "@/lib/utils";
+import { unNormalizeTitle } from "@/lib/utils";
 
 interface NavBarBtnProps {
   slug: string;
@@ -35,7 +35,7 @@ const NavBarBtn: React.FC<NavBarBtnProps> = ({
       >
         {children}
         <span className={isActive ? textActiveClasses : textInactiveClasses}>
-          {titleCase(slug.split("/").slice(-1)[0])}
+          {unNormalizeTitle(slug.split("/").slice(-1)[0])}
         </span>
       </button>
     </Link>

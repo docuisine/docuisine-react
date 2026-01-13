@@ -2,6 +2,7 @@ import { Card, CardContent, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import RecipeModal from "@/components/custom/recipes/recipe-modal";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"; // Import Dialog components
+import { type Recipe } from "@/lib/types";
 
 import {
   ClockIcon,
@@ -12,14 +13,6 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 
-export interface Recipe {
-  title: string;
-  imageSrc: string;
-  timeTaken: number; // in minutes
-  servings: number;
-  description?: string;
-  rating?: number;
-}
 
 const RecipeDescription = ({ description }: { description: string }) => {
   return (
