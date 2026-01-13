@@ -36,6 +36,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
       POSTGRES_DB: ${POSTGRES_DB:-docuisine}
     volumes:
+      - ./scripts/init/:/docker-entrypoint-initdb.d/:ro
       - docuisine_db_data:/var/lib/postgresql/
     healthcheck:
       test:
@@ -74,6 +75,27 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+  s3-init:
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z-cpuv1
+    container_name: docuisine-s3-dev-init
+    depends_on:
+      s3:
+        condition: service_healthy
+    volumes:
+      - ./scripts/init-images:/init-images:ro
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://s3:9000 ${S3_ACCESS_KEY:-minioadmin} ${S3_SECRET_KEY:-minioadmin};
+
+      mc mb local/${S3_BUCKET_NAME:-docuisine-images};
+
+      mc anonymous set download local/${S3_BUCKET_NAME:-docuisine-images};
+
+      mc cp /init-images/* local/${S3_BUCKET_NAME:-docuisine-images};
+
+      exit 0;
+      "
+    restart: "no"
 
 volumes:
   docuisine_db_data:

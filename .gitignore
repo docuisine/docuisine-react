@@ -26,3 +26,6 @@ dist-ssr
 
 # environment variables
 .env
+
+# Asset pack
+scripts/init-images*

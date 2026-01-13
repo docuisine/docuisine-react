@@ -35,6 +35,12 @@ Make sure to edit the variables to your liking, and they must match together. Fo
 
 `VITE_BACKEND_URL` - This is where we access the backend. `VITE_IMAGE_HOST` - This the S3 bucket and images are stored. `VITE_APP_VERSION` - Optional, but is used to display the version hash on production, we do not set this manually on production.
 
+5. Download the dev asset pack. This only works for machines that have `curl` and `unzip` so make sure to install them into your machine.
+```bash
+curl -L https://github.com/docuisine/assets/raw/refs/heads/master/asset-pack/dev/init-images.zip -o scripts/init-images.zip;
+unzip -o scripts/init-images.zip;
+```
+
 Now you are ready to write code.
 
 ## Development Process
