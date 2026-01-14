@@ -69,7 +69,7 @@ services:
       start_period: 30s
   s3-init:
     image: minio/mc:RELEASE.2025-08-13T08-35-41Z-cpuv1
-    container_name: docuisine-s3-dev-init
+    container_name: docuisine-react-s3-dev-init
     depends_on:
       s3:
         condition: service_healthy
