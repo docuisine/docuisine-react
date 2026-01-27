@@ -46,3 +46,5 @@ export const titleCase = (str: string) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
+
+export const removeWhitespace = (str: string) => str.replace(/\s+/g, "");

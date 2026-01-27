@@ -5,6 +5,7 @@ import { useSignup } from "@/lib/signup-context";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { removeWhitespace } from "@/lib/utils";
 
 export function SignupUsernameForm() {
   const { data, setData } = useSignup();
@@ -15,7 +16,7 @@ export function SignupUsernameForm() {
   }
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const username = e.target.value.trim();
+    const username = removeWhitespace(e.target.value);
     setData({ ...data, username });
     setNextDisabled(username === "" || username.length < 3);
   };
@@ -50,7 +51,7 @@ export function SignupUsernameForm() {
           name="email"
           type="email"
           value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value.trim() })}
+          onChange={(e) => setData({ ...data, email: removeWhitespace(e.target.value) })}
           placeholder="johnFood@docuisine.org"
         />
         <FieldDescription className="text-start">

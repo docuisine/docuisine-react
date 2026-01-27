@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { UndoIcon } from "lucide-react";
 import React, { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
-import { validatePassword } from "@/lib/utils";
+import { validatePassword, removeWhitespace } from "@/lib/utils";
 
 export function SignupPasswordForm() {
   const { data, setData } = useSignup();
@@ -41,7 +41,7 @@ export function SignupPasswordForm() {
               name="password"
               value={data.password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setData({ ...data, password: e.target.value })
+                setData({ ...data, password: removeWhitespace(e.target.value) })
               }
             />
           </Field>
@@ -53,7 +53,7 @@ export function SignupPasswordForm() {
               name="confirm-password"
               value={confirmPassword}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setConfirmPassword(e.target.value)
+                setConfirmPassword(removeWhitespace(e.target.value))
               }
             />
           </Field>

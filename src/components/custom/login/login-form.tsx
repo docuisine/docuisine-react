@@ -19,7 +19,7 @@ import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { APIError } from "@/lib/errors";
 import Admonition from "@/components/custom/admonition";
-import { validatePassword } from "@/lib/utils";
+import { validatePassword, removeWhitespace } from "@/lib/utils";
 import STATUS from "@/lib/status";
 
 export function LoginForm({
@@ -88,7 +88,7 @@ export function LoginForm({
                   type="text"
                   value={form.username}
                   onChange={(e) =>
-                    setForm({ ...form, username: e.target.value })
+                    setForm({ ...form, username: removeWhitespace(e.target.value) })
                   }
                   placeholder="johnFood"
                   required
@@ -118,7 +118,7 @@ export function LoginForm({
                   name="password"
                   value={form.password}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setForm({ ...form, password: e.target.value })
+                    setForm({ ...form, password: removeWhitespace(e.target.value) })
                   }
                   required
                   {...(error?.statusCode === STATUS.HTTP_401_UNAUTHORIZED && {
