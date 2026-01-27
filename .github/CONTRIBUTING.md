@@ -38,7 +38,7 @@ Make sure to edit the variables to your liking, and they must match together. Fo
 5. Download the dev asset pack. This only works for machines that have `curl` and `unzip` so make sure to install them into your machine.
 ```bash
 curl -L https://github.com/docuisine/assets/raw/refs/heads/master/asset-pack/dev/init-images.zip -o scripts/init-images.zip;
-unzip -o scripts/init-images.zip;
+unzip -o scripts/init-images.zip -d scripts/init-images;
 ```
 
 Now you are ready to write code.
