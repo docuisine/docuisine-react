@@ -1,8 +1,18 @@
 import { useAuth } from "@/lib/useAuth";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import PageMenu from "@/components/custom/menu";
-import { Settings2Icon } from "lucide-react";
+import { Menu, MenuGroup, MenuItem } from "@/components/custom/menu";
+import {
+  Settings2Icon,
+  UsersIcon,
+  HamburgerIcon,
+  UtensilsCrossedIcon,
+  BookTextIcon,
+  CarrotIcon,
+  DatabaseBackupIcon,
+  BrushCleaningIcon,
+  ScrollIcon,
+} from "lucide-react";
 
 const AdministrationPage = () => {
   const { user } = useAuth();
@@ -16,14 +26,50 @@ const AdministrationPage = () => {
 
   return (
     <div className="flex gap-8 h-full">
-      <PageMenu.Menu>
-        <PageMenu.MenuGroup title="">
-          <PageMenu.MenuItem page="/administration/site-settings">
+      <Menu>
+        <MenuGroup title="">
+          <MenuItem page="/administration/site-settings">
             <Settings2Icon />
             Site Settings
-          </PageMenu.MenuItem>
-        </PageMenu.MenuGroup>
-      </PageMenu.Menu>
+          </MenuItem>
+          <MenuItem page="/administration/user-management">
+            <UsersIcon />
+            Users
+          </MenuItem>
+        </MenuGroup>
+        <MenuGroup title="Content">
+          <MenuItem page="/administration/recipe-management">
+            <UtensilsCrossedIcon />
+            Recipes
+          </MenuItem>
+          <MenuItem page="/administration/cuisine-management">
+            <HamburgerIcon />
+            Cuisines
+          </MenuItem>
+          <MenuItem page="/administration/ingredient-management">
+            <CarrotIcon />
+            Ingredients
+          </MenuItem>
+          <MenuItem page="/administration/cookbook-management">
+            <BookTextIcon />
+            Cookbooks
+          </MenuItem>
+        </MenuGroup>
+        <MenuGroup title="Maintenance">
+          <MenuItem page="/administration/clean">
+            <BrushCleaningIcon />
+            Clean
+          </MenuItem>
+          <MenuItem page="/administration/backup">
+            <DatabaseBackupIcon />
+            Backup
+          </MenuItem>
+          <MenuItem page="/administration/logs">
+            <ScrollIcon />
+            Logs
+          </MenuItem>
+        </MenuGroup>
+      </Menu>
       <Outlet />
     </div>
   );
