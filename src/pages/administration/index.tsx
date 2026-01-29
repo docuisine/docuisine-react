@@ -5,7 +5,7 @@ import { Menu, MenuGroup, MenuItem } from "@/components/custom/menu";
 import {
   Settings2Icon,
   UsersIcon,
-  HamburgerIcon,
+  CookingPotIcon,
   UtensilsCrossedIcon,
   BookTextIcon,
   CarrotIcon,
@@ -43,7 +43,7 @@ const AdministrationPage = () => {
             Recipes
           </MenuItem>
           <MenuItem page="/administration/cuisine-management">
-            <HamburgerIcon />
+            <CookingPotIcon />
             Cuisines
           </MenuItem>
           <MenuItem page="/administration/ingredient-management">

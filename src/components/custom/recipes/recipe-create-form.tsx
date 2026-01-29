@@ -6,7 +6,7 @@ import {
   CarrotIcon,
   ImageIcon,
   WrenchIcon,
-  ShapesIcon,
+  CookingPotIcon,
   FormIcon,
 } from "lucide-react";
 import IngredientField from "./form/ingredient-field";
@@ -165,13 +165,13 @@ export default function RecipeCreateForm() {
       <div className="flex gap-4">
         <InputGroup>
           <InputGroupHeader>
-            <ShapesIcon {...headerIconProps} />
-            Categories
+            <CookingPotIcon {...headerIconProps} />
+            Cuisines
           </InputGroupHeader>
-          <SelectComboBox label="+ Add Category">
-            <CommandItem value="Category 1">Category 1</CommandItem>
-            <CommandItem value="Category 2">Category 2</CommandItem>
-            <CommandItem value="Category 3">Category 3</CommandItem>
+          <SelectComboBox label="+ Add Cuisine">
+            <CommandItem value="Cuisine 1">Cuisine 1</CommandItem>
+            <CommandItem value="Cuisine 2">Cuisine 2</CommandItem>
+            <CommandItem value="Cuisine 3">Cuisine 3</CommandItem>
           </SelectComboBox>
         </InputGroup>
         <InputGroup>
