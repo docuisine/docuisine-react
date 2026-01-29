@@ -20,19 +20,22 @@ export const UserField = ({ label, ...props }: UserField) => {
 };
 
 export function MiniPage({ children }: { children: React.ReactNode }) {
-  return <div className="w-full">{children}</div>;
+  return <div className="w-full gap-8 flex flex-col">{children}</div>;
 }
 
 export function MiniPageSection({
   title,
   children,
+  icon
 }: {
   title: string;
   children: React.ReactNode;
+  icon?: React.ReactNode;
 }) {
   return (
     <div>
-      <h1 className="font-semibold text-2xl mb-6 text-start border-b">
+      <h1 className="font-semibold text-2xl mb-4 text-start border-b items-center flex pb-1">
+        {icon && <span className="mr-2">{icon}</span>}
         {title}
       </h1>
       {children}

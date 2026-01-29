@@ -1,8 +1,23 @@
+import {
+  MiniPage,
+  MiniPageSection,
+  MiniPageSectionContent,
+} from "@/components/custom/profile/common";
+import { InfoIcon, SettingsIcon } from "lucide-react";
+
 export default function SiteSettingsPage() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Site Settings</h1>
-      <p>Here you can configure various settings for the application.</p>
-    </div>
+    <MiniPage>
+      <MiniPageSection title="Configuration" icon={<SettingsIcon />}>
+        <MiniPageSectionContent>
+          <p>Here you can configure various settings for the application.</p>
+        </MiniPageSectionContent>
+      </MiniPageSection>
+      <MiniPageSection title="About" icon={<InfoIcon />}>
+        <MiniPageSectionContent>
+          <p>This application is built using React and TypeScript.</p>
+        </MiniPageSectionContent>
+      </MiniPageSection>
+    </MiniPage>
   );
 }
