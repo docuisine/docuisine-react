@@ -78,7 +78,7 @@ const ProfileDropdown = ({
           {displayAccount && (
             <DropdownMenuItem
               className="px-4 py-2.5 text-base"
-              onClick={() => navigate("/account")}
+              onClick={() => navigate("/account/profile")}
             >
               <UserIcon className="text-foreground size-5" />
               <span>My account</span>
@@ -87,7 +87,7 @@ const ProfileDropdown = ({
           {displayAdministration && (
             <DropdownMenuItem
               className="px-4 py-2.5 text-base"
-              onClick={() => navigate("/administration")}
+              onClick={() => navigate("/administration/site-settings")}
             >
               <SettingsIcon className="text-foreground size-5" />
               <span>Administration</span>
