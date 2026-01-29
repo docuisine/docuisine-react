@@ -2,7 +2,7 @@ import { useAuth } from "@/lib/useAuth";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import PageMenu from "@/components/custom/menu";
-import { SettingsIcon } from "lucide-react";
+import { Settings2Icon } from "lucide-react";
 
 const AdministrationPage = () => {
   const { user } = useAuth();
@@ -18,9 +18,9 @@ const AdministrationPage = () => {
     <div className="flex gap-8 h-full">
       <PageMenu.Menu>
         <PageMenu.MenuGroup title="">
-          <PageMenu.MenuItem page="/administration/configuration">
-            <SettingsIcon />
-            Configuration
+          <PageMenu.MenuItem page="/administration/site-settings">
+            <Settings2Icon />
+            Site Settings
           </PageMenu.MenuItem>
         </PageMenu.MenuGroup>
       </PageMenu.Menu>

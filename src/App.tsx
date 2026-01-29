@@ -14,7 +14,7 @@ import AccountPage from "@/pages/account";
 import ProfilePage from "@/pages/account/profile";
 import AuthenticationPage from "@/pages/account/authentication";
 import CuisinePage from "@/pages/cuisine";
-import ConfigurationPage from "@/pages/administration/configuration";
+import SiteSettingsPage from "@/pages/administration/configuration";
 
 import { SignupUsernameForm } from "@/components/custom/signup/username";
 import { SignupPasswordForm } from "@/components/custom/signup/password";
@@ -58,8 +58,8 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          { index: true, element: <Navigate to="configuration" replace /> },
-          { path: "configuration", element: <ConfigurationPage /> }
+          { index: true, element: <Navigate to="site-settings" replace /> },
+          { path: "site-settings", element: <SiteSettingsPage /> },
         ],
       },
       {
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
       {
         path: "/cuisine/:cuisineName",
         element: <CuisinePage />,
-      }
+      },
     ],
   },
   {
