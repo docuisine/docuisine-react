@@ -81,17 +81,12 @@ const ProfileDropdown = ({
               <span>My account</span>
             </DropdownMenuItem>
           )}
-          <DropdownMenuItem className="px-4 py-2.5 text-base">
-            {isAuthenticated &&
-              user &&
-              user.role ===
-                "admin" && (
-                  <>
-                    <SettingsIcon className="text-foreground size-5" />
-                    <span>Settings</span>
-                  </>
-                )}
-          </DropdownMenuItem>
+          {isAuthenticated && user && user.role === "admin" && (
+            <DropdownMenuItem className="px-4 py-2.5 text-base" onClick={() => navigate("/administration")}>
+              <SettingsIcon className="text-foreground size-5" />
+              <span>Settings</span>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
