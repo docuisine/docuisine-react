@@ -42,7 +42,7 @@ const ProfileDropdown = ({
   const navigate = useNavigate();
 
   const displayAccount = isAuthenticated;
-  const displaySettings = isAuthenticated && user && user.role === "admin";
+  const displayAdministration = isAuthenticated && user && user.role === "admin";
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
@@ -72,7 +72,7 @@ const ProfileDropdown = ({
           </div>
         </DropdownMenuLabel>
 
-        {(displayAccount || displaySettings) && <DropdownMenuSeparator />}
+        {(displayAccount || displayAdministration) && <DropdownMenuSeparator />}
 
         <DropdownMenuGroup>
           {displayAccount && (
@@ -84,13 +84,13 @@ const ProfileDropdown = ({
               <span>My account</span>
             </DropdownMenuItem>
           )}
-          {displaySettings && (
+          {displayAdministration && (
             <DropdownMenuItem
               className="px-4 py-2.5 text-base"
               onClick={() => navigate("/administration")}
             >
               <SettingsIcon className="text-foreground size-5" />
-              <span>Settings</span>
+              <span>Administration</span>
             </DropdownMenuItem>
           )}
         </DropdownMenuGroup>
