@@ -1,6 +1,8 @@
 import { useAuth } from "@/lib/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import PageMenu from "@/components/custom/menu";
+import { SettingsIcon } from "lucide-react";
 
 const AdministrationPage = () => {
   const { user } = useAuth();
@@ -12,7 +14,19 @@ const AdministrationPage = () => {
     }
   }, [user, navigate]);
 
-  return <div>Administration Page</div>;
+  return (
+    <div className="flex gap-8 h-full">
+      <PageMenu.Menu>
+        <PageMenu.MenuGroup title="">
+          <PageMenu.MenuItem page="/administration/configuration">
+            <SettingsIcon />
+            Configuration
+          </PageMenu.MenuItem>
+        </PageMenu.MenuGroup>
+      </PageMenu.Menu>
+      <Outlet />
+    </div>
+  );
 };
 
 export default AdministrationPage;
