@@ -4,17 +4,14 @@ import {
   UtensilsCrossedIcon,
   BookTextIcon,
   ListTodo,
-  SettingsIcon,
   AppWindowIcon,
 } from "lucide-react";
-import { useAuth } from "@/lib/useAuth";
 import { useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { normalizeTitle } from "@/lib/utils";
 import type { Bar } from "@/lib/types";
 
 const NavBar = () => {
-  const { isAuthenticated, user } = useAuth();
   const location = useLocation();
   const [recentPath, setRecentPath] = useState<string | null>(null);
 
@@ -41,26 +38,12 @@ const NavBar = () => {
     []
   );
 
-  const adminSection: Bar[] = useMemo(
-    () =>
-      (isAuthenticated && user && user.role === "admin")
-        ? [
-            {
-              title: "Administration",
-              slug: "/administration",
-              icon: <SettingsIcon size={iconSize} />,
-            },
-          ]
-        : [],
-    [isAuthenticated, user]
-  );
-
   /**
    * All default tabs (used to check if current route is already known)
    */
   const defaultTabs = useMemo(() => {
-    return [...mainSections, ...adminSection].map((s) => s.slug);
-  }, [mainSections, adminSection]);
+    return mainSections.map((s) => s.slug);
+  }, [mainSections]);
 
   /**
    * Track the most recent non-default route
@@ -103,15 +86,6 @@ const NavBar = () => {
 
       {/* Auth + recent sections */}
       <div className="flex">
-        {adminSection.map((section) => (
-          <NavBarBtn
-            key={section.slug}
-            slug={section.slug}
-          >
-            {section.icon}
-          </NavBarBtn>
-        ))}
-
         {recentSection.map((section) => (
           <NavBarBtn
             key={section.slug}

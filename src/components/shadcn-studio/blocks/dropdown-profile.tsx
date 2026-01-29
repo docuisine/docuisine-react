@@ -38,7 +38,7 @@ const ProfileDropdown = ({
   email,
   avatarUrl,
 }: Props) => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const navigate = useNavigate();
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
@@ -50,7 +50,10 @@ const ProfileDropdown = ({
               <AvatarImage src={avatarUrl} alt="Profile picture" />
               <AvatarFallback>
                 <AvatarFallback className="rounded-md">
-                  <CircleUser size={"1.5em"} className="text-muted-foreground" />
+                  <CircleUser
+                    size={"1.5em"}
+                    className="text-muted-foreground"
+                  />
                 </AvatarFallback>
               </AvatarFallback>
             </Avatar>
@@ -70,14 +73,24 @@ const ProfileDropdown = ({
 
         <DropdownMenuGroup>
           {isAuthenticated && (
-            <DropdownMenuItem className="px-4 py-2.5 text-base" onClick={() => navigate("/account")}>
+            <DropdownMenuItem
+              className="px-4 py-2.5 text-base"
+              onClick={() => navigate("/account")}
+            >
               <UserIcon className="text-foreground size-5" />
               <span>My account</span>
             </DropdownMenuItem>
           )}
           <DropdownMenuItem className="px-4 py-2.5 text-base">
-            <SettingsIcon className="text-foreground size-5" />
-            <span>Settings</span>
+            {isAuthenticated &&
+              user &&
+              user.role ===
+                "admin" && (
+                  <>
+                    <SettingsIcon className="text-foreground size-5" />
+                    <span>Settings</span>
+                  </>
+                )}
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
@@ -90,7 +103,7 @@ const ProfileDropdown = ({
               window.open(
                 "https://docuisine.github.io/documentation/",
                 "_blank",
-                "noopener,noreferrer"
+                "noopener,noreferrer",
               )
             }
           >
