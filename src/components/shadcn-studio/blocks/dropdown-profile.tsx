@@ -40,6 +40,9 @@ const ProfileDropdown = ({
 }: Props) => {
   const { isAuthenticated, logout, user } = useAuth();
   const navigate = useNavigate();
+
+  const displayAccount = isAuthenticated;
+  const displaySettings = isAuthenticated && user && user.role === "admin";
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
@@ -69,10 +72,10 @@ const ProfileDropdown = ({
           </div>
         </DropdownMenuLabel>
 
-        <DropdownMenuSeparator />
+        {(displayAccount || displaySettings) && <DropdownMenuSeparator />}
 
         <DropdownMenuGroup>
-          {isAuthenticated && (
+          {displayAccount && (
             <DropdownMenuItem
               className="px-4 py-2.5 text-base"
               onClick={() => navigate("/account")}
@@ -81,8 +84,11 @@ const ProfileDropdown = ({
               <span>My account</span>
             </DropdownMenuItem>
           )}
-          {isAuthenticated && user && user.role === "admin" && (
-            <DropdownMenuItem className="px-4 py-2.5 text-base" onClick={() => navigate("/administration")}>
+          {displaySettings && (
+            <DropdownMenuItem
+              className="px-4 py-2.5 text-base"
+              onClick={() => navigate("/administration")}
+            >
               <SettingsIcon className="text-foreground size-5" />
               <span>Settings</span>
             </DropdownMenuItem>
