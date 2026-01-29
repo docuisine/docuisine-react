@@ -60,9 +60,9 @@ const AdministrationPage = () => {
             <BrushCleaningIcon />
             Clean
           </MenuItem>
-          <MenuItem page="/administration/backup">
+          <MenuItem page="/administration/backups">
             <DatabaseBackupIcon />
-            Backup
+            Backups
           </MenuItem>
           <MenuItem page="/administration/logs">
             <ScrollIcon />

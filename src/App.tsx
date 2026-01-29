@@ -15,6 +15,15 @@ import ProfilePage from "@/pages/account/profile";
 import AuthenticationPage from "@/pages/account/authentication";
 import CuisinePage from "@/pages/cuisine";
 import SiteSettingsPage from "@/pages/administration/configuration";
+import ManageUsersPage from "@/pages/administration/users";
+import ManageRecipesPage from "@/pages/administration/recipes";
+import ManageCuisinesPage from "./pages/administration/cuisines";
+import ManageCookbooksPage from "@/pages/administration/cookbooks";
+import ManageIngredientsPage from "@/pages/administration/ingredients";
+import CleanPage from "@/pages/administration/clean";
+import BackupsPage from "@/pages/administration/backups";
+import LogsPage from "@/pages/administration/logs";
+
 
 import { SignupUsernameForm } from "@/components/custom/signup/username";
 import { SignupPasswordForm } from "@/components/custom/signup/password";
@@ -60,6 +69,14 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="site-settings" replace /> },
           { path: "site-settings", element: <SiteSettingsPage /> },
+          { path: "user-management", element: <ManageUsersPage /> },
+          { path: "recipe-management", element: <ManageRecipesPage /> },
+          { path: "cuisine-management", element: <ManageCuisinesPage /> },
+          { path: "cookbook-management", element: <ManageCookbooksPage /> },
+          { path: "ingredient-management", element: <ManageIngredientsPage /> },
+          { path: "clean", element: <CleanPage /> },
+          { path: "backups", element: <BackupsPage /> },
+          { path: "logs", element: <LogsPage /> },
         ],
       },
       {
