@@ -13,8 +13,8 @@ export function MenuGroup({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-w-50 mr-4 mb-1">
-      <h3 className={`font-semibold text-sm text-start mb-1 ml-2 text-nowrap text-muted-foreground select-none ${title ? "" : "hidden"}`}>
+    <div className="flex flex-col min-w-50 mr-4 mb-2">
+      <h3 className={`font-semibold text-sm text-start mb-2 ml-2 text-nowrap text-muted-foreground select-none ${title ? "" : "hidden"}`}>
         {title}
       </h3>
       {children}
