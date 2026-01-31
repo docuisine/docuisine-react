@@ -24,7 +24,7 @@ export const ConfigurationItem = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div className="flex flex-row gap-8 items-center border-b py-2 px-4 w-full">
+    <div className="flex flex-row gap-8 items-center border-b last:border-b-0 py-2 px-4 w-full">
       <div className="w-4">{children}</div>
       <ConfigurationItemLabel label={label} />
       <ConfigurationItemDescription description={description} />

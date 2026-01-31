@@ -3,9 +3,24 @@ export const StatusItemStatus = ({
 }: {
   color: "green" | "red" | "yellow";
 }) => {
+  switch (color) {
+    case "green":
+      return (
+        <div className="w-4 items-center flex justify-center">
+          <div className="rounded-full w-2 h-2 bg-green-600 ring-card block size-2 ring-2"></div>
+        </div>
+      );
+    case "yellow":
+      return (
+        <div className="w-4 items-center flex justify-center">
+          <div className="rounded-full w-2 h-2 bg-yellow-600 ring-card block size-2 ring-2"></div>
+        </div>
+      );
+  }
+
   return (
     <div className="w-4 items-center flex justify-center">
-      <div className={`rounded-full w-2 h-2 bg-${color}-600`}></div>
+      <div className="rounded-full w-2 h-2 bg-red-600 ring-card block size-2 ring-2"></div>
     </div>
   );
 };
@@ -23,9 +38,7 @@ export const StatusItemDescription = ({
 }: {
   description: string;
 }) => {
-  return (
-    <p className="text-xs text-muted-foreground">{description}</p>
-  );
+  return <p className="text-xs text-muted-foreground">{description}</p>;
 };
 
 export const StatusItem = ({
@@ -38,7 +51,7 @@ export const StatusItem = ({
   description: string;
 }) => {
   return (
-    <div className="flex flex-row gap-8 items-center border-b py-2 px-4 w-full text-start">
+    <div className="flex flex-row gap-8 items-center border-b last:border-b-0 py-2 px-4 w-full text-start">
       <StatusItemStatus color={color} />
       <StatusItemLabel label={label} />
       <StatusItemDescription description={description} />
@@ -46,11 +59,7 @@ export const StatusItem = ({
   );
 };
 
-export const StatusTable = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const StatusTable = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col border rounded-md overflow-hidden w-full">
       {children}
