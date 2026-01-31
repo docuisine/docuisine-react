@@ -68,3 +68,13 @@ export interface CreateRecipeStep {
   html_id: string;
   step_num: number;
 }
+
+
+export interface Configuration {
+  frontendLatestVersion: string;
+  backendVersion: string;
+  backendLatestVersion: string;
+  defaultSecretsUsed: string[];
+  databaseURL: string;
+  databaseType: string;
+}

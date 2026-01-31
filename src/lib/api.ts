@@ -1,8 +1,9 @@
 import { urlJoin } from "@/lib/utils";
 import axios from "axios";
 import errors from "@/lib/errors";
-import { BACKEND_URL } from "./settings";
+import { BACKEND_URL, IMAGE_HOST } from "./settings";
 import STATUS from "@/lib/status";
+import { type Configuration } from "@/lib/types";
 
 /**
  * Authenticate a user and retrieve an access token.
@@ -24,7 +25,7 @@ export async function login(formdata: FormData) {
   try {
     const response = await axios.post(
       urlJoin(BACKEND_URL, "/auth/token/"),
-      formdata
+      formdata,
     );
 
     return response.data;
@@ -36,17 +37,17 @@ export async function login(formdata: FormData) {
         case STATUS.HTTP_401_UNAUTHORIZED:
           throw new errors.InvalidCredentialsError(
             "The password provided is incorrect.",
-            STATUS.HTTP_401_UNAUTHORIZED
+            STATUS.HTTP_401_UNAUTHORIZED,
           );
         case STATUS.HTTP_404_NOT_FOUND:
           throw new errors.UserNotFoundError(
             "A user with this username does not exist.",
-            STATUS.HTTP_404_NOT_FOUND
+            STATUS.HTTP_404_NOT_FOUND,
           );
         case STATUS.HTTP_500_INTERNAL_SERVER_ERROR:
           throw new errors.ServerError(
             "Something went wrong on the server.",
-            STATUS.HTTP_500_INTERNAL_SERVER_ERROR
+            STATUS.HTTP_500_INTERNAL_SERVER_ERROR,
           );
         default:
           throw new Error("Login failed");
@@ -88,10 +89,9 @@ export async function getAllCuisines() {
   return response.data;
 }
 
-
 export async function getCuisineByName(cuisineName: string) {
   const response = await axios.get(
-    urlJoin(BACKEND_URL, `/categories/${cuisineName}`)
+    urlJoin(BACKEND_URL, `/categories/${cuisineName}`),
   );
   return response.data;
 }
@@ -104,7 +104,7 @@ export async function getUserbyUsername(username: string) {
 export async function updateUserProfilePicture(formdata: FormData) {
   const response = await axios.put(
     urlJoin(BACKEND_URL, `/users/img`),
-    formdata
+    formdata,
   );
   return response.data;
 }
@@ -118,6 +118,22 @@ export async function updateUserEmail(formdata: FormData) {
   return response.data;
 }
 
+export async function getConfiguration(): Promise<Configuration> {
+  const response = await axios.get(
+    urlJoin(BACKEND_URL, `/health/configuration`),
+  );
+  return response.data;
+}
+
+export async function healthImageHost(): Promise<boolean> {
+  try {
+    const response = await axios.get(IMAGE_HOST);
+    return response.status === STATUS.HTTP_200_OK;
+  } catch {
+    return false;
+  }
+}
+
 const api = {
   login,
   signup,
@@ -126,6 +142,8 @@ const api = {
   getAllCategories: getAllCuisines,
   updateUserProfilePicture,
   updateUserEmail,
+  getConfiguration,
+  healthImageHost,
 };
 
 export default api;
