@@ -50,7 +50,7 @@ function getVersionDescription(
   } else {
     return (
       <span>
-        Update available ({currentVersion} → {latestVersionLink})
+        Update available ({currentVersion.slice(0, 7)} → {latestVersionLink})
       </span>
     );
   }
