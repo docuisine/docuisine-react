@@ -34,7 +34,6 @@ major:
 	git commit -am "🏷️ release (major): $$VERSION" && \
 	git tag -a "$$VERSION" -m "Release $$VERSION"
 
-
 .PHONY: tag
 tag:
 	@VERSION=$$(node -p "require('./package.json').version") && \
