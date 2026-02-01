@@ -35,7 +35,12 @@ function getVersionDescription(
   updateLink: string,
 ) {
   const latestVersionLink = (
-    <a href={updateLink} target="_blank" rel="noopener noreferrer" className="underline">
+    <a
+      href={updateLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
       {latestVersion}
     </a>
   );
@@ -78,7 +83,6 @@ export default function SiteSettingsPage() {
     );
   }
   let frontendDeployment;
-  let backendDeployment;
   let isBackendLatestVersion = false;
   let isFrontendLatestVersion = false;
 
@@ -86,11 +90,9 @@ export default function SiteSettingsPage() {
   if (configuration.backendDeployment === DEPLOYMENT.DOCKER) {
     isBackendLatestVersion =
       configuration.backendVersion === configuration.backendLatestVersion;
-    backendDeployment = DEPLOYMENT.DOCKER;
   } else {
     isBackendLatestVersion =
       configuration.backendCommitHash === configuration.backendLatestCommitHash;
-    backendDeployment = DEPLOYMENT.VERCEL;
   }
 
   // Check frontend version on Vercel using commit SHA
@@ -112,8 +114,14 @@ export default function SiteSettingsPage() {
   const configurationItems = [
     {
       icon: <ContainerIcon />,
-      label: "Deployment",
+      label: "Backend Deployment",
       description: configuration.backendDeployment,
+    },
+
+    {
+      icon: <ContainerIcon />,
+      label: "Frontend Deployment",
+      description: frontendDeployment,
     },
     {
       icon: <HashIcon />,
@@ -161,7 +169,10 @@ export default function SiteSettingsPage() {
                   : configuration.frontendLatestCommitHash.slice(0, 7),
                 frontendDeployment === DEPLOYMENT.DOCKER
                   ? updateLinkByRelease("docuisine-react")
-                  : updateLinkByHash(configuration.frontendLatestCommitHash, "docuisine-react"),
+                  : updateLinkByHash(
+                      configuration.frontendLatestCommitHash,
+                      "docuisine-react",
+                    ),
               )}
             />
             <StatusItem
@@ -169,15 +180,18 @@ export default function SiteSettingsPage() {
               label="Backend"
               description={getVersionDescription(
                 isBackendLatestVersion,
-                backendDeployment === DEPLOYMENT.DOCKER
+                configuration.backendDeployment === DEPLOYMENT.DOCKER
                   ? configuration.backendVersion
                   : configuration.backendCommitHash.slice(0, 7),
-                backendDeployment === DEPLOYMENT.DOCKER
+                configuration.backendDeployment === DEPLOYMENT.DOCKER
                   ? configuration.backendLatestVersion
                   : configuration.backendLatestCommitHash.slice(0, 7),
-                backendDeployment === DEPLOYMENT.DOCKER
+                configuration.backendDeployment === DEPLOYMENT.DOCKER
                   ? updateLinkByRelease("docuisine")
-                  : updateLinkByHash(configuration.backendLatestCommitHash, "docuisine" ),
+                  : updateLinkByHash(
+                      configuration.backendLatestCommitHash,
+                      "docuisine",
+                    ),
               )}
             />
             <StatusItem
