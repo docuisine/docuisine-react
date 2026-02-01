@@ -1,11 +1,10 @@
 import { useId } from "react";
 import { Input } from "@/components/ui/input";
 import { GripIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Ingredient } from "@/lib/types";
 import { IngredientUnitCombobox } from "./ingredient-unit-combobox";
-import { TrashIcon } from "lucide-react";
+import { DeleteBtn } from "@/components/custom/buttons";
 
 type InputFloatingLabelProps = React.ComponentProps<typeof Input> & {
   className?: string;
@@ -34,7 +33,7 @@ const InputFloatingLabel = ({
           "has-[+input:not(:placeholder-shown)]:top-0",
           "has-[+input:not(:placeholder-shown)]:cursor-default",
           "has-[+input:not(:placeholder-shown)]:text-xs",
-          "has-[+input:not(:placeholder-shown)]:font-medium"
+          "has-[+input:not(:placeholder-shown)]:font-medium",
         )}
       >
         <span className="bg-background inline-flex px-1">{label}</span>
@@ -68,14 +67,7 @@ export default function IngredientField({
       />
       <IngredientUnitCombobox />
       <InputFloatingLabel label="Notes" type="text" />
-      <Button
-        variant="ghost"
-        aria-roledescription="Delete entry"
-        className="text-muted-foreground hover:bg-[rgb(var(--admonition-destructive-bg))] hover:text-[rgb(var(--admonition-destructive-fg))]"
-        onClick={() => deleteHandler(ingredient.id)}
-      >
-        <TrashIcon />
-      </Button>
+      <DeleteBtn handler={() => deleteHandler(ingredient.id)} />
     </div>
   );
 }
