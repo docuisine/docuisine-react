@@ -16,9 +16,21 @@ dev-down:
 #   This will bump the version in package.json 
 #	and create a git commit with the appropriate message
 .PHONY: patch minor major
+
 patch:
-	@npm version patch -m "🏷️ release (patch): %s"
+	@npm version patch --no-git-tag-version
+	@VERSION=$$(node -p "require('./package.json').version") && \
+	git commit -am "🏷️ release (patch): $$VERSION" && \
+	git tag -a "$$VERSION" -m "Release $$VERSION"
+
 minor:
-	@npm version minor -m "🏷️ release (minor): %s"
+	@npm version minor --no-git-tag-version
+	@VERSION=$$(node -p "require('./package.json').version") && \
+	git commit -am "🏷️ release (minor): $$VERSION" && \
+	git tag -a "$$VERSION" -m "Release $$VERSION"
+
 major:
-	@npm version major -m "🏷️ release (major): %s"
+	@npm version major --no-git-tag-version
+	@VERSION=$$(node -p "require('./package.json').version") && \
+	git commit -am "🏷️ release (major): $$VERSION" && \
+	git tag -a "$$VERSION" -m "Release $$VERSION"
