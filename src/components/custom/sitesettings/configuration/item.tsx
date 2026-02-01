@@ -1,6 +1,8 @@
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 export const ConfigurationItemLabel = ({ label }: { label: string }) => {
   return (
-    <span className="font-medium text-sm w-24 text-nowrap text-start">
+    <span className="font-medium text-sm min-w-24 w-24 text-nowrap text-start py-2">
       {label}
     </span>
   );
@@ -11,7 +13,12 @@ export const ConfigurationItemDescription = ({
 }: {
   description: string;
 }) => {
-  return <p className="text-xs text-muted-foreground">{description}</p>;
+  return (
+    <ScrollArea className="text-xs text-muted-foreground text-start truncate">
+      <p className="py-3 w-full">{description}</p>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
+  );
 };
 
 export const ConfigurationItem = ({
@@ -24,8 +31,8 @@ export const ConfigurationItem = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div className="flex flex-row gap-8 items-center border-b last:border-b-0 py-2 px-4 w-full">
-      <div className="w-4">{children}</div>
+    <div className="flex flex-row gap-8 items-center border-b last:border-b-0 px-4 w-full">
+      <div className="w-4 py-2">{children}</div>
       <ConfigurationItemLabel label={label} />
       <ConfigurationItemDescription description={description} />
     </div>
@@ -38,7 +45,7 @@ export const ConfigurationTable = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="flex flex-col border rounded-md overflow-hidden w-full">
+    <div className="flex flex-col border rounded-md overflow-hidden max-w-[50vw] min-w-100 w-full table-fixed">
       {children}
     </div>
   );
