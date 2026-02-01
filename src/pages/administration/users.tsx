@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import type { User } from "@/lib/types";
 import { CheckIcon } from "lucide-react";
 import { DeleteBtn } from "@/components/custom/buttons";
+import { useAuth } from "@/lib/useAuth";
 
 function UTC08DateString(dateString: string) {
   const date = new Date(dateString);
@@ -33,6 +34,7 @@ function UTC08DateString(dateString: string) {
 }
 
 export default function ManageUsersPage() {
+  const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -59,19 +61,23 @@ export default function ManageUsersPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((user) => (
+              {users.map((appUser) => (
                 <TableRow>
-                  <TableCell className="text-left">{user.id}</TableCell>
-                  <TableCell className="text-left">{user.username}</TableCell>
-                  <TableCell className="text-left">{user.email}</TableCell>
+                  <TableCell className="text-left">{appUser.id}</TableCell>
                   <TableCell className="text-left">
-                    {user.role === "admin" ? <CheckIcon /> : ""}
+                    {appUser.username}
+                  </TableCell>
+                  <TableCell className="text-left">{appUser.email}</TableCell>
+                  <TableCell className="text-left">
+                    {appUser.role === "admin" ? <CheckIcon /> : ""}
                   </TableCell>
                   <TableCell className="text-left">
-                    {UTC08DateString(user.created_at)}
+                    {UTC08DateString(appUser.created_at)}
                   </TableCell>
                   <TableCell className="text-left">
-                    <DeleteBtn handler={() => {}} />
+                    {appUser.id != user!.id && (
+                      <DeleteBtn handler={() => {}}></DeleteBtn>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
