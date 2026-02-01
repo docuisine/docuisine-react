@@ -134,6 +134,16 @@ export async function healthImageHost(): Promise<boolean> {
   }
 }
 
+export async function getAllUsers() {
+  const response = await axios.get(urlJoin(BACKEND_URL, `/users/`));
+  return response.data;
+}
+
+export async function deleteUserById(userId: number) {
+  const response = await axios.delete(urlJoin(BACKEND_URL, `/users/${userId}`));
+  return response.data;
+}
+
 const api = {
   login,
   signup,
@@ -144,6 +154,7 @@ const api = {
   updateUserEmail,
   getConfiguration,
   healthImageHost,
+  getAllUsers,
 };
 
 export default api;
