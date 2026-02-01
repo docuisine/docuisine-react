@@ -2,7 +2,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export const ConfigurationItemLabel = ({ label }: { label: string }) => {
   return (
-    <span className="font-medium text-sm min-w-24 w-24 text-nowrap text-start py-2">
+    <span className="font-medium text-sm min-w-24 w-36 text-nowrap text-start py-2">
       {label}
     </span>
   );
