@@ -94,11 +94,13 @@ export default function SiteSettingsPage() {
   }
 
   // Check frontend version on Vercel using commit SHA
+  // IF we are running on Vercel, this env var will be truthy
   if (import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA) {
     isFrontendLatestVersion =
       import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ===
       configuration.frontendLatestCommitHash;
     frontendDeployment = DEPLOYMENT.VERCEL;
+    // Else we should be running on Docker
     // Check frontend version on Docker using version number
   } else {
     isFrontendLatestVersion =
