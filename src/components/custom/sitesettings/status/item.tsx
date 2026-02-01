@@ -36,13 +36,13 @@ export const StatusItemLabel = ({ label }: { label: string }) => {
 };
 
 export const StatusItemDescription = ({
-  description,
+  children
 }: {
-  description: string;
+  children: React.ReactNode;
 }) => {
   return (
     <ScrollArea className="text-xs text-muted-foreground text-start truncate">
-      <p className="py-3 w-full">{description}</p>
+      <p className="py-3 w-full">{children}</p>
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
@@ -55,13 +55,15 @@ export const StatusItem = ({
 }: {
   color: "green" | "red" | "yellow";
   label: string;
-  description: string;
+  description: React.ReactNode;
 }) => {
   return (
     <div className="flex flex-row gap-8 items-center border-b last:border-b-0 px-4 w-full">
       <StatusItemStatus color={color} />
       <StatusItemLabel label={label} />
-      <StatusItemDescription description={description} />
+      <StatusItemDescription>
+        {description}
+      </StatusItemDescription>
     </div>
   );
 };

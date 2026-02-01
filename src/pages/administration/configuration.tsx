@@ -32,8 +32,31 @@ function getVersionDescription(
   upToDate: boolean,
   currentVersion: string,
   latestVersion: string,
+  updateLink: string,
 ) {
-  return `${upToDate ? `Up to date (${latestVersion})` : `Update available (${currentVersion} -> ${latestVersion})`} `;
+  const latestVersionLink = (
+    <a href={updateLink} target="_blank" rel="noopener noreferrer" className="underline">
+      {latestVersion}
+    </a>
+  );
+
+  if (upToDate) {
+    return <span>Up to date ({latestVersion})</span>;
+  } else {
+    return (
+      <span>
+        Update available ({currentVersion} → {latestVersionLink})
+      </span>
+    );
+  }
+}
+
+function updateLinkByHash(hash: string, repo: string) {
+  return `https://github.com/docuisine/${repo}/commit/${hash}`;
+}
+
+function updateLinkByRelease(repo: string) {
+  return `https://github.com/docuisine/${repo}/releases/latest`;
 }
 
 export default function SiteSettingsPage() {
@@ -70,14 +93,13 @@ export default function SiteSettingsPage() {
     backendDeployment = DEPLOYMENT.VERCEL;
   }
 
-
   // Check frontend version on Vercel using commit SHA
   if (import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA) {
     isFrontendLatestVersion =
       import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ===
       configuration.frontendLatestCommitHash;
     frontendDeployment = DEPLOYMENT.VERCEL;
-  // Check frontend version on Docker using version number
+    // Check frontend version on Docker using version number
   } else {
     isFrontendLatestVersion =
       appSettings.APP_VERSION === configuration.frontendLatestVersion;
@@ -129,8 +151,15 @@ export default function SiteSettingsPage() {
               label="Frontend"
               description={getVersionDescription(
                 isFrontendLatestVersion,
-                frontendDeployment === DEPLOYMENT.DOCKER ? Settings.APP_VERSION : import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA || 'unknown',
-                frontendDeployment === DEPLOYMENT.DOCKER ? configuration.frontendLatestVersion : configuration.frontendLatestCommitHash.slice(0, 7),
+                frontendDeployment === DEPLOYMENT.DOCKER
+                  ? Settings.APP_VERSION
+                  : import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA || "unknown",
+                frontendDeployment === DEPLOYMENT.DOCKER
+                  ? configuration.frontendLatestVersion
+                  : configuration.frontendLatestCommitHash.slice(0, 7),
+                frontendDeployment === DEPLOYMENT.DOCKER
+                  ? updateLinkByRelease("docuisine-react")
+                  : updateLinkByHash(configuration.frontendLatestCommitHash, "docuisine-react"),
               )}
             />
             <StatusItem
@@ -138,8 +167,15 @@ export default function SiteSettingsPage() {
               label="Backend"
               description={getVersionDescription(
                 isBackendLatestVersion,
-                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendVersion : configuration.backendCommitHash.slice(0, 7),
-                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendLatestVersion : configuration.backendLatestCommitHash.slice(0, 7),
+                backendDeployment === DEPLOYMENT.DOCKER
+                  ? configuration.backendVersion
+                  : configuration.backendCommitHash.slice(0, 7),
+                backendDeployment === DEPLOYMENT.DOCKER
+                  ? configuration.backendLatestVersion
+                  : configuration.backendLatestCommitHash.slice(0, 7),
+                backendDeployment === DEPLOYMENT.DOCKER
+                  ? updateLinkByRelease("docuisine")
+                  : updateLinkByHash(configuration.backendLatestCommitHash, "docuisine" ),
               )}
             />
             <StatusItem
