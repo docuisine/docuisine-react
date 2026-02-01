@@ -130,7 +130,7 @@ export default function SiteSettingsPage() {
               description={getVersionDescription(
                 isFrontendLatestVersion,
                 frontendDeployment === DEPLOYMENT.DOCKER ? Settings.APP_VERSION : import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA || 'unknown',
-                frontendDeployment === DEPLOYMENT.DOCKER ? configuration.frontendLatestVersion : configuration.frontendLatestCommitHash,
+                frontendDeployment === DEPLOYMENT.DOCKER ? configuration.frontendLatestVersion : configuration.frontendLatestCommitHash.slice(0, 7),
               )}
             />
             <StatusItem
@@ -138,8 +138,8 @@ export default function SiteSettingsPage() {
               label="Backend"
               description={getVersionDescription(
                 isBackendLatestVersion,
-                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendVersion : configuration.backendCommitHash,
-                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendLatestVersion : configuration.backendLatestCommitHash,
+                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendVersion : configuration.backendCommitHash.slice(0, 7),
+                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendLatestVersion : configuration.backendLatestCommitHash.slice(0, 7),
               )}
             />
             <StatusItem
