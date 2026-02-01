@@ -41,12 +41,12 @@ function getVersionDescription(
       rel="noopener noreferrer"
       className="underline"
     >
-      {latestVersion}
+      {latestVersion.slice(0, 7)}
     </a>
   );
 
   if (upToDate) {
-    return <span>Up to date ({latestVersion})</span>;
+    return <span>Up to date ({latestVersion.slice(0, 7)})</span>;
   } else {
     return (
       <span>
@@ -166,7 +166,7 @@ export default function SiteSettingsPage() {
                   : import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA || "unknown",
                 frontendDeployment === DEPLOYMENT.DOCKER
                   ? configuration.frontendLatestVersion
-                  : configuration.frontendLatestCommitHash.slice(0, 7),
+                  : configuration.frontendLatestCommitHash,
                 frontendDeployment === DEPLOYMENT.DOCKER
                   ? updateLinkByRelease("docuisine-react")
                   : updateLinkByHash(
@@ -182,10 +182,10 @@ export default function SiteSettingsPage() {
                 isBackendLatestVersion,
                 configuration.backendDeployment === DEPLOYMENT.DOCKER
                   ? configuration.backendVersion
-                  : configuration.backendCommitHash.slice(0, 7),
+                  : configuration.backendCommitHash,
                 configuration.backendDeployment === DEPLOYMENT.DOCKER
                   ? configuration.backendLatestVersion
-                  : configuration.backendLatestCommitHash.slice(0, 7),
+                  : configuration.backendLatestCommitHash,
                 configuration.backendDeployment === DEPLOYMENT.DOCKER
                   ? updateLinkByRelease("docuisine")
                   : updateLinkByHash(
