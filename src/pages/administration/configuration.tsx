@@ -108,7 +108,7 @@ export default function SiteSettingsPage() {
             />
             <StatusItem
               color={!isUsingDefaultSecrets ? "green" : "red"}
-              label="Default Secrets"
+              label="Secrets"
               description={
                 isUsingDefaultSecrets
                   ? `Default secrets are being used: ${configuration.defaultSecretsUsed.join(
