@@ -72,9 +72,13 @@ export interface CreateRecipeStep {
 
 export interface Configuration {
   frontendLatestVersion: string;
+  frontendLatestCommitHash: string;
   backendVersion: string;
   backendLatestVersion: string;
+  backendCommitHash: string;
+  backendLatestCommitHash: string;
+  backendDeployment: "docker" | "vercel";
   defaultSecretsUsed: string[];
   databaseURL: string;
-  databaseType: string;
+  databaseType: "sqlite" | "postgresql" | "mysql";
 }

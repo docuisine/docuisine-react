@@ -15,10 +15,18 @@ import api from "@/lib/api";
 import appSettings from "@/lib/settings";
 import { useEffect, useState } from "react";
 import { type Configuration } from "@/lib/types";
-import { BracesIcon, ImageIcon, DatabaseIcon, GithubIcon } from "lucide-react";
+import {
+  BracesIcon,
+  ImageIcon,
+  DatabaseIcon,
+  GithubIcon,
+  ContainerIcon,
+  HashIcon,
+} from "lucide-react";
 import Settings from "@/lib/settings";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
+import { DEPLOYMENT } from "@/lib/enums";
 
 function getVersionDescription(
   upToDate: boolean,
@@ -46,14 +54,53 @@ export default function SiteSettingsPage() {
       </div>
     );
   }
+  let frontendDeployment;
+  let backendDeployment;
+  let isBackendLatestVersion = false;
+  let isFrontendLatestVersion = false;
 
-  const isFrontendLatestVersion =
-    appSettings.APP_VERSION === configuration.frontendLatestVersion;
-  const isBackendLatestVersion =
-    configuration.backendVersion === configuration.backendLatestVersion;
+  // Check backend version based on deployment method
+  if (configuration.backendDeployment === DEPLOYMENT.DOCKER) {
+    isBackendLatestVersion =
+      configuration.backendVersion === configuration.backendLatestVersion;
+    backendDeployment = DEPLOYMENT.DOCKER;
+  } else {
+    isBackendLatestVersion =
+      configuration.backendCommitHash === configuration.backendLatestCommitHash;
+    backendDeployment = DEPLOYMENT.VERCEL;
+  }
+
+
+  // Check frontend version on Vercel using commit SHA
+  if (import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA) {
+    isFrontendLatestVersion =
+      import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA ===
+      configuration.frontendLatestCommitHash;
+    frontendDeployment = DEPLOYMENT.VERCEL;
+  // Check frontend version on Docker using version number
+  } else {
+    isFrontendLatestVersion =
+      appSettings.APP_VERSION === configuration.frontendLatestVersion;
+    frontendDeployment = DEPLOYMENT.DOCKER;
+  }
+
   const isUsingDefaultSecrets = configuration.defaultSecretsUsed.length > 0;
-
   const configurationItems = [
+    {
+      icon: <ContainerIcon />,
+      label: "Deployment",
+      description: configuration.backendDeployment,
+    },
+    {
+      icon: <HashIcon />,
+      label: "Frontend Build",
+      description: Settings.APP_VERSION,
+    },
+    {
+      icon: <HashIcon />,
+      label: "Backend Build",
+      description: configuration.backendCommitHash,
+    },
     { icon: <BracesIcon />, label: "API", description: Settings.BACKEND_URL },
     {
       icon: <ImageIcon />,
@@ -82,8 +129,8 @@ export default function SiteSettingsPage() {
               label="Frontend"
               description={getVersionDescription(
                 isFrontendLatestVersion,
-                appSettings.APP_VERSION,
-                configuration.frontendLatestVersion,
+                frontendDeployment === DEPLOYMENT.DOCKER ? Settings.APP_VERSION : import.meta.env.VITE_VERCEL_GIT_COMMIT_SHA || 'unknown',
+                frontendDeployment === DEPLOYMENT.DOCKER ? configuration.frontendLatestVersion : configuration.frontendLatestCommitHash,
               )}
             />
             <StatusItem
@@ -91,8 +138,8 @@ export default function SiteSettingsPage() {
               label="Backend"
               description={getVersionDescription(
                 isBackendLatestVersion,
-                configuration.backendVersion,
-                configuration.backendLatestVersion,
+                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendVersion : configuration.backendCommitHash,
+                backendDeployment === DEPLOYMENT.DOCKER ? configuration.backendLatestVersion : configuration.backendLatestCommitHash,
               )}
             />
             <StatusItem
