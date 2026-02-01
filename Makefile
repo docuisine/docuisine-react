@@ -15,6 +15,7 @@ dev-down:
 # 	Usage: make patch | minor | major
 #   This will bump the version in package.json 
 #	and create a git commit with the appropriate message
+# 	and tag.
 .PHONY: patch minor major
 patch:
 	@npm version patch --no-git-tag-version
@@ -34,7 +35,7 @@ major:
 	git commit -am "🏷️ release (major): $$VERSION" && \
 	git tag -a "$$VERSION" -m "Release $$VERSION"
 
-
+# Push tag to origin
 .PHONY: tag
 tag:
 	@VERSION=$$(node -p "require('./package.json').version") && \
