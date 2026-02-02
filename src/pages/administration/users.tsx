@@ -18,6 +18,8 @@ import type { User } from "@/lib/types";
 import { CheckIcon } from "lucide-react";
 import { DeleteBtn } from "@/components/custom/buttons";
 import { useAuth } from "@/lib/useAuth";
+import { Spinner } from "@/components/ui/spinner";
+import { toggleUserRole } from "@/lib/api";
 
 function UTC08DateString(dateString: string) {
   const date = new Date(dateString);
@@ -31,6 +33,32 @@ function UTC08DateString(dateString: string) {
     hour: "2-digit",
     minute: "2-digit",
   });
+}
+
+function AdminToggle({ user, self }: { user: User; self: boolean }) {
+  const [isAdmin, setIsAdmin] = useState(user.role === "admin");
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleToggle() {
+    setIsLoading(true);
+    toggleUserRole(user.id)
+      .then(() => {
+        setIsAdmin(!isAdmin);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  return (
+    <Button variant="ghost" onClick={handleToggle} disabled={self}>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <CheckIcon className={isAdmin ? "opacity-100" : "opacity-20"} />
+      )}
+    </Button>
+  );
 }
 
 export default function ManageUsersPage() {
@@ -69,7 +97,10 @@ export default function ManageUsersPage() {
                   </TableCell>
                   <TableCell className="text-left">{appUser.email}</TableCell>
                   <TableCell className="text-left">
-                    {appUser.role === "admin" ? <CheckIcon /> : ""}
+                    <AdminToggle
+                      user={appUser}
+                      self={appUser.id === user!.id}
+                    />
                   </TableCell>
                   <TableCell className="text-left">
                     {UTC08DateString(appUser.created_at)}

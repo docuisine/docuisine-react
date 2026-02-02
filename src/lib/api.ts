@@ -144,6 +144,13 @@ export async function deleteUserById(userId: number) {
   return response.data;
 }
 
+export async function toggleUserRole(userId: number) {
+  const response = await axios.put(
+    urlJoin(BACKEND_URL, `/users/toggle-role/${userId}`),
+  );
+  return response.data;
+}
+
 const api = {
   login,
   signup,
@@ -155,6 +162,8 @@ const api = {
   getConfiguration,
   healthImageHost,
   getAllUsers,
+  deleteUserById,
+  toggleUserRole,
 };
 
 export default api;
