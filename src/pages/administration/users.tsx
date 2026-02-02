@@ -20,6 +20,29 @@ import { DeleteBtn } from "@/components/custom/buttons";
 import { useAuth } from "@/lib/useAuth";
 import { Spinner } from "@/components/ui/spinner";
 import { toggleUserRole } from "@/lib/api";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function SkeletonRow() {
+  return (
+    <TableRow>
+      {Array.from({ length: 6 }).map((_, index) => (
+        <TableCell key={index}>
+          <Skeleton className="h-4 flex-1 bg-muted my-2" />
+        </TableCell>
+      ))}
+    </TableRow>
+  );
+}
+
+function SkeletonTable() {
+  return (
+    <>
+      {Array.from({ length: 5 }).map((_, index) => (
+        <SkeletonRow key={index} />
+      ))}
+    </>
+  );
+}
 
 function UTC08DateString(dateString: string) {
   const date = new Date(dateString);
@@ -64,9 +87,13 @@ function AdminToggle({ user, self }: { user: User; self: boolean }) {
 export default function ManageUsersPage() {
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getAllUsers().then(setUsers);
+    getAllUsers().then((fetchedUsers) => {
+      setUsers(fetchedUsers);
+      setIsLoading(false);
+    });
   }, []);
   return (
     <MiniPage>
@@ -89,29 +116,33 @@ export default function ManageUsersPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((appUser) => (
-                <TableRow>
-                  <TableCell className="text-left">{appUser.id}</TableCell>
-                  <TableCell className="text-left">
-                    {appUser.username}
-                  </TableCell>
-                  <TableCell className="text-left">{appUser.email}</TableCell>
-                  <TableCell className="text-left">
-                    <AdminToggle
-                      user={appUser}
-                      self={appUser.id === user!.id}
-                    />
-                  </TableCell>
-                  <TableCell className="text-left">
-                    {UTC08DateString(appUser.created_at)}
-                  </TableCell>
-                  <TableCell className="text-left">
-                    {appUser.id != user!.id && (
-                      <DeleteBtn handler={() => {}}></DeleteBtn>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {isLoading ? (
+                <SkeletonTable />
+              ) : (
+                users.map((appUser) => (
+                  <TableRow>
+                    <TableCell className="text-left">{appUser.id}</TableCell>
+                    <TableCell className="text-left">
+                      {appUser.username}
+                    </TableCell>
+                    <TableCell className="text-left">{appUser.email}</TableCell>
+                    <TableCell className="text-left">
+                      <AdminToggle
+                        user={appUser}
+                        self={appUser.id === user!.id}
+                      />
+                    </TableCell>
+                    <TableCell className="text-left">
+                      {UTC08DateString(appUser.created_at)}
+                    </TableCell>
+                    <TableCell className="text-left">
+                      {appUser.id != user!.id && (
+                        <DeleteBtn handler={() => {}}></DeleteBtn>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </MiniPageSectionContent>
