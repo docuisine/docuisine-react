@@ -104,15 +104,15 @@ export default function ManageUsersPage() {
         </MiniPageSectionContent>
       </MiniPageSection>
       <MiniPageSection title="Users">
-        <MiniPageSectionContent>
+        <MiniPageSectionContent className="border rounded-md overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="font-semibold">User ID</TableHead>
+                <TableHead className="font-semibold pl-4">User ID</TableHead>
                 <TableHead className="font-semibold">Username</TableHead>
                 <TableHead className="font-semibold">Email</TableHead>
                 <TableHead className="font-semibold">Admin</TableHead>
-                <TableHead className="font-semibold">Created At</TableHead>
+                <TableHead className="font-semibold pr-4">Created At</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -121,7 +121,7 @@ export default function ManageUsersPage() {
               ) : (
                 users.map((appUser) => (
                   <TableRow>
-                    <TableCell className="text-left">{appUser.id}</TableCell>
+                    <TableCell className="text-left pl-4">{appUser.id}</TableCell>
                     <TableCell className="text-left">
                       {appUser.username}
                     </TableCell>
@@ -135,7 +135,7 @@ export default function ManageUsersPage() {
                     <TableCell className="text-left">
                       {UTC08DateString(appUser.created_at)}
                     </TableCell>
-                    <TableCell className="text-left">
+                    <TableCell className="text-left pr-4">
                       {appUser.id != user!.id && (
                         <DeleteBtn handler={() => {}}></DeleteBtn>
                       )}
