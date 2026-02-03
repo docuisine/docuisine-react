@@ -84,6 +84,22 @@ function AdminToggle({ user, self }: { user: User; self: boolean }) {
   );
 }
 
+function sortById(users: User[]) {
+  return users.sort((a, b) => {
+    return a.id - b.id;
+  });
+}
+
+function handleInviteUser() {
+  try {
+    const link = window.location.origin + "/signup?invite=true";
+    navigator.clipboard.writeText(link);
+    alert("Invitation link copied to clipboard.");
+  } catch {
+    alert("Failed to copy invitation link.");
+  }
+}
+
 export default function ManageUsersPage() {
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
@@ -91,7 +107,7 @@ export default function ManageUsersPage() {
 
   useEffect(() => {
     getAllUsers().then((fetchedUsers) => {
-      setUsers(fetchedUsers);
+      setUsers(sortById(fetchedUsers));
       setIsLoading(false);
     });
   }, []);
@@ -100,7 +116,9 @@ export default function ManageUsersPage() {
       <MiniPageSection title="Add users">
         <MiniPageSectionContent className="justify-start">
           <Button>Add User</Button>
-          <Button variant="ghost">Invite User</Button>
+          <Button variant="ghost" onClick={handleInviteUser}>
+            Invite User
+          </Button>
         </MiniPageSectionContent>
       </MiniPageSection>
       <MiniPageSection title="Users">
@@ -121,7 +139,9 @@ export default function ManageUsersPage() {
               ) : (
                 users.map((appUser) => (
                   <TableRow>
-                    <TableCell className="text-left pl-4">{appUser.id}</TableCell>
+                    <TableCell className="text-left pl-4">
+                      {appUser.id}
+                    </TableCell>
                     <TableCell className="text-left">
                       {appUser.username}
                     </TableCell>
