@@ -11,6 +11,16 @@ import {
   TableCell,
   TableBody,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { getAllUsers } from "@/lib/api";
 import { useEffect, useState } from "react";
@@ -21,6 +31,7 @@ import { useAuth } from "@/lib/useAuth";
 import { Spinner } from "@/components/ui/spinner";
 import { toggleUserRole } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { signup } from "@/lib/api";
 
 function SkeletonRow() {
   return (
@@ -56,6 +67,19 @@ function UTC08DateString(dateString: string) {
     hour: "2-digit",
     minute: "2-digit",
   });
+}
+
+function handleAddUser(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const formData = new FormData(form);
+  signup(formData)
+    .then(() => {
+      alert("User added successfully.");
+    })
+    .catch(() => {
+      alert("Failed to add user.");
+    });
 }
 
 function AdminToggle({ user, self }: { user: User; self: boolean }) {
@@ -115,7 +139,37 @@ export default function ManageUsersPage() {
     <MiniPage>
       <MiniPageSection title="Add users">
         <MiniPageSectionContent className="justify-start">
-          <Button>Add User</Button>
+          <Dialog>
+            <DialogTrigger>
+              <Button>Add user</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Add user</DialogTitle>
+                <form onSubmit={handleAddUser}>
+                  <Label className="mt-4 mb-2" htmlFor="username">
+                    Username
+                  </Label>
+                  <Input id="username" type="text" placeholder="username" />
+                  <Label className="mt-4 mb-2" htmlFor="email">
+                    User Email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="user@example.com"
+                  />
+                  <Label className="mt-4 mb-2" htmlFor="password">
+                    Password
+                  </Label>
+                  <Input id="password" type="password" placeholder="password" />
+                  <Button className="mt-6 w-full" type="submit">
+                    Create User
+                  </Button>
+                </form>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
           <Button variant="ghost" onClick={handleInviteUser}>
             Invite User
           </Button>
