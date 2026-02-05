@@ -76,9 +76,16 @@ export async function login(formdata: FormData) {
  */
 
 export async function signup(formdata: FormData) {
+
+  let email = formdata.get("email");
+
+  if (email === "") {
+    email = null;
+  }
+
   const response = await axios.post(urlJoin(BACKEND_URL, "/users/"), {
     username: formdata.get("username"),
-    email: formdata.get("email"),
+    email: email,
     password: formdata.get("password"),
   });
   return response.data;

@@ -72,10 +72,17 @@ function UTC08DateString(dateString: string) {
 function handleAddUser(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
   const form = event.currentTarget;
+
+  if (form.email.value.trim() === "") {
+    form.email.value = null;
+  }
+
   const formData = new FormData(form);
   signup(formData)
     .then(() => {
       alert("User added successfully.");
+      form.reset();
+      window.location.reload();
     })
     .catch(() => {
       alert("Failed to add user.");
@@ -150,19 +157,30 @@ export default function ManageUsersPage() {
                   <Label className="mt-4 mb-2" htmlFor="username">
                     Username
                   </Label>
-                  <Input id="username" type="text" placeholder="username" />
+                  <Input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="username"
+                  />
                   <Label className="mt-4 mb-2" htmlFor="email">
                     User Email
                   </Label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="user@example.com"
                   />
                   <Label className="mt-4 mb-2" htmlFor="password">
                     Password
                   </Label>
-                  <Input id="password" type="password" placeholder="password" />
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                  />
                   <Button className="mt-6 w-full" type="submit">
                     Create User
                   </Button>
