@@ -148,10 +148,15 @@ export default function ManageUsersPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getAllUsers().then((fetchedUsers) => {
-      setUsers(sortById(fetchedUsers));
-      setIsLoading(false);
-    });
+    getAllUsers()
+      .then((fetchedUsers) => {
+        setUsers(sortById(fetchedUsers));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch users:", error);
+        setIsLoading(false);
+      });
   }, []);
   return (
     <MiniPage>
