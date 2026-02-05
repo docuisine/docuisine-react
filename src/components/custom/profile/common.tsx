@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useId } from "react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 type UserField = React.ComponentProps<typeof Input> & {
   label: string;
@@ -26,7 +27,7 @@ export function MiniPage({ children }: { children: React.ReactNode }) {
 export function MiniPageSection({
   title,
   children,
-  icon
+  icon,
 }: {
   title: string;
   children: React.ReactNode;
@@ -45,8 +46,10 @@ export function MiniPageSection({
 
 export function MiniPageSectionContent({
   children,
+  className,
 }: {
   children: React.ReactNode;
+  className?: string;
 }) {
-  return <div className="flex justify-between w-full gap-4">{children}</div>;
+  return <div className={cn("flex justify-between w-full gap-4", className)}>{children}</div>;
 }
