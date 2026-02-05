@@ -21,6 +21,15 @@ import { Field, FieldLabel, FieldContent } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function RefreshBtn() {
   return (
@@ -170,6 +179,69 @@ function S3Settings() {
   );
 }
 
+function CronPresetsDropdown() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Presets</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>
+          Every <i>x</i> at 00:00
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>Every hour</DropdownMenuItem>
+          <DropdownMenuItem>Every day</DropdownMenuItem>
+          <DropdownMenuItem>Every week</DropdownMenuItem>
+          <DropdownMenuItem>Every month</DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function AutomaticBackupsSettings() {
+  function removeSpaces(str: string) {
+    return str.replace(/\s+/g, "");
+  }
+
+  function spaceSeparate(str: string) {
+    return str.split("").join(" ");
+  }
+
+  function allowNumbersAndAsterisksOnly(str: string) {
+    return str.replace(/[^0-9\*]/g, "");
+  }
+
+  const [cron, setCron] = useState("");
+  function cronHandler(value: string) {
+    setCron(spaceSeparate(allowNumbersAndAsterisksOnly(removeSpaces(value))));
+  }
+  return (
+    <div className="flex flex-col md:flex-row md:gap-4 mb-4">
+      <Field>
+        <FieldLabel>Backup Frequency (Cron)</FieldLabel>
+        <FieldContent className="flex flex-row">
+          <CronPresetsDropdown />
+          <Input
+            placeholder="e.g., 0 0 * * *"
+            id="backup-frequency"
+            value={cron}
+            onChange={(e) => cronHandler(e.target.value)}
+          />
+        </FieldContent>
+      </Field>
+      <Field>
+        <FieldLabel>Max number of backups to keep</FieldLabel>
+        <FieldContent>
+          <Input type="number" defaultValue={3} id="max-number-of-backups" />
+        </FieldContent>
+      </Field>
+    </div>
+  );
+}
+
 export default function BackupsPage() {
   return (
     <MiniPage>
@@ -182,9 +254,7 @@ export default function BackupsPage() {
       <MiniPageSection title="Options">
         <MiniPageSectionContent className="flex flex-col gap-4">
           <BackupsOption label="Enable automatic backups">
-            <div className="flex flex-col gap-2">
-              Automatic backups is enabled.
-            </div>
+            <AutomaticBackupsSettings />
           </BackupsOption>
           <BackupsOption label="Store backups in S3 storage">
             <S3Settings />
