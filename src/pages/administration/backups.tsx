@@ -211,7 +211,7 @@ function AutomaticBackupsSettings() {
   }
 
   function allowNumbersAndAsterisksOnly(str: string) {
-    return str.replace(/[^0-9\*]/g, "");
+    return str.replace(/[^0-9*]/g, "");
   }
 
   const [cron, setCron] = useState("");
@@ -227,6 +227,8 @@ function AutomaticBackupsSettings() {
           <Input
             placeholder="e.g., 0 0 * * *"
             id="backup-frequency"
+            maxLength={9}
+            pattern="^[0-9 *]+$"
             value={cron}
             onChange={(e) => cronHandler(e.target.value)}
           />
