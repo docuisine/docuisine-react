@@ -26,8 +26,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -194,10 +192,6 @@ function CronPresetsDropdown({ setCron }: { setCron: (cron: string) => void }) {
         <Button variant="outline">Presets</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>
-          Every <i>x</i> at 00:00
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={() => setCron(presets["Every hour"])}>
             Every hour
