@@ -132,8 +132,6 @@ function handleInviteUser() {
 }
 
 function handleDeleteUser(userId: number) {
-  // Placeholder for delete user functionality
-
   deleteUserById(userId)
     .then(() => {
       alert("User deleted successfully.");
