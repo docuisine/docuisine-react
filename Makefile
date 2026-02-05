@@ -35,8 +35,8 @@ major:
 	git commit -am "🏷️ release (major): $$VERSION" && \
 	git tag -a "$$VERSION" -m "Release $$VERSION"
 
-# Push tag to origin
-.PHONY: tag
-tag:
+# Push tag to origin and trigger a release
+.PHONY: release
+release:
 	@VERSION=$$(node -p "require('./package.json').version") && \
 	git push origin $$VERSION
