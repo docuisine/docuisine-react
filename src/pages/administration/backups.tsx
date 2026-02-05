@@ -59,8 +59,10 @@ function UploadBackupBtn() {
 
 function Header() {
   return (
-    <div className="rounded-md flex items-center gap-2">
-      <span className="text-sm">Backup and restore your Docuisine data</span>
+    <div className="flex items-center">
+      <span className="text-sm mr-2">
+        Backup and restore your Docuisine data
+      </span>
       <RefreshBtn />
       <UploadBackupBtn />
     </div>
