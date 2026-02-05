@@ -76,7 +76,6 @@ export async function login(formdata: FormData) {
  */
 
 export async function signup(formdata: FormData) {
-
   let email = formdata.get("email");
 
   if (email === "") {
@@ -151,6 +150,11 @@ export async function deleteUserById(userId: number) {
   return response.data;
 }
 
+/**
+ * Toggles the role of a user by ID (admin <-> user).
+ * @param userId - The ID of the user whose role should be toggled.
+ * @returns A promise that resolves to the response data from the server.
+ */
 export async function toggleUserRole(userId: number) {
   const response = await axios.put(
     urlJoin(BACKEND_URL, `/users/toggle-role/${userId}`),
