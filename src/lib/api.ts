@@ -140,11 +140,28 @@ export async function healthImageHost(): Promise<boolean> {
   }
 }
 
+/**
+ * Fetches all users from the backend API.
+ *
+ * Sends a GET request to the `/users/` endpoint of the backend server and returns the response data.
+ *
+ * @returns {Promise<any>} A promise that resolves to the list of users returned by the backend.
+ * @throws {AxiosError} Throws if the HTTP request fails.
+ */
 export async function getAllUsers() {
   const response = await axios.get(urlJoin(BACKEND_URL, `/users/`));
   return response.data;
 }
 
+/**
+ * Deletes a user by their unique ID.
+ *
+ * Sends a DELETE request to the backend API to remove the user with the specified `userId`.
+ *
+ * @param userId - The unique identifier of the user to delete.
+ * @returns A promise that resolves with the response data from the backend.
+ * @throws Will throw an error if the request fails.
+ */
 export async function deleteUserById(userId: number) {
   const response = await axios.delete(urlJoin(BACKEND_URL, `/users/${userId}`));
   return response.data;
