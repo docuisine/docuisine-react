@@ -55,12 +55,9 @@ function SkeletonTable() {
   );
 }
 
-function UTC08DateString(dateString: string) {
+function formatDateString(dateString: string) {
   const date = new Date(dateString);
-  const utc8Date = new Date(
-    date.getTime() + 8 * 60 * 60 * 1000,
-  ); /* UTC+8 adjustment */
-  return utc8Date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -238,7 +235,7 @@ export default function ManageUsersPage() {
                       />
                     </TableCell>
                     <TableCell className="text-left">
-                      {UTC08DateString(appUser.created_at)}
+                      {formatDateString(appUser.created_at)}
                     </TableCell>
                     <TableCell className="text-left pr-4">
                       {appUser.id != user!.id && (
