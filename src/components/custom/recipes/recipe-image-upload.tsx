@@ -1,25 +1,9 @@
 import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { ImageUpIcon, TrashIcon } from "lucide-react";
+import { ImageUpIcon } from "lucide-react";
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-export const DeleteImage = ({ handler }: { handler: () => void }) => {
-  const classname = cn(
-    "bg-background",
-    "hover:bg-[rgb(var(--admonition-destructive-bg))]",
-    "border-[rgb(var(--admonition-destructive-border))]",
-    "text-[rgb(var(--admonition-destructive-fg))]",
-    "hover:text-[rgb(var(--admonition-destructive-fg))]"
-  );
-  return (
-    <Button variant="destructive" className={classname} onClick={handler}>
-      <TrashIcon />
-      Delete image
-    </Button>
-  );
-};
+import { DeleteBtn } from "@/components/custom/buttons";
 
 export default function RecipeImageUpload() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -100,7 +84,9 @@ export default function RecipeImageUpload() {
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
           />
-          <DeleteImage handler={handleDeleteImage} />
+          <DeleteBtn handler={handleDeleteImage} >
+            Delete image
+          </DeleteBtn>
         </div>
       )}
     </div>

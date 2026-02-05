@@ -3,7 +3,7 @@ import axios from "axios";
 import errors from "@/lib/errors";
 import { BACKEND_URL, IMAGE_HOST } from "./settings";
 import STATUS from "@/lib/status";
-import { type Configuration } from "@/lib/types";
+import type { Configuration, User } from "@/lib/types";
 
 /**
  * Authenticate a user and retrieve an access token.
@@ -76,9 +76,15 @@ export async function login(formdata: FormData) {
  */
 
 export async function signup(formdata: FormData) {
+  let email = formdata.get("email");
+
+  if (email === "") {
+    email = null;
+  }
+
   const response = await axios.post(urlJoin(BACKEND_URL, "/users/"), {
     username: formdata.get("username"),
-    email: formdata.get("email"),
+    email: email,
     password: formdata.get("password"),
   });
   return response.data;
@@ -134,6 +140,45 @@ export async function healthImageHost(): Promise<boolean> {
   }
 }
 
+/**
+ * Fetches all users from the backend API.
+ *
+ * Sends a GET request to the `/users/` endpoint of the backend server and returns the response data.
+ *
+ * @returns {Promise<User[]>} A promise that resolves to the list of users returned by the backend.
+ * @throws {AxiosError} Throws if the HTTP request fails.
+ */
+export async function getAllUsers() {
+  const response = await axios.get(urlJoin(BACKEND_URL, `/users/`));
+  return response.data as User[];
+}
+
+/**
+ * Deletes a user by their unique ID.
+ *
+ * Sends a DELETE request to the backend API to remove the user with the specified `userId`.
+ *
+ * @param userId - The unique identifier of the user to delete.
+ * @returns A promise that resolves with the response data from the backend.
+ * @throws Will throw an error if the request fails.
+ */
+export async function deleteUserById(userId: number) {
+  const response = await axios.delete(urlJoin(BACKEND_URL, `/users/${userId}`));
+  return response.data;
+}
+
+/**
+ * Toggles the role of a user by ID (admin <-> user).
+ * @param userId - The ID of the user whose role should be toggled.
+ * @returns A promise that resolves to the response data from the server.
+ */
+export async function toggleUserRole(userId: number) {
+  const response = await axios.put(
+    urlJoin(BACKEND_URL, `/users/toggle-role/${userId}`),
+  );
+  return response.data;
+}
+
 const api = {
   login,
   signup,
@@ -144,6 +189,9 @@ const api = {
   updateUserEmail,
   getConfiguration,
   healthImageHost,
+  getAllUsers,
+  deleteUserById,
+  toggleUserRole,
 };
 
 export default api;
