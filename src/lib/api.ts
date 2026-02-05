@@ -3,7 +3,7 @@ import axios from "axios";
 import errors from "@/lib/errors";
 import { BACKEND_URL, IMAGE_HOST } from "./settings";
 import STATUS from "@/lib/status";
-import { type Configuration } from "@/lib/types";
+import type { Configuration, User } from "@/lib/types";
 
 /**
  * Authenticate a user and retrieve an access token.
@@ -145,7 +145,7 @@ export async function healthImageHost(): Promise<boolean> {
  *
  * Sends a GET request to the `/users/` endpoint of the backend server and returns the response data.
  *
- * @returns {Promise<any>} A promise that resolves to the list of users returned by the backend.
+ * @returns {Promise<User[]>} A promise that resolves to the list of users returned by the backend.
  * @throws {AxiosError} Throws if the HTTP request fails.
  */
 export async function getAllUsers() {
