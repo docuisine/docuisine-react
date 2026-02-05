@@ -33,7 +33,7 @@ function RefreshBtn() {
   return (
     <Tooltip>
       <TooltipTrigger>
-        <Button variant="ghost">
+        <Button variant="ghost" aria-label="Refresh backup list">
           <RotateCwIcon size={20} />
         </Button>
       </TooltipTrigger>
@@ -46,7 +46,7 @@ function UploadBackupBtn() {
   return (
     <Tooltip>
       <TooltipTrigger>
-        <Button variant="ghost">
+        <Button variant="ghost" aria-label="Upload backup">
           <CloudUploadIcon size={20} />
         </Button>
       </TooltipTrigger>
