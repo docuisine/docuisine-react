@@ -223,7 +223,7 @@ export default function ManageUsersPage() {
                 <SkeletonTable />
               ) : (
                 users.map((appUser) => (
-                  <TableRow>
+                  <TableRow key={appUser.id}>
                     <TableCell className="text-left pl-4">
                       {appUser.id}
                     </TableCell>
