@@ -31,7 +31,7 @@ import { useAuth } from "@/lib/useAuth";
 import { Spinner } from "@/components/ui/spinner";
 import { toggleUserRole } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
-import { signup } from "@/lib/api";
+import { signup, deleteUserById } from "@/lib/api";
 
 function SkeletonRow() {
   return (
@@ -129,6 +129,19 @@ function handleInviteUser() {
   } catch {
     alert("Failed to copy invitation link.");
   }
+}
+
+function handleDeleteUser(userId: number) {
+  // Placeholder for delete user functionality
+
+  deleteUserById(userId)
+    .then(() => {
+      alert("User deleted successfully.");
+      window.location.reload();
+    })
+    .catch(() => {
+      alert("Failed to delete user.");
+    });
 }
 
 export default function ManageUsersPage() {
@@ -229,7 +242,7 @@ export default function ManageUsersPage() {
                     </TableCell>
                     <TableCell className="text-left pr-4">
                       {appUser.id != user!.id && (
-                        <DeleteBtn handler={() => {}}></DeleteBtn>
+                        <DeleteBtn handler={() => handleDeleteUser(appUser.id)}></DeleteBtn>
                       )}
                     </TableCell>
                   </TableRow>
