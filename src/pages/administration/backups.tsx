@@ -179,7 +179,13 @@ function S3Settings() {
   );
 }
 
-function CronPresetsDropdown() {
+function CronPresetsDropdown({ setCron }: { setCron: (cron: string) => void }) {
+  const presets = {
+    "Every hour": "0 * * * *",
+    "Every day": "0 0 * * *",
+    "Every week": "0 0 * * 0",
+    "Every month": "0 0 1 * *",
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -191,10 +197,18 @@ function CronPresetsDropdown() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Every hour</DropdownMenuItem>
-          <DropdownMenuItem>Every day</DropdownMenuItem>
-          <DropdownMenuItem>Every week</DropdownMenuItem>
-          <DropdownMenuItem>Every month</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCron(presets["Every hour"])}>
+            Every hour
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCron(presets["Every day"])}>
+            Every day
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCron(presets["Every week"])}>
+            Every week
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setCron(presets["Every month"])}>
+            Every month
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -223,7 +237,7 @@ function AutomaticBackupsSettings() {
       <Field>
         <FieldLabel>Backup Frequency (Cron)</FieldLabel>
         <FieldContent className="flex flex-row">
-          <CronPresetsDropdown />
+          <CronPresetsDropdown setCron={setCron} />
           <Input
             placeholder="e.g., 0 0 * * *"
             id="backup-frequency"
