@@ -126,7 +126,7 @@ function BackupsOption({
         <FieldLabel>{label}</FieldLabel>
       </div>
       <FieldContent
-        className={`${enabled ? "block" : "hidden"} transition transition-transform`}
+        className={`${enabled ? "block" : "hidden"} transition-transform`}
       >
         {children}
       </FieldContent>
