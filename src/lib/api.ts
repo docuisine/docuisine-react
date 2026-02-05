@@ -150,7 +150,7 @@ export async function healthImageHost(): Promise<boolean> {
  */
 export async function getAllUsers() {
   const response = await axios.get(urlJoin(BACKEND_URL, `/users/`));
-  return response.data;
+  return response.data as User[];
 }
 
 /**
