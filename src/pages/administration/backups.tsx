@@ -211,20 +211,21 @@ function CronPresetsDropdown({ setCron }: { setCron: (cron: string) => void }) {
   );
 }
 
+function removeSpaces(str: string) {
+  return str.replace(/\s+/g, "");
+}
+
+function spaceSeparate(str: string) {
+  return str.split("").join(" ");
+}
+
+function allowNumbersAndAsterisksOnly(str: string) {
+  return str.replace(/[^0-9*]/g, "");
+}
+
 function AutomaticBackupsSettings() {
-  function removeSpaces(str: string) {
-    return str.replace(/\s+/g, "");
-  }
-
-  function spaceSeparate(str: string) {
-    return str.split("").join(" ");
-  }
-
-  function allowNumbersAndAsterisksOnly(str: string) {
-    return str.replace(/[^0-9*]/g, "");
-  }
-
   const [cron, setCron] = useState("");
+
   function cronHandler(value: string) {
     setCron(spaceSeparate(allowNumbersAndAsterisksOnly(removeSpaces(value))));
   }
