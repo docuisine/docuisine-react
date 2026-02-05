@@ -231,7 +231,7 @@ function AutomaticBackupsSettings() {
   return (
     <div className="flex flex-col md:flex-row md:gap-4 mb-4">
       <Field>
-        <FieldLabel>Backup Frequency (Cron)</FieldLabel>
+        <FieldLabel>Backup frequency (Cron)</FieldLabel>
         <FieldContent className="flex flex-row">
           <CronPresetsDropdown setCron={setCron} />
           <Input
