@@ -20,6 +20,7 @@ import {
 import { Field, FieldLabel, FieldContent } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 function RefreshBtn() {
   return (
@@ -124,6 +125,51 @@ function BackupsOption({
   );
 }
 
+function S3Settings() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Field>
+        <FieldLabel>Endpoint</FieldLabel>
+        <FieldContent>
+          <Input placeholder="Enter S3 endpoint" id="s3-endpoint" />
+        </FieldContent>
+      </Field>
+      <div className="flex flex-col md:flex-row md:gap-4">
+        <Field>
+          <FieldLabel>Bucket Name</FieldLabel>
+          <FieldContent>
+            <Input placeholder="Enter S3 bucket name" id="s3-bucket-name" />
+          </FieldContent>
+        </Field>
+        <Field>
+          <FieldLabel>Region</FieldLabel>
+          <FieldContent>
+            <Input placeholder="Enter S3 region" id="s3-region" />
+          </FieldContent>
+        </Field>
+      </div>
+      <div className="flex flex-col md:flex-row md:gap-4">
+        <Field>
+          <FieldLabel>Access Key ID</FieldLabel>
+          <FieldContent>
+            <Input placeholder="Enter Access Key ID" id="access-key-id" />
+          </FieldContent>
+        </Field>
+        <Field>
+          <FieldLabel>Secret Access Key</FieldLabel>
+          <FieldContent>
+            <Input
+              placeholder="Enter Secret Access Key"
+              type="password"
+              id="secret-access-key"
+            />
+          </FieldContent>
+        </Field>
+      </div>
+    </div>
+  );
+}
+
 export default function BackupsPage() {
   return (
     <MiniPage>
@@ -141,7 +187,7 @@ export default function BackupsPage() {
             </div>
           </BackupsOption>
           <BackupsOption label="Store backups in S3 storage">
-            <div className="flex flex-col gap-2">S3 storage is enabled.</div>
+            <S3Settings />
           </BackupsOption>
           <Button className="self-end max-w-xs mt-2">Save changes</Button>
         </MiniPageSectionContent>
