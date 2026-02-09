@@ -49,7 +49,7 @@ export const ConfigurationTable = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="grid grid-cols-[auto_auto_1fr] border rounded-md overflow-hidden max-w-[50vw] min-w-100 w-full">
+    <div className="grid grid-cols-[3rem_auto_1fr] border rounded-md overflow-hidden max-w-[50vw] min-w-100 w-full">
       {children}
     </div>
   );
