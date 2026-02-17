@@ -34,6 +34,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { signup, deleteUserById } from "@/lib/api";
 import appSettings from "@/lib/settings";
 import { urlJoin } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
 
 function SkeletonRow() {
   return (
@@ -145,6 +146,25 @@ export default function ManageUsersPage() {
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+
+  const allSelected = users.length > 0 && selectedUsers.length === users.length;
+
+  function toggleSelectAll(checked: boolean) {
+    if (checked) {
+      setSelectedUsers(users.map((u) => u.id));
+    } else {
+      setSelectedUsers([]);
+    }
+  }
+
+  function toggleUser(id: number, checked: boolean) {
+    if (checked) {
+      setSelectedUsers((prev) => [...prev, id]);
+    } else {
+      setSelectedUsers((prev) => prev.filter((userId) => userId !== id));
+    }
+  }
 
   useEffect(() => {
     getAllUsers()
@@ -213,8 +233,18 @@ export default function ManageUsersPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="font-semibold pl-4">User ID</TableHead>
-                <TableHead className="font-semibold">Username</TableHead>
+                <TableHead className="font-semibold pl-4">
+                  <div className="flex items-center">
+                    <Checkbox
+                      checked={allSelected}
+                      onCheckedChange={(checked) =>
+                        toggleSelectAll(Boolean(checked))
+                      }
+                    />
+                  </div>
+                </TableHead>
+                <TableHead className="font-semibold">ID</TableHead>
+                <TableHead className="font-semibold">User</TableHead>
                 <TableHead className="font-semibold">Email</TableHead>
                 <TableHead className="font-semibold">Admin</TableHead>
                 <TableHead className="font-semibold">Created At</TableHead>
@@ -228,8 +258,16 @@ export default function ManageUsersPage() {
                 users.map((appUser) => (
                   <TableRow key={appUser.id}>
                     <TableCell className="text-left pl-4">
-                      {appUser.id}
+                      <div className="flex items-center">
+                        <Checkbox
+                          checked={selectedUsers.includes(appUser.id)}
+                          onCheckedChange={(checked) =>
+                            toggleUser(appUser.id, Boolean(checked))
+                          }
+                        />
+                      </div>
                     </TableCell>
+                    <TableCell className="text-left">{appUser.id}</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center">
                         {appUser.preview_img ? (
