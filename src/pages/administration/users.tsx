@@ -32,6 +32,8 @@ import { Spinner } from "@/components/ui/spinner";
 import { toggleUserRole } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { signup, deleteUserById } from "@/lib/api";
+import appSettings from "@/lib/settings";
+import { urlJoin } from "@/lib/utils";
 
 function SkeletonRow() {
   return (
@@ -215,7 +217,8 @@ export default function ManageUsersPage() {
                 <TableHead className="font-semibold">Username</TableHead>
                 <TableHead className="font-semibold">Email</TableHead>
                 <TableHead className="font-semibold">Admin</TableHead>
-                <TableHead className="font-semibold pr-4">Created At</TableHead>
+                <TableHead className="font-semibold">Created At</TableHead>
+                <TableHead className="font-semibold pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -228,7 +231,21 @@ export default function ManageUsersPage() {
                       {appUser.id}
                     </TableCell>
                     <TableCell className="text-left">
-                      {appUser.username}
+                      <div className="flex items-center">
+                        {appUser.preview_img ? (
+                          <img
+                            className="w-6 h-6 rounded-sm mr-2"
+                            src={urlJoin(
+                              appSettings.IMAGE_HOST,
+                              appUser.preview_img,
+                            )}
+                            alt={appUser.username}
+                          />
+                        ) : (
+                          <div className="w-6 h-6 rounded-sm mr-2 bg-muted" />
+                        )}
+                        {appUser.username}
+                      </div>
                     </TableCell>
                     <TableCell className="text-left">{appUser.email}</TableCell>
                     <TableCell className="text-left">
@@ -242,7 +259,9 @@ export default function ManageUsersPage() {
                     </TableCell>
                     <TableCell className="text-left pr-4">
                       {appUser.id != user!.id && (
-                        <DeleteBtn handler={() => handleDeleteUser(appUser.id)}></DeleteBtn>
+                        <DeleteBtn
+                          handler={() => handleDeleteUser(appUser.id)}
+                        ></DeleteBtn>
                       )}
                     </TableCell>
                   </TableRow>
