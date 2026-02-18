@@ -82,3 +82,7 @@ export interface Configuration {
   databaseURL: string;
   databaseType: "sqlite" | "postgresql" | "mysql";
 }
+
+export interface WizardFormData {
+  language: string;
+}
