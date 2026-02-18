@@ -28,6 +28,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { Backup } from "@/lib/types";
 
 function RefreshBtn() {
   return (
@@ -79,7 +80,7 @@ function BackupItem() {
 }
 
 function BackupsTable() {
-  const items = [];
+  const items: Backup[] = [];
   return (
     <div className="rounded-md border">
       <Table>

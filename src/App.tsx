@@ -23,7 +23,7 @@ import ManageIngredientsPage from "@/pages/administration/ingredients";
 import CleanPage from "@/pages/administration/clean";
 import BackupsPage from "@/pages/administration/backups";
 import LogsPage from "@/pages/administration/logs";
-
+import SetupWizardPage from "@/pages/setup-wizard";
 
 import { SignupUsernameForm } from "@/components/custom/signup/username";
 import { SignupPasswordForm } from "@/components/custom/signup/password";
@@ -116,6 +116,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/login", element: <LoginPage /> },
+  { path: "/wizard", element: <SetupWizardPage /> },
   { path: "*", element: <PageNotFound404 /> },
 ]);
 
