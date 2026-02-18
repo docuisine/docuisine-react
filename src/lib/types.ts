@@ -86,3 +86,10 @@ export interface Configuration {
 export interface WizardFormData {
   language: string;
 }
+
+export interface Backup {
+  id: string;
+  name: string;
+  date: string;
+  size: string;
+}
