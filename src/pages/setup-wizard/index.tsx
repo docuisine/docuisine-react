@@ -1,11 +1,25 @@
 import { LanguageSelector } from "./language-select";
 import { SeedUserStep } from "./seed-user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+function docuisineInitialized() {
+  const localStorageKey = "docuisine_initialized";
+  return localStorage.getItem(localStorageKey) === "true";
+}
 
 export default function SetupWizardPage() {
   const [currentStep, setCurrentStep] = useState(1);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (docuisineInitialized()) {
+      navigate("/recipes", { replace: true });
+    }
+  }, [navigate]);
 
   const steps = [
     {

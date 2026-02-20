@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App.tsx";
 import { AuthProvider } from "./components/auth.tsx";
 import { TooltipProvider } from "./components/ui/tooltip.tsx";
+import CheckInitRoute from "@/components/init-route.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <TooltipProvider>
-        <App />
-      </TooltipProvider>
-    </AuthProvider>
+    <CheckInitRoute>
+      <AuthProvider>
+        <TooltipProvider>
+          <App />
+        </TooltipProvider>
+      </AuthProvider>
+    </CheckInitRoute>
   </StrictMode>,
 );

@@ -179,7 +179,37 @@ export async function toggleUserRole(userId: number) {
   return response.data;
 }
 
+export async function checkAppInitialized(): Promise<boolean> {
+  const INIT_KEY = "docuisine_initialized";
+  // Check localStorage first
+  const cached = localStorage.getItem(INIT_KEY);
+
+  if (cached === "true") {
+    return true;
+  }
+
+  try {
+    // Call API only if not cached
+    const response = await axios.get(
+      urlJoin(BACKEND_URL, "/init/existing-root-user"),
+    );
+
+    const isInitialized = response.data === true;
+
+    // Cache ONLY if true
+    if (isInitialized) {
+      localStorage.setItem(INIT_KEY, "true");
+    }
+
+    return isInitialized;
+  } catch (err) {
+    console.error("Failed to check app initialization", err);
+    return false;
+  }
+}
+
 const api = {
+  checkAppInitialized,
   login,
   signup,
   getUserbyUsername,
