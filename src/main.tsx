@@ -5,17 +5,20 @@ import App from "./App.tsx";
 import { AuthProvider } from "./components/auth.tsx";
 import { TooltipProvider } from "./components/ui/tooltip.tsx";
 import CheckInitRoute from "@/components/init-route.tsx";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
+import HealthCheck from "@/components/healthcheck.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <CheckInitRoute>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <App />
-        </TooltipProvider>
-      </AuthProvider>
-    </CheckInitRoute>
+    <Toaster />
+    <HealthCheck>
+      <CheckInitRoute>
+        <AuthProvider>
+          <TooltipProvider>
+            <App />
+          </TooltipProvider>
+        </AuthProvider>
+      </CheckInitRoute>
+    </HealthCheck>
   </StrictMode>,
 );
