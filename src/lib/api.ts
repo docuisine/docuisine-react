@@ -209,8 +209,34 @@ export async function checkAppInitialized(): Promise<boolean> {
 }
 
 export async function getLogs(level: string = "info"): Promise<string[]> {
-  const response = await axios.get(urlJoin(BACKEND_URL, `/health/logs?level=${level.toLowerCase()}`));
+  const response = await axios.get(
+    urlJoin(BACKEND_URL, `/health/logs?level=${level.toLowerCase()}`),
+  );
   return response.data as string[];
+}
+
+export async function healthCheck() {
+  try {
+    await axios.get(urlJoin(BACKEND_URL, "/health/"));
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      const status = err.response?.status;
+
+      switch (status) {
+        case STATUS.HTTP_500_INTERNAL_SERVER_ERROR:
+          throw new errors.ServerError(
+            "Something went wrong on the server.",
+            STATUS.HTTP_500_INTERNAL_SERVER_ERROR,
+          );
+        default:
+          throw new Error("Could not communicate with the server.");
+      }
+    }
+
+    throw err;
+  }
+
+  return true;
 }
 
 const api = {
@@ -228,6 +254,7 @@ const api = {
   deleteUserById,
   toggleUserRole,
   getLogs,
+  healthCheck,
 };
 
 export default api;
