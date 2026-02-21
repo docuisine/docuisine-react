@@ -8,7 +8,7 @@ export default function CheckInitRoute({
 }: {
   children: JSX.Element;
 }) {
-  const [isInitialized, setIsInitialized] = useState<boolean | null>(null);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
   useEffect(() => {
     async function check() {
@@ -19,7 +19,7 @@ export default function CheckInitRoute({
     check();
   }, []);
 
-  if (isInitialized === null) {
+  if (!isInitialized) {
     return (
       <div className="flex h-screen w-full items-center justify-center gap-4">
         <Spinner /> Checking initialization...
