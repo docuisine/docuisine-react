@@ -134,6 +134,7 @@ function copyToClipboard(logs: string) {
     .writeText(logs)
     .catch((err) => {
       toast.error("Failed to copy logs to clipboard", {
+        position: "top-right",
         style: destructiveSonnerStyle,
       });
       console.error("Could not copy logs to clipboard: ", err);
