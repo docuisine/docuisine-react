@@ -24,6 +24,8 @@ import { DownloadIcon, CopyIcon } from "lucide-react";
 import appSettings from "@/lib/settings";
 import api from "@/lib/api";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { destructiveSonnerStyle, successSonnerStyle } from "@/lib/constants";
 
 const logLevels = ["Trace", "Debug", "Info", "Warning", "Error"];
 
@@ -128,9 +130,20 @@ function downloadLogsAsTXT(logs: string) {
 }
 
 function copyToClipboard(logs: string) {
-  navigator.clipboard.writeText(logs).catch((err) => {
-    console.error("Failed to copy logs to clipboard:", err);
-  });
+  navigator.clipboard
+    .writeText(logs)
+    .catch((err) => {
+      toast.error("Failed to copy logs to clipboard", {
+        style: destructiveSonnerStyle,
+      });
+      console.error("Could not copy logs to clipboard: ", err);
+    })
+    .then(() => {
+      toast.success("Logs copied to clipboard", {
+        position: "top-right",
+        style: successSonnerStyle,
+      });
+    });
 }
 
 function ExportDropdownMenu({
