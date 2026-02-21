@@ -186,7 +186,7 @@ export default function LogsPage() {
   const [selectedLevel, setSelectedLevel] = useState("Info");
 
   useEffect(() => {
-    api.getLogs(selectedLevel).then((logs) => setLogs(logs.join("")));
+    api.getLogs(selectedLevel).then((logs) => setLogs(logs.join("\n")));
   }, [selectedLevel]);
 
   return (
