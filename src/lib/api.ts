@@ -208,9 +208,9 @@ export async function checkAppInitialized(): Promise<boolean> {
   }
 }
 
-export async function getLogs(level: string = "info"): Promise<string> {
+export async function getLogs(level: string = "info"): Promise<string[]> {
   const response = await axios.get(urlJoin(BACKEND_URL, `/health/logs?level=${level.toLowerCase()}`));
-  return response.data as string;
+  return response.data as string[];
 }
 
 const api = {

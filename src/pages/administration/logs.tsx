@@ -111,7 +111,7 @@ function highlightLogLevels(text: string) {
 
 function LogsViewer({ logs }: { logs: string }) {
   return (
-    <div className="bg-muted rounded p-4 h-96 overflow-y-auto text-start whitespace-pre-wrap font-mono text-sm">
+    <div className="bg-muted rounded p-4 h-96 max-h-96 overflow-y-auto text-start whitespace-pre-wrap font-mono text-sm">
       {highlightLogLevels(logs)}
     </div>
   );
@@ -186,7 +186,7 @@ export default function LogsPage() {
   const [selectedLevel, setSelectedLevel] = useState("Info");
 
   useEffect(() => {
-    api.getLogs(selectedLevel).then((logs) => setLogs(logs));
+    api.getLogs(selectedLevel).then((logs) => setLogs(logs.join("")));
   }, [selectedLevel]);
 
   return (
